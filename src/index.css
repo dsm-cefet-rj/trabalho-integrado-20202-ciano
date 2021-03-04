@@ -1,0 +1,456 @@
+/*-------------------------------------------pagina1--------------------------------------------------------------*/
+*{ 
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(180deg, rgba(55, 127, 189, 0.75) 0%, rgba(142, 194, 240, 0) 100%), #FEFFC5;
+    background-repeat: no-repeat;
+    overflow: auto;
+    display: flex;
+    min-height: 100vh;
+}
+
+.container{
+    height: 60rem;   
+}
+
+.cabecalho{
+    display: flex;
+    min-height: 5rem;
+    background-color: #436D7C;
+}
+
+.rodape{
+    background-color: #436D7C;
+}
+
+.rodape img{
+    max-height: 3rem;
+}
+
+.corpo{
+    height: 50.6rem;
+}
+.conteudo{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    max-height: 100rem;
+    max-width: 150rem;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6); 
+}
+
+.conteudo1{
+    height: 46rem;
+    margin:2rem 2rem;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+  
+}
+.btn_continuar{
+    background-color:  #6289CC;
+    border-radius: 10px;
+}
+.testando{
+    display: flex;
+    flex-grow: 1;
+}
+/*------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------pagina2-----------------------------------------------------------*/
+.input_login,.input_login:focus{
+   
+
+    margin-top:2rem ;
+    margin-bottom:1rem ;
+    padding:0.5rem;
+    background-color: rgba(255,255,255,0);    
+    color: black;
+    border:none;
+    border-bottom:3px solid black;
+    font-size:20px;
+    opacity: 0.6;
+    font-weight: 700;
+}
+
+.input_login:focus{
+    outline: 2rem;
+    font-size:22px;
+   padding-left: 0.5rem;
+   opacity: 1;
+   font-weight: 900;
+    
+    
+    
+}
+
+#entrar{
+    
+
+    padding: 0.8rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 15px;
+}
+#entrar:hover{
+    background:green ;
+    border: none;
+
+}
+a{
+   
+    margin-top: 1rem;
+ 
+    color: #1052c4;        
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold; 
+}
+a:hover{
+    color: green;
+    text-decoration:none;
+}
+/*-------------------------------------------------------------------------*/
+/*-----------------------------pagina 3-----------------------------------*/
+.titulo_email{
+    font-weight: 700;
+}
+
+.cabecalho_email{
+background-color:  #436D7C ;
+    height: 8rem;
+    margin-bottom: 2rem;
+}
+.formulario_email{
+    background: rgba(255, 255, 255, 0.6);
+    max-width: 1000px;
+    border-radius: 5px; 
+}
+/*--------------------------------------------------------------------------*/
+/*-----------------------------pagina4--------------------------------------*/
+.img_ajuste{
+    height: 50rem;
+}
+
+.sessao img{
+    max-width: 20rem;
+    border-radius: 10px;
+}
+
+
+
+
+/*-------------------------------------------------------------------------*/
+/*-------------------------------pagina5------------------------------------*/
+.perfil_ajuste{
+   
+    height:52rem;
+}
+.perfil_formulario{
+
+    height:52rem;
+    margin:1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 5px; 
+
+}
+.cabecalho_perfil{
+    height: 4.5rem;
+}
+
+.perfil_formulario>#atualizar{
+    
+    height:2.5rem;
+    width: 14rem;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 7px;
+}
+
+.perfil_formulario input{
+    margin-top: 0.9rem;
+    height: 2rem;
+    
+}
+
+.borda_form{
+    border: 3px solid  rgba(14, 13, 13,0.5);
+    margin-bottom: 5rem;
+    border-radius: 5px;
+    
+}
+.box_perfil{
+    width: 20rem;
+    padding-left:0.5rem;
+}
+#atualizar{
+    background-color: #6289CC ;
+}
+
+/*------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------pagina 6------------------------------------------------*/
+
+.livros a{
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.livros a:hover{
+    background-color: #F1F1F1;
+}
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------pagina 7-----------------------------------------------*/
+
+.corpo_renovar1 ,.corpo_renovar{
+
+    height: 50.67rem;
+}
+
+.corpo_renovar1 form{
+    height: 50rem;
+ 
+}
+
+#sim{
+  
+        width: 15rem;
+        padding: 0.8rem;
+        margin-top: 1rem;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 15px;
+    }
+    #sim:hover{
+        background:green ;
+        border: none;
+    
+    }    
+
+
+/*---------------------------------------------------------------------------------------------------*/
+
+
+
+/*--------------------------------------pagina8------------------------------------------------------*/
+.form_listar{
+    height:  2rem;
+    padding: 0rem;
+    outline: 2px solid red;
+}
+
+/*-------------------------------------pagina9-------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
+/*-------------------------------------pagina10-------------------------------------------------------*/
+.corpo_listar_livro{
+   
+    height: 46.68rem;
+
+}
+.form_listar_livro{
+height: 2.5rem;
+border-radius: 10px;
+}
+
+.cabeçalho_lista_livro {
+    height: 6rem;
+}
+
+
+/*----------------------------------------------------------------------------------------------------*/
+/*-------------------------------------pagina11-------------------------------------------------------*/
+
+.corpo_requerir_livro{
+   
+    height: 46.68rem;
+    
+
+}
+.form_requirir_livro{
+height: 43rem;
+border-radius: 10px;
+outline: 2px solid black;
+background: rgba(255, 255, 255, 0.6); 
+border-radius: 10px; 
+}
+
+.cabeçalho_requerir_livro {
+    outline: 2px solid red;
+    height: 6rem;
+}
+#enviar_requirir{
+    width: 11rem;
+    height: 3rem;
+    border-radius: 5px;
+    line-height: 1rem;
+    
+    font-size: 30px;
+
+}
+.form_requirir_livro >textarea{
+    border:none;
+    border: 2.5px solid black;
+    height: 5.5em;
+    
+
+}
+#enviar_requirir:hover{
+    background-color: green;
+    border:none;
+    
+}
+
+/*---------------------------------------------------------------------------------------------------*/
+/*----------------------------------------pagina12---------------------------------------------------*/
+
+.sessao2 img{
+    max-width: 20rem;    
+    border-radius: 10px;
+}
+
+
+
+
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------pagina13---------------------------------------------------*/
+
+
+
+.ajustar_manter_emprestimo  a{
+    font-weight: 700;
+    /* height: 4rem;*/
+    background-color: #6289CC ;
+
+    
+}
+.ajustar_manter_emprestimo  a{
+    font-size: 22px;
+    border-radius: 5px;
+    height: 5rem;
+}
+.ajustar_manter_emprestimo a:hover{
+    background-color: green;
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------*/
+/*----------------------------------------pagina14---------------------------------------------------*/
+.perfil_ajuste{
+    height:52rem;
+}
+.perfil_formulario{
+
+    height:52rem;
+    margin:1rem;
+    background: rgba(255, 255, 255, 0.6);
+     border-radius: 5px; 
+
+}
+#confirmar{
+    height: 3.5rem;
+    width: 15rem;
+    border-radius: 10px;
+    background-color: #6289CC ;
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+}
+
+
+#confirmar:hover{
+    background-color: green;
+}
+
+/*----------------------------------------pagina15---------------------------------------------------*/
+#pesq,#atualizacao,#cadastrar,#enviar{
+    height: 3.5rem;
+    width: 15rem;
+    
+    margin: 1rem auto;
+    border-radius: 10px;
+    background-color: #6289CC;
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+}
+
+.botao{
+    min-height: 3.5rem;
+    min-width: 10rem;
+    
+    border-radius: 10px;
+    background-color: #6289CC;
+    font-size: 15px;
+    color: white;
+    font-weight: 700;
+}
+
+.botao-red{
+    min-height: 3.5rem;
+    min-width: 10rem;
+    
+    color: #FFFFFF;
+    border-radius: 10px;
+    background-color: #FF6347;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#pesq:hover,#atualizacao:hover,#cadastrar:hover,#enviar:hover,.botao:hover{
+    background-color: green;
+}
+/*---------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------pagina16---------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------pagina21---------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------pagina22---------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------ajustes(pegando style inline e trocando por style externo)---------------*/
+
+.ajuste1{
+    border: 2px solid gray;
+     border-radius: 5px;
+      height: 4.9rem;
+}
+.size-book-10{
+    max-height:10rem;
+}
+.ajuste3{
+    max-height:150px;
+}
+.ajuste4{
+    max-width: 160px;
+
+}
+.ajuste5{
+    display:none;
+}
+
+.mw-15rem{
+    max-width: 1.5rem;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
