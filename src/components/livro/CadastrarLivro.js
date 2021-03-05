@@ -1,12 +1,12 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 
-const LivroCadastrarLivro = () => {
+const CadastrarLivro = () => {
 
     return (
         <div className="container-fluid d-flex flex-column">
 
-            <Cabecalho titulo="Cadastrar Livro" />
+            <CabecalhoVoltar titulo="Cadastrar Livro" />
 
             <section className="perfil_ajuste row justify-content-center  corpo_login">
                 <form className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
@@ -21,7 +21,6 @@ const LivroCadastrarLivro = () => {
                 </form>
             </section>
         </div>
-
     );
 }
-export default LivroCadastrarLivro;
+export default CadastrarLivro;

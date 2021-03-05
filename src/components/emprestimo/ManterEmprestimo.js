@@ -1,12 +1,12 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
 
 const ManterEmprestimo = () => {
     return (
         <div className="container-fluid">
 
-            <Cabecalho titulo="Manter Empréstimo" />
+            <CabecalhoVoltar titulo="Manter Empréstimo" />
 
             <section className="row  justify-content-center align-items-center corpo_renovar1">
                 <div className="row ajustar_manter_emprestimo  justify-content-center align-items-start   col-sm-10 col-md-7 col-lg-6 col-xl-4 conteudo1">

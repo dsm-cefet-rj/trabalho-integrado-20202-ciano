@@ -1,8 +1,8 @@
 import React from 'react';
-import CabecalhoVoltar from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
 
-const RelatorioOpcoes = () => {
+const ManterRelatorio = () => {
     return(
     <div className="container-fluid ">
         
@@ -23,4 +23,4 @@ const RelatorioOpcoes = () => {
     </div>
     );
 }
-export default RelatorioOpcoes;
+export default ManterRelatorio;

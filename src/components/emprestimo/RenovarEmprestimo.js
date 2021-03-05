@@ -1,12 +1,12 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
 
 const RenovarEmprestimo = () => {
     return (
         <div className="container-fluid">
 
-            <Cabecalho titulo="Renovar Empréstimo" />
+            <CabecalhoVoltar titulo="Renovar Empréstimo" />
             
             <section className="row justify-content-center corpo_login mt-5">
                 <form className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25" action="#" method="POST">

@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoUniversityLibrary from './IMG/logo-University-Library.svg';
+import LogoUniversityLibrary from '../img/logo-University-Library.svg';
 
 const Login = () => {
 

@@ -1,29 +1,14 @@
-import React, {Fragment} from 'react';
-import CadastrarUsuario from './Components/cadastrar-usuario';
-import LivroAtualizarLivro from './Components/livro_atualizar-livro';
-import LivroCadastrarLivro from './Components/livro_cadastrar-livro';
-import LivroInformacoesDetalhadasConsulta from './Components/livro_informacoes-detalhadas-consulta';
-import LivroInformacoesDetalhadasNaoDevolvido from './Components/livro_informacoes-detalhadas-nao-devolvido';
-import LivroListaDeLivros from './Components/livro_lista-de-livros';
-import LivroListaDeLivros2 from './Components/livro_lista-de-livros2';
-import Login from './Components/login';
-import MenuInicialBibliotecario from './Components/menu_inicial-bibliotecario'
-import ConsultarEmprestimo from './Components/emprestimo_consultar-emprestimo';
-import EncerrarEmprestimoConfirmacao from './Components/emprestimo_encerrar-emprestimo-confirmacao';
-import EncerrarEmprestimo from './Components/emprestimo_encerrar-emprestimo';
-import ManterEmprestimo from './Components/emprestimo_manter-emprestimo';
-import RegistrarEmprestimo from './Components/emprestimo_registrar-emprestimo'
-import MenuInicialUsuario from './Components/menu_inicial-usuario'
-import BemVindo from './Components/bem-vindo';
-import RelatorioDevolucoesLivros from './Components/relatorio_livros-devolucao';
-import RelatorioLivrosEmprestado from './Components/relatorio_livros-emprestados';
-import RelatorioOpcoes from './Components/relatorios';
+import React, { Fragment } from 'react';
+import ManterEmprestimo from './components/emprestimo/ManterEmprestimo';
+import Login from './components/geral/Login';
+import MenuInicialBibliotecario from './components/geral/MenuInicialBibliotecario';
+import AtualizarLivro from './components/livro/AtualizarLivro';
 
 function App() {
   return (
     <Fragment>
 
-      <Login />
+      <MenuInicialBibliotecario />
 
     </Fragment>
   );

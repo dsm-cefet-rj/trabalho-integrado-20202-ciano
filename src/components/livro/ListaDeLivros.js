@@ -1,12 +1,12 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
 
-const LivroListaDeLivros = () => {
+const ListaDeLivros = () => {
     return (
         <div className="container-fluid">
  
-            <Cabecalho titulo="Lista de Livros" />
+            <CabecalhoVoltar titulo="Lista de Livros" />
 
             <section className=" corpo_listar_livro   row  justify-content-center  corpo_login  ">
                 <form className="form_listar_livro formulario_email  col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 form" action="#" method="POST">
@@ -17,7 +17,6 @@ const LivroListaDeLivros = () => {
 
             <Rodape />
         </div>
-
     );
 }
-export default LivroListaDeLivros;
+export default ListaDeLivros;

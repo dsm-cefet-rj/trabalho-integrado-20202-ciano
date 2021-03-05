@@ -1,13 +1,13 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
-import CapaLivro from './IMG/capa-livro-exemplo.svg';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
+import CapaLivro from '../img/capa-livro-exemplo.svg';
 
-const LivroInformacoesDetalhadasConsulta = () => {
+const InformacoesDetalhadasConsulta = () => {
   return (
     <div className="container-fluid ">
 
-      <Cabecalho titulo="Informações Detalhadas" />
+      <CabecalhoVoltar titulo="Informações Detalhadas" />
 
       <section className="row justify-content-center align-items-start flex-grow-1">
         <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
@@ -92,7 +92,6 @@ const LivroInformacoesDetalhadasConsulta = () => {
 
       <Rodape />
     </div>
-
   );
 }
-export default LivroInformacoesDetalhadasConsulta;
+export default InformacoesDetalhadasConsulta;

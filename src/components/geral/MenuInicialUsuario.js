@@ -1,9 +1,9 @@
 import React from 'react';
-import Rodape from './CorpoPagina/rodape';
-import btnFilaDeEspera from './IMG/Botoes/btn_FilaDeEspera.jpg';
-import btnLivros from './IMG/Botoes/btn_Livros.jpg';
-import btnRenovarEmprestimos from './IMG/Botoes/btn_RenovarEmprestimo.jpg';
-import btnProFileUserWhite from './IMG/profile-user-white.svg';
+import Rodape from '../utils/Rodape';
+import btnFilaDeEspera from '../img/botoes/btn_FilaDeEspera.jpg';
+import btnLivros from '../img/botoes/btn_Livros.jpg';
+import btnRenovarEmprestimos from '../img/botoes/btn_RenovarEmprestimo.jpg';
+import btnProFileUserWhite from '../img/profile-user-white.svg';
 
 
 const MenuInicialUsuario = () => {

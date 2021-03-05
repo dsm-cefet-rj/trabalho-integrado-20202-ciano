@@ -1,12 +1,9 @@
 import React from 'react';
-import Rodape from './CorpoPagina/rodape';
-import btnCadastrarUsuario from './IMG/Botoes/btn_CadastrarUsuario.jpg';
-import btnManterEmprestimos from './IMG/Botoes/btn_ManterEmprestimos.jpg';
-import btnRelatorios from './IMG/Botoes/btn_Relatorios.jpg';
-import btnProFileUserWhite from './IMG/profile-user-white.svg';
-
-
-
+import Rodape from '../utils/Rodape';
+import btnCadastrarUsuario from '../img/botoes/btn_CadastrarUsuario.jpg';
+import btnManterEmprestimos from '../img/botoes/btn_ManterEmprestimos.jpg';
+import btnRelatorios from '../img/botoes/btn_Relatorios.jpg';
+import btnProFileUserWhite from '../img/profile-user-white.svg';
 
 
 const MenuInicialBibliotecario = () => {
@@ -27,7 +24,7 @@ const MenuInicialBibliotecario = () => {
         document.getElementById("visualizar_perfil").style.marginTop = "110px";
         document.querySelector("#tela_sair").style.marginLe = "350px";
     }
-    
+
     return (
         <div className="container-fluid ">
             <div className="text-white font-weight-bold align-items-center justify-content-center" id="tela_fundo" style={{ display: 'none' }}>
@@ -58,7 +55,6 @@ const MenuInicialBibliotecario = () => {
 
             <Rodape />
         </div>
-
     );
 }
 export default MenuInicialBibliotecario;

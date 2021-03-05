@@ -1,11 +1,11 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 
 const CadastrarUsuario = () => {
     return (
         <div className="container-fluid d-flex flex-column">
-            
-            <Cabecalho titulo="Cadastrar Usuário"/>
+
+            <CabecalhoVoltar titulo="Cadastrar Usuário" />
 
             <section className="perfil_ajuste row justify-content-center corpo_login p-3">
                 <form className="row flex-column perfil_formulario col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4 form w-25" action="#" method="POST">

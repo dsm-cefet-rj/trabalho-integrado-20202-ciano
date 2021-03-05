@@ -1,19 +1,19 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
-import CapaLivro from './IMG/capa-livro-exemplo.svg';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
+import CapaLivro from '../img/capa-livro-exemplo.svg';
 
-const RenovarEmprestimoConfirmacao = () => {
+const EncerrarEmprestimoConfirmacao = () => {
     return (
         <div className="container-fluid ">
 
-            <Cabecalho titulo="Renovar Empréstimo" />
+            <CabecalhoVoltar titulo="Encerrar Empréstimo" />
 
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
                     <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
 
-                        <img src={CapaLivro} alt="Livro fechado" className="size-book-10" />
+                        <img src={CapaLivro} alt="Livro fechado" className="size-book-10"/>
 
                         <div className="table-responsive">
                             <table className="table table-striped mt-5">
@@ -87,8 +87,7 @@ const RenovarEmprestimoConfirmacao = () => {
                             </table>
                         </div>
 
-                        <h3 className="h4 text-center">Deseja renovar o empréstimo para o dia (20/04/2020)?</h3>
-                        <a href="#" id="sim" className="btn align-self-end text-white botao">SIM</a>
+                        <a href="" id="encerrar-emprestimo" className="btn align-self-end text-white botao-red">Encerrar Empréstimo</a>
 
                     </div>
                 </div>
@@ -98,4 +97,4 @@ const RenovarEmprestimoConfirmacao = () => {
         </div>
     );
 }
-export default RenovarEmprestimoConfirmacao;
+export default EncerrarEmprestimoConfirmacao;

@@ -1,11 +1,11 @@
 import React from 'react';
-import Cabecalho from './CorpoPagina/cabecalho-voltar';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 
 const RegistrarEmprestimo = () => {
     return (
         <div className="container-fluid d-flex flex-column">
             
-            <Cabecalho titulo="Registrar Empréstimo" />
+            <CabecalhoVoltar titulo="Registrar Empréstimo" />
             
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row conteudo col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">

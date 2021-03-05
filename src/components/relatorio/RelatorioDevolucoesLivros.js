@@ -1,7 +1,7 @@
 import React from 'react';
-import CabecalhoVoltar from './CorpoPagina/cabecalho-voltar';
-import Rodape from './CorpoPagina/rodape';
-import info_img from './IMG/information-color.svg';
+import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import Rodape from '../utils/Rodape';
+import info_img from '../img/information-color.svg';
 
 const RelatorioDevolucoesLivros = () => {
     return (
