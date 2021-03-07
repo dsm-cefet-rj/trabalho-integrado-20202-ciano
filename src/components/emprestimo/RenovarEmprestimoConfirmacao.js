@@ -2,6 +2,11 @@ import React from 'react';
 import CapaLivro from '../img/capa-livro-exemplo.svg';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
+import InfosGeraisEmprestimo from './InfosGeraisEmprestimo';
+
+var usuario = { nome: 'Rodrio da Silva Barreto', matricula: '19654684ADM', email: 'exemplo@email.com', telefone: '(21) 93939-9933' };
+var livro = { titulo: 'Calculo Vol.1', autor: 'James Stewart', codLocalizacao: 'S15P5-6', isbn: 'C978-85-221-1461-0', qtdDisponivel: 9, qtdTotal: 15, imagem: CapaLivro };
+var emprestimo = { id: 1, dataDevolucao: '05/04/2020', dataEmprestimo: '19/03/2020' };
 
 const RenovarEmprestimoConfirmacao = () => {
     return (
@@ -13,79 +18,7 @@ const RenovarEmprestimoConfirmacao = () => {
                 <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
                     <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
 
-                        <img src={CapaLivro} alt="Livro fechado" className="size-book-10" />
-
-                        <div className="table-responsive">
-                            <table className="table table-striped mt-5">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col" colspan="2" className="text-center">Livro</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Título:</th>
-                                        <td>Calculo Vol.1</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Autor:</th>
-                                        <td>James Stewart</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Cod. Localização:</th>
-                                        <td>S15P5-6</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">ISBN:</th>
-                                        <td>C978-85-221-1461-0</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">QTD Disponível:</th>
-                                        <td>9</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">QTD Total:</th>
-                                        <td>15</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table className="table table-striped my-5">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col" colspan="2" className="text-center">Usuário</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Nome:</th>
-                                        <td>Carla Philips da Conceição</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Matrícula:</th>
-                                        <td>12374754BCC</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table className="table table-striped my-5">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col" colspan="2" className="text-center">Empréstimo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Data de Emprestimo:</th>
-                                        <td>19/03/2020</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Data de Devolução:</th>
-                                        <td>05/04/2020</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <InfosGeraisEmprestimo usuario={usuario} livro={livro} emprestimo={emprestimo} />
 
                         <h3 className="h4 text-center">Deseja renovar o empréstimo para o dia (20/04/2020)?</h3>
                         <a href="#" id="sim" className="btn align-self-end text-white botao">SIM</a>
