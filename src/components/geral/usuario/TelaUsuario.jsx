@@ -1,12 +1,6 @@
 import React from 'react';
-import Rodape from '../utils/Rodape';
-import btnCadastrarUsuario from '../img/botoes/btn_CadastrarUsuario.jpg';
-import btnManterEmprestimos from '../img/botoes/btn_ManterEmprestimos.jpg';
-import btnRelatorios from '../img/botoes/btn_Relatorios.jpg';
-import btnProFileUserWhite from '../img/profile-user-white.svg';
-
-
-const MenuInicialBibliotecario = () => {
+import btnProFileUserWhite from '../../img/profile-user-white.svg';
+const TelaUsuario = (props) => {
     const desligar = () => {
         document.getElementById("tela_fundo").style.display = "none";
     }
@@ -24,9 +18,8 @@ const MenuInicialBibliotecario = () => {
         document.getElementById("visualizar_perfil").style.marginTop = "110px";
         document.querySelector("#tela_sair").style.marginLe = "350px";
     }
-
     return (
-        <div className="container-fluid ">
+        <div>
             <div className="text-white font-weight-bold align-items-center justify-content-center" id="tela_fundo" style={{ display: 'none' }}>
                 <span className="mt-2 mr-2 d-flex btn justify-content-end" id="tela_sair" onClick={desligar}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
@@ -38,23 +31,11 @@ const MenuInicialBibliotecario = () => {
                 <a href="editar-perfil.html" id="visualizar_perfil" className="btn btn-block font-weight-bold btn-success">Editar Perfil</a>
                 <a href="login.html" id="sair_perfil" className="btn mt-3 font-weight-bold btn-block btn-danger">Logout</a>
             </div>
-
-            <header className="row justify-content-start align-items-center cabecalho text-white">
+            <header className="row justify-content-start align-items-center text-white cabecalho">
                 <img onClick={ligar} src={btnProFileUserWhite} alt="Icone do usuário" className="btn mr-3 ml-3" />
-                <h1 className="h2 font-weight-bold text-center">Bem vindo, </h1>
+                <h1 className="h2 font-weight-bold text-center">{props.tituloUsuario}</h1>
             </header>
-
-            <section className="row sessao2 justify-content-center m-1">
-                <div className="d-flex flex-column">
-                    <a href="emprestimo_manter-emprestimo.html"><img src={btnManterEmprestimos} alt="imagem nao carregou" className="img-thumbnail mt-0 text-white" /></a>
-                    <a href="relatorios.html"><img src={btnRelatorios} alt="imagem nao carregou" className="img-thumbnail text-white" /></a>
-                    <a href="livro_lista-de-livros2.html"><img src={btnManterEmprestimos} alt="imagem nao carregou" className="img-thumbnail text-white" /></a>
-                    <a href="cadastrar-usuario.html"><img src={btnCadastrarUsuario} alt="imagem nao carregou" className="img-thumbnail text-white" /></a>
-                </div>
-            </section>
-
-            <Rodape />
         </div>
     );
 }
-export default MenuInicialBibliotecario;
+export default TelaUsuario;

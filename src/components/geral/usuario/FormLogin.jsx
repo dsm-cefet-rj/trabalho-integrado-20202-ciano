@@ -1,13 +1,7 @@
 import React from 'react';
-import LogoUniversityLibrary from '../img/logo-University-Library.svg';
-
-const Login = () => {
-
+const CabecalhoLogin = () => {
     return (
-        <div className="container-fluid">
-            <header className="d-flex justify-content-center align-items-center">
-                <img src={LogoUniversityLibrary} alt="A imagem da logo não carregou" className="mt-5 ajuste4 mb-3" />
-            </header>
+        <div>
             <section className="d-flex justify-content-center mx-2 my-1">
                 <form className="col-sm-8 col-md-7 col-lg-6 col-xl-3 form w-100" action="#" method="POST">
                     <input className=" input_login col " type="text" name="matricula" placeholder="Matrícula" />
@@ -20,4 +14,4 @@ const Login = () => {
         </div>
     );
 }
-export default Login;
+export default CabecalhoLogin;
