@@ -2,6 +2,7 @@ import React from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import info_img from '../img/information-color.svg';
+import InfosGeraisRelatorio from './InfosGeraisRelatorio';
 
 const RelatorioLivrosEmprestado = () => {
     return (
@@ -23,93 +24,7 @@ const RelatorioLivrosEmprestado = () => {
                             </form>
                         </div>
 
-                        <div className="table-responsive-sm">
-                            <table className="table table-hover table-sm table-striped">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Título</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Data Emp.</th>
-                                        <th scope="col">Data Dev.</th>
-                                        <th scope="col">Info.</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Calculo Vol.1</td>
-                                        <td>André Marques</td>
-                                        <td>26/03/2020</td>
-                                        <td>30/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Calculo Vol.1</td>
-                                        <td>Maria Clara da Silva</td>
-                                        <td>10/03/2020</td>
-                                        <td>15/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Use a Cabeça Java</td>
-                                        <td>André Marques</td>
-                                        <td>26/03/2020</td>
-                                        <td>30/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr><tr>
-                                        <th scope="row">4</th>
-                                        <td>Calculo Vol.1</td>
-                                        <td>André Marques</td>
-                                        <td>26/03/2020</td>
-                                        <td>30/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>Calculo Vol.1</td>
-                                        <td>Maria Clara da Silva</td>
-                                        <td>10/03/2020</td>
-                                        <td>15/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">6</th>
-                                        <td>Use a Cabeça Java</td>
-                                        <td>André Marques</td>
-                                        <td>26/03/2020</td>
-                                        <td>30/04/2020</td>
-                                        <td>
-                                            <a href="livro_informacoes-detalhadas.html">
-                                                <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <InfosGeraisRelatorio />
                     </div>
                 </div>
             </section>
