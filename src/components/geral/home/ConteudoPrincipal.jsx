@@ -1,5 +1,6 @@
 import React from 'react';
 import Leitor from '../../img/leitor.svg';
+import {Link} from 'react-router-dom';
 
 const ConteudoPrincipal = () => {
     return (
@@ -13,7 +14,7 @@ const ConteudoPrincipal = () => {
             Aproveite!!!
             <img src={Leitor} alt="Desenho de uma pessoa lendo livro" style={{ width: '30px', margin: '-10px auto 0' }} />
                     </p>
-                    <a href="login.html" className="btn align-self-end col-12 col-sm-4 offset-sm-8 col-xl-3 offset-xl-9 btn_continuar text-white">Continuar</a>
+                    <Link to="/login" className="btn align-self-end col-12 col-sm-4 offset-sm-8 col-xl-3 offset-xl-9 btn_continuar text-white">Continuar</Link>
                 </div>
             </section>
         </div>

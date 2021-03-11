@@ -3,7 +3,7 @@ import CabecalhoHome from './CabecalhoHome';
 import Rodape from '../../utils/Rodape';
 import Conteudo from './ConteudoPrincipal'
 
-const BemVindo = () => {
+const Home = () => {
     return (
         <div className="container-fluid d-flex flex-column" >
             <CabecalhoHome />
@@ -12,4 +12,4 @@ const BemVindo = () => {
         </div>
     );
 }
-export default BemVindo;
+export default Home;
