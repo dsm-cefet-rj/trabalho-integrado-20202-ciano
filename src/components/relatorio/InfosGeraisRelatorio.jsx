@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import info_img from '../img/information-color.svg';
 
 
@@ -9,7 +10,7 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     },
 
     {
@@ -18,7 +19,7 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     },
 
     {
@@ -27,7 +28,7 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     },
 
     {
@@ -36,7 +37,7 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     },
 
     {
@@ -45,7 +46,7 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     },
 
     {
@@ -54,14 +55,12 @@ let relatorioEmprestimos = [
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
-        informacoes: '#'
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
     }
 ]
 
 
 let TabelaFormatada = (props) => {
-    //Aguarda 2 parâmetros (titulo, informacoes)
-    //informacoes precisa ser um array. Ex: [{ th: 'Nome', td: 'Marcia Andrade Cunha' }]
 
     let cont = 0;
 
@@ -75,9 +74,9 @@ let TabelaFormatada = (props) => {
                     <td>{emprestimo.dataEmprestimo}</td>
                     <td>{emprestimo.dataDevolucao}</td>
                     <td>
-                        <a href={emprestimo.informacoes}>
+                        <Link to={emprestimo.informacoes}>
                             <img src={info_img} alt="Informação" className="mx-auto d-block mw-15rem" />
-                        </a>
+                        </Link>
                     </td>
                 </tr>
             )}
@@ -90,7 +89,6 @@ const InfosGeraisRelatorio = () => {
 
     return (
         <>
-
             <div className="table-responsive-sm">
                 <table className="table table-hover table-sm table-striped">
                     <thead className="thead-dark">

@@ -5,7 +5,7 @@ const RegistrarEmprestimo = () => {
     return (
         <div className="container-fluid d-flex flex-column">
             
-            <CabecalhoVoltar titulo="Registrar Empréstimo" />
+            <CabecalhoVoltar titulo="Registrar Empréstimo" link='/emprestimo'/>
             
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row conteudo col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">

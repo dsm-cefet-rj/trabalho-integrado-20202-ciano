@@ -5,7 +5,7 @@ const CadastrarLivro = () => {
     return (
         <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo="Cadastrar Livro" />
-            <FormLivro btnNome="Cadastrar" btnNome="Cadastrar" idNome="cadastrar" />
+            <FormLivro btnNome="Cadastrar" idNome="cadastrar" />
         </div>
     );
 }

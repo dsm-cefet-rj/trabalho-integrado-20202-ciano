@@ -1,14 +1,13 @@
 import React from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
-import info_img from '../img/information-color.svg';
 import InfosGeraisRelatorio from './InfosGeraisRelatorio';
 
 const RelatorioLivrosEmprestado = () => {
     return (
         <div className="container-fluid d-flex flex-column">
 
-            <CabecalhoVoltar titulo="Relatório de Livros Emprestados" links="/menu/bibliotecario"/>
+            <CabecalhoVoltar titulo="Relatório de Livros Emprestados" link="/relatorio" />
 
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row col-12 col-sm-10 col-md-9 col-lg-8 col-xl-7 justify-content-center p-0">

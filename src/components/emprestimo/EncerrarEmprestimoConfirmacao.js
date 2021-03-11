@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CapaLivro from '../img/capa-livro-exemplo.svg';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
@@ -12,7 +13,7 @@ const EncerrarEmprestimoConfirmacao = () => {
     return (
         <div className="container-fluid ">
 
-            <CabecalhoVoltar titulo="Encerrar Empréstimo" />
+            <CabecalhoVoltar titulo="Encerrar Empréstimo" link='/emprestimo/emprestimo/encerrar'/>
 
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
@@ -20,7 +21,7 @@ const EncerrarEmprestimoConfirmacao = () => {
 
                         <InfosGeraisEmprestimo usuario={usuario} livro={livro} emprestimo={emprestimo} />
 
-                        <a href="" id="encerrar-emprestimo" className="btn align-self-end text-white botao-red">Encerrar Empréstimo</a>
+                        <Link to='/' id="encerrar-emprestimo" className="btn align-self-end text-white botao-red">Encerrar Empréstimo</Link>
 
                     </div>
                 </div>

@@ -7,7 +7,7 @@ const RenovarEmprestimo = () => {
     return (
         <div className="container-fluid">
 
-            <CabecalhoVoltar titulo="Renovar Empréstimo" />
+            <CabecalhoVoltar titulo='Renovar Empréstimo' link='/emprestimo'/>
             
             <ConsultarMatricula />
 

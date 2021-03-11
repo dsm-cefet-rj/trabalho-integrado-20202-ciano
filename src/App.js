@@ -1,9 +1,9 @@
 import React from 'react';
 import Rotas from './rota/Rotas';
 function App() {
-  return (
-    <Rotas />
-  );
+	return (
+		<Rotas />
+	);
 }
 
 export default App;
