@@ -4,11 +4,12 @@ import Rodape from '../utils/Rodape';
 import info_img from '../img/information-color.svg';
 import InfosGeraisRelatorio from './InfosGeraisRelatorio';
 
+
 const RelatorioDevolucoesLivros = () => {
     return (
         <div className="container-fluid d-flex flex-column">
 
-            <CabecalhoVoltar titulo="Relatório de Devolução de Livro" />
+            <CabecalhoVoltar titulo="Relatório de Devolução de Livro" links="/menu/bibliotecario" />
 
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row col-12 col-sm-11 col-md-9 col-lg-8 col-xl-7 justify-content-center p-0">
