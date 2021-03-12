@@ -4,7 +4,7 @@ import FormLivro from './FormLivros';
 const CadastrarLivro = () => {
     return (
         <div className="container-fluid d-flex flex-column">
-            <CabecalhoVoltar titulo="Cadastrar Livro" />
+            <CabecalhoVoltar titulo="Cadastrar Livro" link='/menu/bibliotecario'/>
             <FormLivro btnNome="Cadastrar" idNome="cadastrar" />
         </div>
     );

@@ -24,7 +24,7 @@ let relatorioEmprestimos = [
 
     {
         id: '3',
-        tituloLivro: 'Calculo Vol. 3',
+        tituloLivro: 'Algebra Linear',
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
@@ -33,6 +33,15 @@ let relatorioEmprestimos = [
 
     {
         id: '4',
+        tituloLivro: 'Use a Cabeça Java',
+        nomeUsuario: 'Roger Machado',
+        dataEmprestimo: '26/03/2021',
+        dataDevolucao: '15/04/2021',
+        informacoes: '/relatorio/livros/devolucoes/informacoes'
+    },
+
+    {
+        id: '5',
         tituloLivro: 'Calculo Vol. 4',
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
@@ -41,24 +50,14 @@ let relatorioEmprestimos = [
     },
 
     {
-        id: '5',
-        tituloLivro: 'Calculo Vol. 5',
-        nomeUsuario: 'Maria Clara',
-        dataEmprestimo: '26/03/2021',
-        dataDevolucao: '15/04/2021',
-        informacoes: '/relatorio/livros/devolucoes/informacoes'
-    },
-
-    {
         id: '6',
-        tituloLivro: 'Calculo Vol. 6',
+        tituloLivro: 'Calculo Vol. 5',
         nomeUsuario: 'Maria Clara',
         dataEmprestimo: '26/03/2021',
         dataDevolucao: '15/04/2021',
         informacoes: '/relatorio/livros/devolucoes/informacoes'
     }
 ]
-
 
 let TabelaFormatada = (props) => {
 

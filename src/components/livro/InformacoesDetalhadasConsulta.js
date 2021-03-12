@@ -7,7 +7,7 @@ const InformacoesDetalhadasConsulta = () => {
   return (
     <div className="container-fluid ">
 
-      <CabecalhoVoltar titulo="Informações Detalhadas" />
+      <CabecalhoVoltar titulo="Informações Detalhadas" link='/menu/bibliotecario'/>
 
       <section className="row justify-content-center align-items-start flex-grow-1">
         <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">

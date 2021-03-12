@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import btnProFileUserWhite from '../../img/profile-user-white.svg';
 const TelaUsuario = (props) => {
     const desligar = () => {
@@ -29,7 +30,7 @@ const TelaUsuario = (props) => {
                 <h1 className="row justify-content-center align-items-center">Perfil</h1>
                 <hr style={{ height: '10px' }} className="bg-white font-weight-bold w-100" />
                 <a href="editar-perfil.html" id="visualizar_perfil" className="btn btn-block font-weight-bold btn-success">Editar Perfil</a>
-                <a href="login.html" id="sair_perfil" className="btn mt-3 font-weight-bold btn-block btn-danger">Logout</a>
+                <Link to="/" id="sair_perfil" className="btn mt-3 font-weight-bold btn-block btn-danger">Logout</Link>
             </div>
             <header className="row justify-content-start align-items-center text-white cabecalho">
                 <img onClick={ligar} src={btnProFileUserWhite} alt="Icone do usuário" className="btn mr-3 ml-3" />

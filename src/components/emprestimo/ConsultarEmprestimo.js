@@ -5,8 +5,8 @@ import Rodape from '../utils/Rodape';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
 
 var livros = [
-    { href: '/emprestimo/renovar/confirmacao', id: '1', titulo: 'Calculo Vol.1', imagem: CapaLivro, imagemAlt: 'Livro fechado' },
-    { href: '/emprestimo/encerrar/confirmacao', id: '2', titulo: 'Algebra Linear', imagem: CapaLivro, imagemAlt: 'Livro fechado' }
+    { link: '/emprestimo/renovar/confirmacao', id: '1', titulo: 'Calculo Vol.1', imagem: CapaLivro, imagemAlt: 'Livro fechado' },
+    { link: '/emprestimo/encerrar/confirmacao', id: '2', titulo: 'Algebra Linear', imagem: CapaLivro, imagemAlt: 'Livro fechado' }
 ]
 var usuarioConsultado = { nome: 'Rodrio da Silva Barreto', matricula: '19654684ADM', email: 'exemplo@email.com', telefone: '(21) 93939-9933', livros: livros }
 
