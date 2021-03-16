@@ -1,31 +1,125 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ErrorFormulario4 from './validacaolivro/MensagemErro4';
 const FormLivros = (props) => {
+    const [formLivro, setFormLivro] = useState({
+        titulo: "",
+        genero: "",
+        autor: "",
+        isbn: "",
+        quantidade: "",
+        localizacao: "",
+        erros1: false,
+        erros2: false,
+        erros4: false,
+        erros5: false,
+        erros3: false,
+    })
+
+    const onChange = (e) => {
+        e.target.value = e.target.value.trim();
+
+        if ([e.target.name].toString() === "isbn") {
+
+
+            if (/[^0-9]/gi.test(e.target.value)) {
+                formLivro.erros5 = true;
+            }
+            else {
+                formLivro.erros5 = false;
+
+            }
+            if (((document.getElementById("isbn").value.length !== 10) && (document.getElementById("isbn").value.length !== 13))) {
+                formLivro.erros4 = true;
+            } else {
+                formLivro.erros4 = false;
+            }
+
+        }
+        if ([e.target.name].toString() === "quantidade") {
+
+
+            if (/[^0-9]/gi.test(e.target.value)) {
+                formLivro.erros1 = true;
+            }
+            else {
+                formLivro.erros1 = false;
+
+            }
+            if (((document.getElementById("quantidade").value.length < 1))) {
+                formLivro.erros2 = true;
+            } else {
+                formLivro.erros2 = false;
+            }
+
+        }
+        setFormLivro({
+            ...formLivro,
+            [e.target.name]: e.target.value
+        })
+
+    }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (!formLivro.erros1 && !formLivro.erros2 && !formLivro.erros4 && !formLivro.erros5 &&
+            formLivro.titulo && formLivro.genero && formLivro.autor && formLivro.isbn &&
+            formLivro.quantidade && formLivro.localizacao) {
+
+            e.target.reset()
+            formLivro.titulo = "";
+            formLivro.genero = "";
+            formLivro.autor = "";
+            formLivro.isbn = "";
+            formLivro.quantidade = "";
+            formLivro.localizacao = "";
+
+        } else {
+            setTimeout(() => {
+                setFormLivro({
+                    erros3: false,
+                })
+            }, 3000);
+            setFormLivro({
+                erros3: true,
+            })
+        }
+    }
     return (
-        <section className="perfil_ajuste  row  justify-content-center  corpo_login  ">
-            <form className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
-                
-                {/* 
+        <>
+            <div className="align-self-center my-2 h5 w-25   text-center" >
+                <ErrorFormulario4 erros1={formLivro.erros1} erros2={formLivro.erros2}
+                    erros3={formLivro.erros3} erros4={formLivro.erros4} erros5={formLivro.erros5}
+                />
+            </div>
+
+
+            <section className="perfil_ajuste  row  justify-content-center  corpo_login  " >
+
+                <form onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
+                    <div className="my-2 text-center">
+
+                    </div>
+                    {/* 
                     Título do Livro:
                     - String;
                     - Não pode ser Nulo;
                 */}
-                <input className="box_perfil input_login mt-5 w-100 mb-5 " type="text" name="titulo" placeholder="Título" />
-                
-                {/* 
+                    <input onChange={onChange} className="box_perfil input_login mt-5 w-100 mb-5 " type="text" name="titulo" placeholder="Título" />
+
+                    {/* 
                     Gênero:
                     - String;
                     - Não pode ser Nulo;
                 */}
-                <input className="box_perfil mb-5  input_login w-100" type="text" name="genero" placeholder="Gênero" />
-                
-                {/* 
+                    <input onChange={onChange} className="box_perfil mb-5  input_login w-100" type="text" name="genero" placeholder="Gênero" />
+
+                    {/* 
                     Autor do Livro:
                     - String;
                     - Não pode ser Nulo;
                 */}
-                <input className="box_perfil input_login w-100 mb-5 " type="text" name="autor" placeholder="Autor" />
-                
-                {/* 
+                    <input onChange={onChange} className="box_perfil input_login w-100 mb-5 " type="text" name="autor" placeholder="Autor" />
+
+                    {/* 
                     ISBN:
                     - String;
                     - Existe dois padrões de ISBN (ISBN-10 e ISBN-13);
@@ -35,26 +129,27 @@ const FormLivros = (props) => {
                     - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
                     - Não pode ser Nulo;
                 */}
-                <input className="input_login mb-5  box_perfil w-100" type="text" name="isbn" placeholder="ISBN" />
-                
-                {/* 
+                    <input onChange={onChange} id="isbn" className="input_login mb-5  box_perfil w-100" type="text" name="isbn" placeholder="ISBN" />
+
+                    {/* 
                     Quantidade de Livros:
                     - Inteiro
                     - Minimo -> 1
                     - Não pode ser Nulo;
                 */}
-                <input className="input_login w-100 mb-5 box_perfil" type="text" name="quantidade" placeholder="Quantidade" />
-                
-                {/* 
+                    <input onChange={onChange} id="quantidade" className="input_login w-100 mb-5 box_perfil" type="text" name="quantidade" placeholder="Quantidade" />
+
+                    {/* 
                     Codigo de Localização:
                     - String
                     - Não pode ser Nulo;
                 */}
-                <input className="input_login w-100 mb-5 box_perfil" type="text" name="localizacao" placeholder="Cód. localização" />
-                
-                <input className="mt-2 align-self-center btn" id={props.idNome} type="submit" value={props.btnNome} />
-            </form>
-        </section>
+                    <input onChange={onChange} className="input_login w-100 mb-5 box_perfil" type="text" name="localizacao" placeholder="Cód. localização" />
+
+                    <input className="mt-2 align-self-center btn" id={props.idNome} type="submit" value={props.btnNome} />
+                </form>
+            </section>
+        </>
     );
 }
 export default FormLivros;
