@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
 import { useSelector, useDispatch } from 'react-redux';
-import { RegistrarEmprestimoConsultar, RegistrarEmprestimoConsultar2 } from '../../store1/emprestimo/Emprestimo.Action';
+import { RegistrarEmprestimoConsultar, RegistrarEmprestimoConsultar2 } from '../../store/emprestimo/Emprestimo.Action';
 
 const RegistrarEmprestimo = () => {
     const dispatch = useDispatch();
-    const consultarMatricula = useSelector(state => state.consultaMatriculaEmprestimo);
-
+    const consultarMatricula = useSelector(state => state.emprestimo);
 
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',

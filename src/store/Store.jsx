@@ -4,7 +4,7 @@ import relatorioReducer from './relatorio/Relatorio.Reduncer';
 import emprestimoReducer from './emprestimo/Emprestimo.Reduncer';
 const rootReducer = combineReducers({
        relatorio: relatorioReducer,
-       consultaMatriculaEmprestimo: emprestimoReducer
+       emprestimo: emprestimoReducer
 })
 const store = createStore(rootReducer)
 

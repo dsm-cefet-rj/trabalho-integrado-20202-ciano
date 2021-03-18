@@ -1,5 +1,8 @@
-import { usuarios, livros } from '../../mocks/db.json';
-export default function EmprestimoReducer(state = " ", action) {
+import { usuarios, livros, emprestimos } from '../../mocks/db.json';
+
+const initialEmpretimos = emprestimos;
+
+export default function EmprestimoReducer(emprestimos = initialEmpretimos, action) {
     switch (action.type) {
         case 'CONSULTA_MATRICULA':
             const Filtro_Aluno = (((usuarios.filter((aluno1) => { return action.payload === aluno1.matricula }))).map(aluno2 => {
@@ -20,7 +23,7 @@ export default function EmprestimoReducer(state = " ", action) {
             }
             return FiltroLivro;
         default:
-            return state
+            return emprestimos
     }
 
 

@@ -3,7 +3,6 @@ export function RegistrarEmprestimoConsultar(matricula) {
         type: 'CONSULTA_MATRICULA',
         payload: matricula
     }
-
 }
 export function RegistrarEmprestimoConsultar2(isbn) {
     return {
@@ -11,5 +10,4 @@ export function RegistrarEmprestimoConsultar2(isbn) {
         payload: isbn
 
     }
-
 }
