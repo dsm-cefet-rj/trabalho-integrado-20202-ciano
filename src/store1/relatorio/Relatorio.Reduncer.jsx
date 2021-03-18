@@ -1,5 +1,4 @@
-export default function (state=[30],action){
-    
+export default function RelatorioReduncer(state=[30],action){
 
     switch(action.type){
         case 'Devolucao':
@@ -7,9 +6,5 @@ export default function (state=[30],action){
         default:
             return state
     }
-
-
-
-
 }
 
