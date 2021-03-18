@@ -11,7 +11,7 @@ const initialState = emprestimoAdapter.getInitialState({
 });
 
 export const fetchEmprestimo = createAsyncThunk('emprestimo/fetchEmprestimo', async (_, {getState}) => {
-    console.log(getState());z
+    console.log(getState());
     return await httpGet(`${baseUrl}/emprestimo`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
