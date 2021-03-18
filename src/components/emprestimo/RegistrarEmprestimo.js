@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
 import { useSelector, useDispatch } from 'react-redux';
-import { RegistrarEmprestimoConsultar, RegistrarEmprestimoConsultar2 } from '../../store/emprestimo/Emprestimo.Action';
+import { ConsultarMatricula, ConsultarIsbn } from '../../store/emprestimo/Emprestimo.Action';
 
 const RegistrarEmprestimo = () => {
     const dispatch = useDispatch();
@@ -15,11 +15,10 @@ const RegistrarEmprestimo = () => {
         erros2: false,
         erros3: false,
         erros4: false,
-        erros5: false,
-
-
+        erros5: false
     });
 
+    // =================== Validação ====================
     const onChange = (e) => {
         e.target.value = e.target.value.trim();
 
@@ -72,13 +71,12 @@ const RegistrarEmprestimo = () => {
             erros3: true,
         })
     }
+    // ===========================================
+
     const onSubmit1 = (e) => {
         e.preventDefault();
         if (!regEmprestimo.erros1 && !regEmprestimo.erros2 && regEmprestimo.matricula) {
-            dispatch(RegistrarEmprestimoConsultar(regEmprestimo.matricula))
-
-
-
+            dispatch(ConsultarMatricula(regEmprestimo.matricula))
 
         } else {
             enviarRegistroEmpretismo();
@@ -87,7 +85,7 @@ const RegistrarEmprestimo = () => {
     const onSubmit2 = (e) => {
         e.preventDefault();
         if (!regEmprestimo.erros4 && !regEmprestimo.erros5 && regEmprestimo.isbn) {
-            dispatch(RegistrarEmprestimoConsultar2(regEmprestimo.isbn))
+            dispatch(ConsultarIsbn(regEmprestimo.isbn))
 
         } else {
             enviarRegistroEmpretismo();
@@ -95,7 +93,6 @@ const RegistrarEmprestimo = () => {
     }
     const onSubmit3 = (e) => {
         e.preventDefault();
-
 
         window.location.assign("http://localhost:3000/emprestimo/registrar");
     }
