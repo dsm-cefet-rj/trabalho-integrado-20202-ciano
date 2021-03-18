@@ -4,6 +4,8 @@ import Rodape from '../utils/Rodape';
 import InfosGeraisRelatorio from './InfosGeraisRelatorio';
 
 const RelatorioDevolucoesLivros = () => {
+   
+
     return (
         <div className="container-fluid d-flex flex-column">
 
@@ -16,26 +18,26 @@ const RelatorioDevolucoesLivros = () => {
                         <div className="d-flex w-100 justify-content-center m-0">
                             <form className="px-3 pt-3 justify-content-center" action="#" method="">
                                 <h2 className="h4 mb-0">Filtro:</h2>
-                                
+
                                 {/* 
                                     Título do Livro:
                                     - String;
                                 */}
-                                <input className="input_login d-block d-sm-inline w-100" type="text" name="titulo" placeholder="Título do Livro" />
-                                
+                                <input className="input_login d-block d-sm-inline w-100" type="text" id="titulo" name="titulo" placeholder="Título do Livro" />
+
 
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" value="true" name="n-devolvido" id="n-devolvido" />
                                     <label className="form-check-label" for="n-devolvido">Não Devolvidos</label>
                                 </div>
-                                
+
                                 {/* 
                                     Data de Inicio:
                                     - Date;
                                     - Deve ser igual ou anterior a data atual;
                                 */}
                                 <input className="input_login d-block d-sm-inline" type="date" name="data-inicio" placeholder="Data Início" />
-                                
+
                                 {/* 
                                     Data de Fim:
                                     - Date;
@@ -44,13 +46,17 @@ const RelatorioDevolucoesLivros = () => {
                                 <input className="input_login d-block d-sm-inline" type="date" name="data-fim" placeholder="Data Fim" />
 
 
-                                <input className="btn btn-block align-self-center d-block" id="enviar" type="submit" value="Filtrar" />
                             </form>
+
+                            <inpu className="btn btn-block align-self-center d-block" id="enviar" type="submit" value="Filtrar" />
+
+
                         </div>
 
                         <InfosGeraisRelatorio />
                     </div>
                 </div>
+                
             </section>
 
             <Rodape />

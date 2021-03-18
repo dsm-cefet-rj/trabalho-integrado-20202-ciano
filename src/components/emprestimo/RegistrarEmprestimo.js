@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
+import { useSelector, useDispatch } from 'react-redux';
+import { RegistrarEmprestimoConsultar, RegistrarEmprestimoConsultar2 } from '../../store1/emprestimo/Emprestimo.Action';
 
 const RegistrarEmprestimo = () => {
+    const dispatch = useDispatch();
+    const consultarMatricula = useSelector(state => state.consultaMatriculaEmprestimo);
+
 
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',
         isbn: '',
         erros1: false,
         erros2: false,
+        erros3: false,
         erros4: false,
         erros5: false,
-        erros3: false,
+
 
     });
 
@@ -70,8 +76,11 @@ const RegistrarEmprestimo = () => {
     const onSubmit1 = (e) => {
         e.preventDefault();
         if (!regEmprestimo.erros1 && !regEmprestimo.erros2 && regEmprestimo.matricula) {
-            e.target.reset()
-            regEmprestimo.matricula = "";
+            dispatch(RegistrarEmprestimoConsultar(regEmprestimo.matricula))
+
+
+
+
         } else {
             enviarRegistroEmpretismo();
         }
@@ -79,15 +88,17 @@ const RegistrarEmprestimo = () => {
     const onSubmit2 = (e) => {
         e.preventDefault();
         if (!regEmprestimo.erros4 && !regEmprestimo.erros5 && regEmprestimo.isbn) {
-            e.target.reset()
-            regEmprestimo.isbn = "";
+            dispatch(RegistrarEmprestimoConsultar2(regEmprestimo.isbn))
+
         } else {
             enviarRegistroEmpretismo();
         }
     }
     const onSubmit3 = (e) => {
         e.preventDefault();
-        
+
+
+        window.location.assign("http://localhost:3000/emprestimo/registrar");
     }
 
     return (
@@ -139,7 +150,7 @@ const RegistrarEmprestimo = () => {
                             - String
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
+                        <input value={consultarMatricula[0].nome} className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
 
 
                         {/*
@@ -148,7 +159,7 @@ const RegistrarEmprestimo = () => {
                             - Possuir formato de email;
                             - Não pode ser Nulo;                        
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
+                        <input className="input_login w-100 my-2 form-control" type="email" value={consultarMatricula[0].email} name="email-usuario" placeholder="E-mail" disabled />
 
 
                         {/* 
@@ -156,14 +167,14 @@ const RegistrarEmprestimo = () => {
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
+                        <input value={consultarMatricula[0].titulo} className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
 
                         {/* 
                             Autor do Livro:
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
+                        <input value={consultarMatricula[0].autores} className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
 
                         <input className="my-5 btn" id="confirmar" type="submit" value="Registrar Empréstimo" />
                     </form>

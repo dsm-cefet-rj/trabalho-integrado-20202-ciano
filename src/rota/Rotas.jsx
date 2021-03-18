@@ -19,9 +19,12 @@ import ConsultarEmprestimo from '../components/emprestimo/ConsultarEmprestimo';
 import RenovarEmprestimo from '../components/emprestimo/RenovarEmprestimo';
 import RenovarEmprestimoConfirmacao from '../components/emprestimo/RenovarEmprestimoConfirmacao';
 import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
+import store from '../store1/Store';
+import { Provider} from 'react-redux';
 
 function Rotas() {
 	return (
+		<Provider store={store}>
 		<Router>
 			<Switch>
 				<Route path="/" component={Home} exact />
@@ -54,6 +57,7 @@ function Rotas() {
 
 			</Switch>
 		</Router>
+		</Provider>
 
 	);
 }

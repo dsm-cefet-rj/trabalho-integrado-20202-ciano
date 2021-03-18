@@ -14,7 +14,7 @@ function ErrorFormulario2(props) {
 
             {
                 props.erros4 ? <div className="alert alert-danger text-danger ">
-                    "campo isbn só pode conter no maximo 10 ou 13 numeros" </div> : ""
+                    "campo isbn só pode conter  10 ou 13 numeros" </div> : ""
             }
             {
                 props.erros5 ? <div className="alert alert-danger text-danger ">
