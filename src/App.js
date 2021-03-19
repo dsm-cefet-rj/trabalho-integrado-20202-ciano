@@ -1,7 +1,7 @@
 import React from 'react';
-import Rotas from './rota/Rotas';
-import store from './store/Store';
 import { Provider } from 'react-redux';
+import Rotas from './rota/Rotas';
+import store from './store';
 
 function App() {
 	return (

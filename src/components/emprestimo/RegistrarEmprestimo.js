@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
-import { useSelector, useDispatch } from 'react-redux';
-import { ConsultarMatricula, ConsultarIsbn } from '../../store/emprestimo/Emprestimo.Action';
 
 const RegistrarEmprestimo = () => {
-    const dispatch = useDispatch();
-    const consultarMatricula = useSelector(state => state.emprestimo);
 
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',
@@ -60,38 +56,17 @@ const RegistrarEmprestimo = () => {
         })
 
     }
-    const enviarRegistroEmpretismo = () => {
-        setTimeout(() => {
-            setRegEmprestimo({
-                erros3: false,
-            })
-        }, 3000);
-        setRegEmprestimo({
-
-            erros3: true,
-        })
-    }
     // ===========================================
 
-    const onSubmit1 = (e) => {
+    const onSubmitLivro = (e) => {
         e.preventDefault();
-        if (!regEmprestimo.erros1 && !regEmprestimo.erros2 && regEmprestimo.matricula) {
-            dispatch(ConsultarMatricula(regEmprestimo.matricula))
-
-        } else {
-            enviarRegistroEmpretismo();
-        }
+        
     }
-    const onSubmit2 = (e) => {
+    const onSubmitUsuario = (e) => {
         e.preventDefault();
-        if (!regEmprestimo.erros4 && !regEmprestimo.erros5 && regEmprestimo.isbn) {
-            dispatch(ConsultarIsbn(regEmprestimo.isbn))
-
-        } else {
-            enviarRegistroEmpretismo();
-        }
+        
     }
-    const onSubmit3 = (e) => {
+    const onSubmitEmprestimo = (e) => {
         e.preventDefault();
 
         window.location.assign("http://localhost:3000/emprestimo/registrar");
@@ -109,7 +84,7 @@ const RegistrarEmprestimo = () => {
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row conteudo col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">
 
-                    <form onSubmit={onSubmit1} className="row mx-4 justify-content-center w-100 mt-5 p-0" action="#" method="POST">
+                    <form onSubmit={onSubmitLivro} className="row mx-4 justify-content-center w-100 mt-5 p-0" action="#" method="POST">
                         <div className="input-group">
                             {/* 
                                 Matricula:
@@ -122,7 +97,7 @@ const RegistrarEmprestimo = () => {
                         </div>
                     </form>
 
-                    <form onSubmit={onSubmit2} className="row mx-4 justify-content-center w-100" action="#" method="POST">
+                    <form onSubmit={onSubmitUsuario} className="row mx-4 justify-content-center w-100" action="#" method="POST">
                         <div className="input-group w-100">
                             {/* 
                                 ISBN:
@@ -140,13 +115,13 @@ const RegistrarEmprestimo = () => {
                     </form>
 
 
-                    <form onSubmit={onSubmit3} className="row mx-4 justify-content-center" action="#" method="POST">
+                    <form onSubmit={onSubmitEmprestimo} className="row mx-4 justify-content-center" action="#" method="POST">
                         {/* 
                             Nome Usuário:
                             - String
                             - Não pode ser Nulo;
                         */}
-                        <input value={consultarMatricula[0].nome} className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
+                        <input className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
 
 
                         {/*
@@ -155,7 +130,7 @@ const RegistrarEmprestimo = () => {
                             - Possuir formato de email;
                             - Não pode ser Nulo;                        
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="email" value={consultarMatricula[0].email} name="email-usuario" placeholder="E-mail" disabled />
+                        <input className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
 
 
                         {/* 
@@ -163,14 +138,14 @@ const RegistrarEmprestimo = () => {
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input value={consultarMatricula[0].titulo} className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
+                        <input className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
 
                         {/* 
                             Autor do Livro:
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input value={consultarMatricula[0].autores} className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
+                        <input className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
 
                         <input className="my-5 btn" id="confirmar" type="submit" value="Registrar Empréstimo" />
                     </form>
