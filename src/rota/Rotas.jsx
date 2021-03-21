@@ -1,9 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ConsultarEmprestimo from '../components/emprestimo/ConsultarEmprestimo';
+import ConsultarMatricula from '../components/emprestimo/ConsultarMatricula';
 import EncerrarEmprestimo from '../components/emprestimo/EncerrarEmprestimo';
 import EncerrarEmprestimoConfirmacao from '../components/emprestimo/EncerrarEmprestimoConfirmacao';
 import ManterEmprestimo from '../components/emprestimo/ManterEmprestimo';
 import RegistrarEmprestimo from '../components/emprestimo/RegistrarEmprestimo';
+import RenovarEmprestimo from '../components/emprestimo/RenovarEmprestimo';
+import RenovarEmprestimoConfirmacao from '../components/emprestimo/RenovarEmprestimoConfirmacao';
 import Home from '../components/geral/home/Home';
 import CadastrarUsuario from '../components/geral/usuario/CadastrarUsuario';
 import Login from '../components/geral/usuario/Login';
@@ -12,13 +16,10 @@ import MenuInicialUsuario from '../components/geral/usuario/MenuInicialUsuario';
 import AtualizarLivro from '../components/livro/AtualizarLivro';
 import CadastrarLivro from '../components/livro/CadastrarLivro';
 import InformacoesDetalhadasConsulta from '../components/livro/InformacoesDetalhadasConsulta';
+import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
 import ManterRelatorio from '../components/relatorio/ManterRelatorio';
 import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
-import ConsultarEmprestimo from '../components/emprestimo/ConsultarEmprestimo';
-import RenovarEmprestimo from '../components/emprestimo/RenovarEmprestimo';
-import RenovarEmprestimoConfirmacao from '../components/emprestimo/RenovarEmprestimoConfirmacao';
-import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
 
 function Rotas() {
 	return (
@@ -37,7 +38,8 @@ function Rotas() {
 				<Route path="/emprestimo/registrar" component={RegistrarEmprestimo} />
 				<Route path="/emprestimo/encerrar" component={EncerrarEmprestimo} exact />
 				<Route path="/emprestimo/encerrar/confirmacao" component={EncerrarEmprestimoConfirmacao} />
-				<Route path="/emprestimo/consultar" component={ConsultarEmprestimo} />
+				<Route path="/emprestimo/consultar" component={ConsultarMatricula} exact/>
+				<Route path="/emprestimo/consultar/:matricula" component={ConsultarEmprestimo} />
 				<Route path="/emprestimo/renovar" component={RenovarEmprestimo} exact />
 				<Route path="/emprestimo/renovar/confirmacao" component={RenovarEmprestimoConfirmacao} />
 
