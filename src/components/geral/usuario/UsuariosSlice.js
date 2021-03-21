@@ -1,59 +1,36 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {httpDelete, httpGet, httpPut, httpPost} from '../../../utils';
+import {baseUrl} from '../../../baseUrl';
 
-const initialState = {
+const usuariosAdapter = createEntityAdapter({
+    // Presume que os IDs estão armazenados em um campo diferente de `usuario.id`
+    selectId: (usuario) => usuario.matricula
+  });
+
+const initialState = usuariosAdapter.getInitialState({
     status: 'not_loaded',
-    usuarios: [],
     error: null
-}
-const usuario = {
-    id: null,
-    matricula: null,
-    senha: null,
-    isBibliotecario: null,
-    nome: null,
-    email: null,
-    data_nasc: null,
-    telefone: null,
-    endereco: {
-        logradouro: null,
-        complemento: null,
-        cidade: null,
-        bairro: null,
-        cep: null
-    },
-    data_excluido: null
-};
+});
 
 export const fetchUsuarios = createAsyncThunk('usuarios/fetchUsuarios',
     async () => {
-        return await (await fetch('http://localhost:3004/usuarios')).json();
+        return await httpGet(`${baseUrl}/usuarios`);
     });
-
-function fullfillUsuariosReducer(state, usuariosFetched) {
-    state.status = 'loaded';
-    state.usuarios = usuariosFetched;
-}
-
-export function consultarUsuario(state, matricula) {
-    if (state.status === 'not_loaded') {
-        fetchUsuarios();
-        return usuario;
-    } else if (state.status === 'loaded') {
-        return state.usuarios.filter((user) => user.matricula === matricula)[0];
-    }
-}
 
 export const UsuariosSlice = createSlice({
     name: 'usuarios',
     initialState: initialState,
-    reducers: {
-        consultarUsuario: (state, action) => consultarUsuario(state, action.payload),
-    },
     extraReducers: {
-        [fetchUsuarios.fulfilled]: (state, action) => fullfillUsuariosReducer(state, action.payload),
+        [fetchUsuarios.fulfilled]: (state, action) => { state.status = 'loaded'; usuariosAdapter.setAll(state, action.payload);},
         [fetchUsuarios.pending]: (state, action) => { state.status = 'loading' },
         [fetchUsuarios.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
     }
 });
+
+export const {
+    selectAll: selectAllUsuarios,
+    selectById: selectUsuarioById,
+    selectIds: selectUsuariosIds
+} = usuariosAdapter.getSelectors(state => state.usuarios);
 
 export default UsuariosSlice.reducer;

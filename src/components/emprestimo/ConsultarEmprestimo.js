@@ -1,6 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { fetchUsuarios, selectAllUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
@@ -8,16 +9,20 @@ import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
 
 const ConsultarEmprestimo = () => {
     let { matricula } = useParams();
+    const dispatch = useDispatch();
+    
+    const status = useSelector(state => state.usuarios.status);
+    const error = useSelector(state => state.usuarios.error);
 
-    const usuariosState = useSelector(state => state.usuarios);
-    const usuarios = usuariosState.usuarios;
-    const status = usuariosState.status;
-    const error = usuariosState.error;
-    let usuario = usuarios.filter((user) => user.matricula === matricula)[0];
+    let usuario = useSelector(state => selectUsuarioById(state, matricula));
 
+    useEffect(() => {
+        if (status === 'not_loaded')
+            dispatch(fetchUsuarios());
+    }, [status, dispatch]);
 
     let ConsultarEmprestimo = '';
-    if (status === 'loaded' && usuario) {
+    if (status === 'loaded' && typeof usuario !== 'undefined') {
         ConsultarEmprestimo =
             <>
                 <table className="table table-bordered bg-white">
@@ -49,6 +54,8 @@ const ConsultarEmprestimo = () => {
         ConsultarEmprestimo = <h2>Carregando...</h2>
     } else if (status === 'failed') {
         ConsultarEmprestimo = <h2>Erro: {error}</h2>
+    }else if (typeof usuario === 'undefined'){
+        ConsultarEmprestimo = <h2>404 - Página não encontrada</h2>
     }
 
     return (
