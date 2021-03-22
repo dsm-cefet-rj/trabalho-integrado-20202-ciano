@@ -98,59 +98,21 @@
     },
     {
       "id": 4,
-      "nome": "MARCELO",
+      "matricula": "1843234BCC",
+      "senha": "hhh",
       "categoria": "professor",
-      "matricula": "1843234LLL",
-      "email": "GGGGGG@JJJJ.COM",
-      "senha": "HHHHHH",
-      "data": "14/10/1989",
+      "nome": "diogo",
+      "email": "diogo8@hotmail.com",
+      "data_nasc": "14/10/11111",
       "telefone": "2222222222",
-      "logradouro": "rree",
-      "complemento": "dddd",
-      "bairro": "hhhhh",
-      "cep": "lll"
-    },
-    {
-      "id": 5,
-      "nome": "MARCELO DIAS",
-      "categoria": "aluno",
-      "matricula": "184323455",
-      "email": "VASCO8@outlook.com",
-      "senha": "BBBBB",
-      "data": "14/01/2021",
-      "telefone": "55555555",
-      "logradouro": "RUA 1",
-      "complemento": "336",
-      "bairro": "MARECHAL HERMES",
-      "cep": "222222222"
-    },
-    {
-      "id": 6,
-      "nome": "gustavo",
-      "categoria": "aluno",
-      "matricula": "1958698BCC",
-      "email": "gustavo@hotmail.com",
-      "senha": "555555",
-      "data": "14/01/2021",
-      "telefone": "2222222222",
-      "logradouro": "RUA 1",
-      "complemento": "336",
-      "bairro": "hhhhh",
-      "cep": "lll"
-    },
-    {
-      "id": 7,
-      "nome": "marcelo",
-      "categoria": "professor",
-      "matricula": "hhhhhhhhhhh",
-      "email": "marcelao@outlook.com",
-      "senha": "445kkkkk",
-      "data": "14/02/1886",
-      "telefone": "2222222222",
-      "logradouro": "RUA 1",
-      "complemento": "336",
-      "bairro": "MARECHAL HERMES",
-      "cep": "lll"
+      "endereco": {
+        "logradouro": "RUA 1",
+        "complemento": "336",
+        "cidade": "dd",
+        "bairro": "MARECHAL HERMES",
+        "cep": "1111111111"
+      },
+      "data_excluido": null
     }
   ],
   "emprestimos": [

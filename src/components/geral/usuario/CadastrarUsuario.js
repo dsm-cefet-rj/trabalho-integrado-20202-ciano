@@ -22,9 +22,9 @@ const CadastrarUsuario = () => {
     if (status === 'loaded' || status === 'saved' || status === 'deleted') {
         formulario = <FormCadastrarUsuario />;
     } else if (status === 'loading') {
-        formulario = <div>Carregando os projetos...</div>
+        formulario = <div className="alert h3 text-sucess text-center mt-2 alert-success">Carregando os usuarios...</div>
     } else if (status === 'failed') {
-        formulario = <div>Error: {error}</div>
+        formulario = <div className="alert h3 text-danger text-center mt-2 alert-danger" >Error: {error}</div>
     }
     return (
         <div className="container-fluid d-flex flex-column">
