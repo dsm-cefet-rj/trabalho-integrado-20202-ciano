@@ -41,7 +41,7 @@ function Rotas() {
 				<Route path="/emprestimo/consultar" component={ConsultarMatricula} exact/>
 				<Route path="/emprestimo/consultar/:id" component={ConsultarEmprestimo} />
 				<Route path="/emprestimo/renovar" component={RenovarEmprestimo} exact />
-				<Route path="/emprestimo/renovar/confirmacao" component={RenovarEmprestimoConfirmacao} />
+				<Route path="/emprestimo/renovar/:id" component={RenovarEmprestimoConfirmacao} />
 
 				{/* ---------------- Relatório ---------------- */}
 				<Route path="/relatorio" component={ManterRelatorio} exact />

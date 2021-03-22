@@ -1,4 +1,5 @@
 import React from 'react';
+import CapaLivro from '../img/capa-livro-exemplo.svg';
 
 let TabelaFormatada = (props) => {
     //Aguarda 2 parâmetros (titulo, informacoes)
@@ -21,24 +22,46 @@ let TabelaFormatada = (props) => {
     </table>);
 }
 
+let autoresFormatado = (autores) => {
+    let autorF = ["Autor:", ""];
+    if (autores.length > 0) {
+        let aux = 0;
+        autores.map(
+            (autor) => {
+                if (aux === 0)
+                    autorF[1] = autor;
+                else {
+                    autorF[0] = "Autores:"
+                    autorF[1] = autorF[1].concat(', ', autor);
+                }
+                ++aux;
+            }
+        )
+    }
+    return autorF;
+}
+
 const InfosGeraisEmprestimo = (props) => {
-    let usuario = props.usuario;
-    let livro = props.livro;
     let emprestimo = props.emprestimo;
+    let usuario = emprestimo.usuario;
+    let livro = emprestimo.livro;
+
+    let autores = autoresFormatado(livro.autores);
 
     return (
         <>
-            <img src={livro.imagem} alt="Livro fechado" className="size-book-10" />
+            <img src={CapaLivro} alt="Livro fechado" className="size-book-10" />
 
             <div className="table-responsive">
 
                 <TabelaFormatada titulo="Livro" informacoes={[
                     { th: 'Título:', td: livro.titulo },
-                    { th: 'Autor:', td: livro.autor },
-                    { th: 'Cod. Localização:', td: livro.codLocalizacao },
+                    { th: 'Edição:', td: livro.edicao },
+                    { th: autores[0], td: autores[1] },
+                    { th: 'Cod. Localização:', td: livro.cod_localizacao },
                     { th: 'ISBN:', td: livro.isbn },
-                    { th: 'QTD Disponível:', td: livro.qtdDisponivel },
-                    { th: 'QTD Total:', td: livro.qtdTotal }
+                    { th: 'QTD Disponível:', td: livro.qtd_disponivel },
+                    { th: 'QTD Total:', td: livro.qtd_total }
                 ]} />
 
                 <TabelaFormatada titulo="Usuário" informacoes={[
@@ -47,8 +70,8 @@ const InfosGeraisEmprestimo = (props) => {
                 ]} />
 
                 <TabelaFormatada titulo="Empréstimo" informacoes={[
-                    { th: 'Data de Emprestimo:', td: emprestimo.dataEmprestimo },
-                    { th: 'Data de Devolução:', td: emprestimo.dataDevolucao }
+                    { th: 'Data de Emprestimo:', td: emprestimo.data_emprestimo },
+                    { th: 'Data de Devolução:', td: emprestimo.data_devolucao }
                 ]} />
 
             </div>

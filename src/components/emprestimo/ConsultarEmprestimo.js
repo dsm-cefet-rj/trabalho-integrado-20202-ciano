@@ -33,7 +33,7 @@ const ConsultarEmprestimo = () => {
         if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
         }
-    }, [emprestimosStatus,usuariosStatus,id, dispatch]);
+    }, [emprestimosStatus, usuariosStatus, id, dispatch]);
 
     let TabelaUsuario = '';
     if ((usuariosStatus === 'loaded' || usuariosStatus === 'saved' || usuariosStatus === 'deleted') && usuario) {
@@ -70,7 +70,7 @@ const ConsultarEmprestimo = () => {
 
     let LivrosEmprestados = '';
     if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
-        LivrosEmprestados = <BotoesLivrosEmprestados livros={livros} />
+        LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimos} />
 
     } else if (emprestimosStatus === 'loading') {
         LivrosEmprestados = <div className="alert alert-info w-100">Carregando emprestimos...</div>
