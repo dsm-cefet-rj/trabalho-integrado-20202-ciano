@@ -10,7 +10,7 @@ import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
 const ConsultarEmprestimo = () => {
     let { matricula } = useParams();
     const dispatch = useDispatch();
-    
+
     const status = useSelector(state => state.usuarios.status);
     const error = useSelector(state => state.usuarios.error);
 
@@ -54,7 +54,7 @@ const ConsultarEmprestimo = () => {
         ConsultarEmprestimo = <h2>Carregando...</h2>
     } else if (status === 'failed') {
         ConsultarEmprestimo = <h2>Erro: {error}</h2>
-    }else if (typeof usuario === 'undefined'){
+    } else if (typeof usuario === 'undefined') {
         ConsultarEmprestimo = <h2>404 - Página não encontrada</h2>
     }
 

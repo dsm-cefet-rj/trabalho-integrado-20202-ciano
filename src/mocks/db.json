@@ -1,129 +1,185 @@
 {
-    "livros": [
-        {
-            "id": 1,
-            "isbn": 9788522106608,
-            "titulo": "Calculo Vol.1",
-            "edicao": "3ª",
-            "autores": [
-                "James Stewart"
-            ],
-            "cod_localizacao": "S15P5-6",
-            "qtd_total": 22,
-            "qtd_disponivel": 13,
-            "data_excluido": null
-        },
-        {
-            "id": 2,
-            "isbn": 9788540701694,
-            "titulo": "Álgebra Linear com Aplicações",
-            "edicao": "10ª",
-            "autores": [
-                "Howard Anton"
-            ],
-            "cod_localizacao": "S15P1-1",
-            "qtd_total": 20,
-            "qtd_disponivel": 5,
-            "data_excluido": null
-        },
-        {
-            "id": 3,
-            "isbn": 9788576081739,
-            "titulo": "Use a Cabeça!: Java",
-            "edicao": "2ª",
-            "autores": [
-                "Kathy Sierra",
-                "Bert Bates"
-            ],
-            "cod_localizacao": "S15P1-1",
-            "qtd_total": 30,
-            "qtd_disponivel": 20,
-            "data_excluido": null
-        }
-    ],
-    "usuarios": [
-        {
-            "id": 1,
-            "matricula": "1843234BCC",
-            "senha": "12345678",
-            "isBibliotecario": true,
-            "nome": "Andre da Costa Silva",
-            "email": "exemproemail@gmail.com",
-            "data_nasc": "25/05/1998",
-            "telefone": "(21) 93939-3399",
-            "endereco": {
-                "logradouro": "Avenida Presidente Vargas nº20",
-                "complemento": "BLOCO 03, AP202",
-                "cidade": "Rio de Janeiro",
-                "bairro": "Centro",
-                "cep": 20560070
-            },
-            "data_excluido": null
-        },
-        {
-            "id": 2,
-            "matricula": "1958698BCC",
-            "senha": "12345678",
-            "isBibliotecario": false,
-            "nome": "Maria Clara Albuquerque",
-            "email": "mariaclaraexemplor@gmail.com",
-            "data_nasc": "18/09/1995",
-            "telefone": "(21) 2569-6969",
-            "endereco": {
-                "logradouro": "Rua Viana Drumond nº78",
-                "complemento": "AP704",
-                "cidade": "Rio de Janeiro",
-                "bairro": "Vila Isabel",
-                "cep": 20560070
-            },
-            "data_excluido": null
-        },
-        {
-            "id": 3,
-            "matricula": "2055582ADM",
-            "senha": "12345678",
-            "isBibliotecario": false,
-            "nome": "Pedro Enrique Soares",
-            "email": "pedroenriqueexemplor@gmail.com",
-            "data_nasc": "02/12/2000",
-            "telefone": "(21) 99999-9999",
-            "endereco": {
-                "logradouro": "Rua Ednaldo Pereira nº78",
-                "complemento": "AP704",
-                "cidade": "Rio de Janeiro",
-                "bairro": "Copacabana",
-                "cep": 22050020
-            },
-            "data_excluido": null
-        }
-    ],
-    "emprestimos": [
-        {
-            "id": 1,
-            "livroId": 1,
-            "usuarioId": 2,
-            "data_emprestimo": "10/03/2020",
-            "data_devolucao": "25/03/2020",
-            "data_devolvido": null,
-            "data_excluido": null
-        },
-        {
-            "id": 2,
-            "livroId": 2,
-            "usuarioId": 2,
-            "data_emprestimo": "20/03/2020",
-            "data_devolucao": "25/03/2020",
-            "data_devolvido": null,
-            "data_excluido": null
-        },
-        {
-            "id": 3,
-            "livroId": 1,
-            "usuarioId": 3,
-            "data_emprestimo": "09/12/2020",
-            "data_devolucao": "24/03/2020",
-            "data_devolvido": "05/01/2021",
-            "data_excluido": null
-        }
-    ]
+  "livros": [
+    {
+      "id": 1,
+      "isbn": 9788522106608,
+      "titulo": "Calculo Vol.1",
+      "edicao": "3ª",
+      "autores": [
+        "James Stewart"
+      ],
+      "cod_localizacao": "S15P5-6",
+      "qtd_total": 22,
+      "qtd_disponivel": 13,
+      "data_excluido": null
+    },
+    {
+      "id": 2,
+      "isbn": 9788540701694,
+      "titulo": "Álgebra Linear com Aplicações",
+      "edicao": "10ª",
+      "autores": [
+        "Howard Anton"
+      ],
+      "cod_localizacao": "S15P1-1",
+      "qtd_total": 20,
+      "qtd_disponivel": 5,
+      "data_excluido": null
+    },
+    {
+      "id": 3,
+      "isbn": 9788576081739,
+      "titulo": "Use a Cabeça!: Java",
+      "edicao": "2ª",
+      "autores": [
+        "Kathy Sierra",
+        "Bert Bates"
+      ],
+      "cod_localizacao": "S15P1-1",
+      "qtd_total": 30,
+      "qtd_disponivel": 20,
+      "data_excluido": null
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "matricula": "1843234BCC",
+      "senha": "12345678",
+      "isBibliotecario": true,
+      "nome": "Andre da Costa Silva",
+      "email": "exemproemail@gmail.com",
+      "data_nasc": "25/05/1998",
+      "telefone": "(21) 93939-3399",
+      "endereco": {
+        "logradouro": "Avenida Presidente Vargas nº20",
+        "complemento": "BLOCO 03, AP202",
+        "cidade": "Rio de Janeiro",
+        "bairro": "Centro",
+        "cep": 20560070
+      },
+      "data_excluido": null
+    },
+    {
+      "id": 2,
+      "matricula": "1958698BCC",
+      "senha": "12345678",
+      "isBibliotecario": false,
+      "nome": "Maria Clara Albuquerque",
+      "email": "mariaclaraexemplor@gmail.com",
+      "data_nasc": "18/09/1995",
+      "telefone": "(21) 2569-6969",
+      "endereco": {
+        "logradouro": "Rua Viana Drumond nº78",
+        "complemento": "AP704",
+        "cidade": "Rio de Janeiro",
+        "bairro": "Vila Isabel",
+        "cep": 20560070
+      },
+      "data_excluido": null
+    },
+    {
+      "id": 3,
+      "matricula": "2055582ADM",
+      "senha": "12345678",
+      "isBibliotecario": false,
+      "nome": "Pedro Enrique Soares",
+      "email": "pedroenriqueexemplor@gmail.com",
+      "data_nasc": "02/12/2000",
+      "telefone": "(21) 99999-9999",
+      "endereco": {
+        "logradouro": "Rua Ednaldo Pereira nº78",
+        "complemento": "AP704",
+        "cidade": "Rio de Janeiro",
+        "bairro": "Copacabana",
+        "cep": 22050020
+      },
+      "data_excluido": null
+    },
+    {
+      "id": 4,
+      "nome": "MARCELO",
+      "categoria": "professor",
+      "matricula": "1843234LLL",
+      "email": "GGGGGG@JJJJ.COM",
+      "senha": "HHHHHH",
+      "data": "14/10/1989",
+      "telefone": "2222222222",
+      "logradouro": "rree",
+      "complemento": "dddd",
+      "bairro": "hhhhh",
+      "cep": "lll"
+    },
+    {
+      "id": 5,
+      "nome": "MARCELO DIAS",
+      "categoria": "aluno",
+      "matricula": "184323455",
+      "email": "VASCO8@outlook.com",
+      "senha": "BBBBB",
+      "data": "14/01/2021",
+      "telefone": "55555555",
+      "logradouro": "RUA 1",
+      "complemento": "336",
+      "bairro": "MARECHAL HERMES",
+      "cep": "222222222"
+    },
+    {
+      "id": 6,
+      "nome": "gustavo",
+      "categoria": "aluno",
+      "matricula": "1958698BCC",
+      "email": "gustavo@hotmail.com",
+      "senha": "555555",
+      "data": "14/01/2021",
+      "telefone": "2222222222",
+      "logradouro": "RUA 1",
+      "complemento": "336",
+      "bairro": "hhhhh",
+      "cep": "lll"
+    },
+    {
+      "id": 7,
+      "nome": "marcelo",
+      "categoria": "professor",
+      "matricula": "hhhhhhhhhhh",
+      "email": "marcelao@outlook.com",
+      "senha": "445kkkkk",
+      "data": "14/02/1886",
+      "telefone": "2222222222",
+      "logradouro": "RUA 1",
+      "complemento": "336",
+      "bairro": "MARECHAL HERMES",
+      "cep": "lll"
+    }
+  ],
+  "emprestimos": [
+    {
+      "id": 1,
+      "livroId": 1,
+      "usuarioId": 2,
+      "data_emprestimo": "10/03/2020",
+      "data_devolucao": "25/03/2020",
+      "data_devolvido": null,
+      "data_excluido": null
+    },
+    {
+      "id": 2,
+      "livroId": 2,
+      "usuarioId": 2,
+      "data_emprestimo": "20/03/2020",
+      "data_devolucao": "25/03/2020",
+      "data_devolvido": null,
+      "data_excluido": null
+    },
+    {
+      "id": 3,
+      "livroId": 1,
+      "usuarioId": 3,
+      "data_emprestimo": "09/12/2020",
+      "data_devolucao": "24/03/2020",
+      "data_devolvido": "05/01/2021",
+      "data_excluido": null
+    }
+  ]
 }
