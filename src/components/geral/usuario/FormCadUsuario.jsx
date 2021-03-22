@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteUsuario } from './UsuariosSlice';
-import { selectAllUsuarios, addUsuarioServer, deleteUsuariosServer, fetchUsuarios } from './UsuariosSlice';
+import { useDispatch } from 'react-redux';
+import { addUsuarioServer } from './UsuariosSlice';
 const FormCadUsuario = () => {
 
     const dispatch = useDispatch();
@@ -20,12 +19,12 @@ const FormCadUsuario = () => {
         bairro: "",
     });
     const onChangeUsuarios = (e) => {
-    
-            setRegUsuario({ ...regUsuario, [e.target.name]: e.target.value })
 
-      
+        setRegUsuario({ ...regUsuario, [e.target.name]: e.target.value })
 
-       
+
+
+
 
     }
     const onSubmitUsuarios = (e) => {
@@ -48,7 +47,7 @@ const FormCadUsuario = () => {
 
                     <div className="ajuste1">
                         <span className="font-weight-bold dark ml-1 mr-1 h5"> Categoria:</span>
-                        <input id="0" value="aluno" className="" type="radio" name="categoria"  />
+                        <input id="0" value="aluno" className="" type="radio" name="categoria" />
                         <span className="h5 text-dark font-weight-bold">Aluno</span>
                         <input id="1" value="professor" name="categoria" className="mr-1 mb-1 ml-1 " type="radio" />
                         <span className="ml-1 text-dark font-weight-bold h5">Professor</span>

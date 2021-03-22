@@ -33,10 +33,10 @@ const ConsultarEmprestimo = () => {
         if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
         }
-    }, [emprestimosStatus, dispatch]);
+    }, [emprestimosStatus,usuariosStatus,id, dispatch]);
 
     let TabelaUsuario = '';
-    if (usuariosStatus === 'loaded' && usuario) {
+    if ((usuariosStatus === 'loaded' || usuariosStatus === 'saved' || usuariosStatus === 'deleted') && usuario) {
         TabelaUsuario =
             <table className="table table-bordered bg-white">
                 <tr>
@@ -58,28 +58,25 @@ const ConsultarEmprestimo = () => {
             </table>
 
     } else if (usuariosStatus === 'loading') {
-        TabelaUsuario = <div>Carregando usuario...</div>
+        TabelaUsuario = <div className="alert alert-info w-100" >Carregando usuario...</div>
 
     } else if (usuariosStatus === 'failed') {
-        TabelaUsuario = <div>Erro: {usuariosError}</div>
+        TabelaUsuario = <div className="alert alert-warning w-100">Erro: {usuariosError}</div>
 
-    } else if (typeof usuario === 'undefined') {
-        TabelaUsuario = <div>404 - Usuário não encontrado</div>
+    } else {
+        TabelaUsuario = <div className="alert alert-warning w-100">Usuário não encontrado.</div>
     }
 
 
     let LivrosEmprestados = '';
-    if (emprestimosStatus === 'loaded') {
+    if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
         LivrosEmprestados = <BotoesLivrosEmprestados livros={livros} />
 
     } else if (emprestimosStatus === 'loading') {
-        LivrosEmprestados = <div>Carregando emprestimos...</div>
+        LivrosEmprestados = <div className="alert alert-info w-100">Carregando emprestimos...</div>
 
     } else if (emprestimosStatus === 'failed') {
-        LivrosEmprestados = <div>Erro: {emprestimosError}</div>
-
-    } else if (typeof usuario === 'undefined') {
-        LivrosEmprestados = <div>404 - Usuário não encontrado</div>
+        LivrosEmprestados = <div className="alert alert-warning w-100">Erro: {emprestimosError}</div>
     }
 
     return (
