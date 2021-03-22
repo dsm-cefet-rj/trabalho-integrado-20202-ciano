@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 
-import emprestimoReducer from './components/emprestimo/EmprestimoSlice';
+import emprestimoReducer from './components/emprestimo/EmprestimosSlice';
 import livroReducer from './components/livro/LivroSlice';
 import usuarioReducer from './components/geral/usuario/UsuariosSlice';
 

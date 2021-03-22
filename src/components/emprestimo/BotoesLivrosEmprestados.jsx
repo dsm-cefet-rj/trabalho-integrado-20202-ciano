@@ -12,7 +12,7 @@ const BotaoLivroEmprestado = (props) => {
 }
 
 const BotoesLivrosEmprestados = (props) => {
-    if (props != null && props.livros != null) {
+    if (props != null && props.livros.length > 0) {
         return (
             <div className="d-flex flex-column flex-sm-row justify-content-center livros overflow-auto">
                 {
