@@ -1,61 +1,85 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchUsuarios, selectAllUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice';
+import { fetchUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
+import { fetchEmprestimosUsuario, selectAllEmprestimos } from './EmprestimosSlice';
 
 
 const ConsultarEmprestimo = () => {
-    let { matricula } = useParams();
+    let { id } = useParams();
+    id = parseInt(id);
     const dispatch = useDispatch();
 
-    const status = useSelector(state => state.usuarios.status);
-    const error = useSelector(state => state.usuarios.error);
+    const usuariosStatus = useSelector(state => state.usuarios.status);
+    const usuariosError = useSelector(state => state.usuarios.error);
+    const usuario = useSelector(state => selectUsuarioById(state, id));
 
-    let usuario = useSelector(state => selectUsuarioById(state, matricula));
+    const emprestimosStatus = useSelector(state => state.emprestimos.status);
+    const emprestimosError = useSelector(state => state.emprestimos.error);
+    const emprestimos = useSelector(selectAllEmprestimos);
+
+    let livros = [];
+    if (emprestimos.length > 0) {
+        livros = emprestimos.map((emprestimo) => emprestimo.livro);
+    }
 
     useEffect(() => {
-        if (status === 'not_loaded')
+        if (emprestimosStatus === 'not_loaded') {
+            dispatch(fetchEmprestimosUsuario(id));
+        }
+        if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
-    }, [status, dispatch]);
+        }
+    }, [emprestimosStatus, dispatch]);
 
-    let ConsultarEmprestimo = '';
-    if (status === 'loaded' && typeof usuario !== 'undefined') {
-        ConsultarEmprestimo =
-            <>
-                <table className="table table-bordered bg-white">
-                    <tr>
-                        <th scope="row">Nome:</th>
-                        <td>{usuario.nome}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Matrícula:</th>
-                        <td>{usuario.matricula}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">E-mail:</th>
-                        <td>{usuario.email}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Telefone:</th>
-                        <td>{usuario.telefone}</td>
-                    </tr>
-                </table>
+    let TabelaUsuario = '';
+    if (usuariosStatus === 'loaded' && usuario) {
+        TabelaUsuario =
+            <table className="table table-bordered bg-white">
+                <tr>
+                    <th scope="row">Nome:</th>
+                    <td>{usuario.nome}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Matrícula:</th>
+                    <td>{usuario.matricula}</td>
+                </tr>
+                <tr>
+                    <th scope="row">E-mail:</th>
+                    <td>{usuario.email}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Telefone:</th>
+                    <td>{usuario.telefone}</td>
+                </tr>
+            </table>
 
-                <div className="align-items-start mt-4 w-100">
-                    <h3 className="text-center">Livros em posse:</h3>
+    } else if (usuariosStatus === 'loading') {
+        TabelaUsuario = <div>Carregando usuario...</div>
 
-                    <BotoesLivrosEmprestados livros={usuario.livros} />
-                </div>
-            </>
-    } else if (status === 'loading') {
-        ConsultarEmprestimo = <h2>Carregando...</h2>
-    } else if (status === 'failed') {
-        ConsultarEmprestimo = <h2>Erro: {error}</h2>
+    } else if (usuariosStatus === 'failed') {
+        TabelaUsuario = <div>Erro: {usuariosError}</div>
+
     } else if (typeof usuario === 'undefined') {
-        ConsultarEmprestimo = <h2>404 - Página não encontrada</h2>
+        TabelaUsuario = <div>404 - Usuário não encontrado</div>
+    }
+
+
+    let LivrosEmprestados = '';
+    if (emprestimosStatus === 'loaded') {
+        LivrosEmprestados = <BotoesLivrosEmprestados livros={livros} />
+
+    } else if (emprestimosStatus === 'loading') {
+        LivrosEmprestados = <div>Carregando emprestimos...</div>
+
+    } else if (emprestimosStatus === 'failed') {
+        LivrosEmprestados = <div>Erro: {emprestimosError}</div>
+
+    } else if (typeof usuario === 'undefined') {
+        LivrosEmprestados = <div>404 - Usuário não encontrado</div>
     }
 
     return (
@@ -65,12 +89,16 @@ const ConsultarEmprestimo = () => {
             <section className="row justify-content-center flex-grow-1">
                 <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 align-items-start conteudo">
 
-                    {ConsultarEmprestimo}
+                    {TabelaUsuario}
 
+                    <div className="align-items-start mt-4 w-100">
+                        <h3 className="text-center">Livros em posse:</h3>
+                        {LivrosEmprestados}
+                    </div>
                 </div>
             </section>
             <Rodape />
-        </div>
+        </div >
     );
 }
 
