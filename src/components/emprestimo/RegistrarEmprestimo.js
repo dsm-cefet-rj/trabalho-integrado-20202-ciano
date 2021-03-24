@@ -1,80 +1,118 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
+import { selectAllUsuarios, deleteUsuariosServer, fetchUsuarios } from '../../components/geral/usuario/UsuariosSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAllLivro, fetchLivro } from '../livro/LivroSlice';
+import { addEmprestimoServer, fetchEmprestimo } from '../emprestimo/EmprestimosSlice';
+import { useHistory } from 'react-router-dom';
 
 const RegistrarEmprestimo = () => {
-
+    let history = useHistory();
+    let usuarioId1 = "";
+    let livroId1 = "";
+    const emprestimos = useSelector(selectAllUsuarios);
+    const livros = useSelector(selectAllLivro);
+    const status = useSelector(state => state.emprestimos.status);
+    const error = useSelector(state => state.emprestimos.error);
+    const status1 = useSelector(state => state.livros.status);
+    const error1 = useSelector(state => state.livros.error);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (status === 'not_loaded' || status1 === 'not_loaded') {
+            dispatch(fetchUsuarios())
+            dispatch(fetchLivro())
+            console.log(status)
+        } else if (status === 'failed' || status1 === 'failed') {
+            setTimeout(() => dispatch(fetchUsuarios()), 5000);
+            setTimeout(() => dispatch(fetchLivro()), 5000);
+        }
+    }, [status, dispatch])
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',
         isbn: '',
-        erros1: false,
-        erros2: false,
-        erros3: false,
-        erros4: false,
-        erros5: false
     });
-
-    // =================== Validação ====================
+    function DataRenovacaoString(dataString) {
+        let diasDeAcrescimo = 15;
+        let dataArr = dataString.split("/");
+        var data = new Date(dataArr[2], dataArr[1], dataArr[0]);
+        data.setDate(data.getDate() + diasDeAcrescimo);
+        return (
+            ('0' + data.getDate()).slice(-2) + "/" + ('0' + data.getMonth()).slice(-2) + "/" + data.getFullYear()
+        );
+    }
     const onChange = (e) => {
-        e.target.value = e.target.value.trim();
-
-        if ([e.target.name].toString() === "matricula") {
-
-            if (/[0-9,a-z]{21}/gi.test(e.target.value)) {
-
-                regEmprestimo.erros1 = true;
-            } else {
-                regEmprestimo.erros1 = false;
-            }
-            if (/[!,",.,F/,=,:,_,^,~,`,´,\-,\\,>,<,|,;,*,#,^,~,+,&,¨,%,$,@]/gi.test(e.target.value)) {
-                regEmprestimo.erros2 = true;
-            }
-            else {
-                regEmprestimo.erros2 = false;
-            }
-        }
-        if ([e.target.name].toString() === "isbn") {
-
-
-            if (/[^0-9]/gi.test(e.target.value)) {
-                regEmprestimo.erros5 = true;
-            }
-            else {
-                regEmprestimo.erros5 = false;
-
-            }
-            if (((document.getElementById("isbn").value.length !== 10) && (document.getElementById("isbn").value.length !== 13))) {
-                regEmprestimo.erros4 = true;
-            } else {
-                regEmprestimo.erros4 = false;
-            }
-
-        }
         setRegEmprestimo({
             ...regEmprestimo,
             [e.target.name]: e.target.value
         })
 
     }
-    // ===========================================
-
     const onSubmitLivro = (e) => {
         e.preventDefault();
-        
+        let titulo = document.getElementById("titulo");
+        let autor = document.getElementById("autor");
+        if (livros.toString() != "undefined") {
+            const livros1 = livros.filter(liv1 => {
+                return liv1.isbn == Number(regEmprestimo.isbn)
+            }
+            ).map(liv2 => { return { titulo: liv2.titulo, autores: liv2.autores, id: liv2.id } })
+            if (livros1.length > 0) {
+                titulo.value = livros1[0].titulo
+                autor.value = livros1[0].autores
+                livroId1 = livros1[0].id;
+                autor.style.color = "blue";
+                titulo.style.color = "blue";
+            } else {
+                titulo.value = "Titulo não encontrado"
+                titulo.style.color = "red";
+                autor.value = "Autor não encontrado"
+                autor.style.color = "red";
+            }
+        }
     }
     const onSubmitUsuario = (e) => {
         e.preventDefault();
-        
+        let nome1 = document.getElementById("nome");
+        let email1 = document.getElementById("email")
+        if (emprestimos.toString() != "undefined") {
+            const emprestimos1 = emprestimos.filter(mat1 => {
+                return mat1.matricula.toString() == regEmprestimo.matricula
+            }
+            ).map(mat2 => { return { nome: mat2.nome.toString(), email: mat2.email, id: mat2.id } })
+            if (emprestimos1.length > 0) {
+                email1.value = emprestimos1[0].email
+                nome1.value = emprestimos1[0].nome
+                usuarioId1 = emprestimos1[0].id
+                nome1.style.color = "green";
+                email1.style.color = "green";
+            } else {
+                email1.value = "email não encontrado"
+                nome1.value = "nome não encontrado"
+                email1.style.color = "red";
+                nome1.style.color = "red";
+            }
+
+        }
+
     }
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
-
-        window.location.assign("http://localhost:3000/emprestimo/registrar");
+        let hoje = new Date();
+        let diaEmprestimo = hoje.getDate();
+        let mes = hoje.getMonth() + 1;
+        let ano = hoje.getFullYear();
+        let dataEmprestimo = `${("0" + diaEmprestimo).slice(-2)}/${("0" + mes).slice(-2)}/${ano}`;
+        let diaDevolucao = DataRenovacaoString(dataEmprestimo)
+        dispatch(addEmprestimoServer({
+            id: "", livroId: livroId1, usuarioId: usuarioId1, data_emprestimo: dataEmprestimo,
+            data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
+        }));
+        history.push("/emprestimo");
     }
 
     return (
         <div className="container-fluid d-flex flex-column">
-
             <CabecalhoVoltar titulo="Registrar Empréstimo" link='/emprestimo' />
             <div className="col-11 h5 mt-2 col-sm-8 col-md-6 col-lg-4  mx-auto text-center  ">
                 <ErrorFormulario2 erros1={regEmprestimo.erros1} erros2={regEmprestimo.erros2}
@@ -84,7 +122,7 @@ const RegistrarEmprestimo = () => {
             <section className="row justify-content-center align-items-start flex-grow-1">
                 <div className="row conteudo col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">
 
-                    <form onSubmit={onSubmitLivro} className="row mx-4 justify-content-center w-100 mt-5 p-0" action="#" method="POST">
+                    <form onSubmit={onSubmitUsuario} className="row mx-4 justify-content-center w-100 mt-5 p-0" action="#" method="POST">
                         <div className="input-group">
                             {/* 
                                 Matricula:
@@ -97,7 +135,7 @@ const RegistrarEmprestimo = () => {
                         </div>
                     </form>
 
-                    <form onSubmit={onSubmitUsuario} className="row mx-4 justify-content-center w-100" action="#" method="POST">
+                    <form onSubmit={onSubmitLivro} className="row mx-4 justify-content-center w-100" action="#" method="POST">
                         <div className="input-group w-100">
                             {/* 
                                 ISBN:
@@ -121,7 +159,7 @@ const RegistrarEmprestimo = () => {
                             - String
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
+                        <input id="nome" className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
 
 
                         {/*
@@ -130,7 +168,7 @@ const RegistrarEmprestimo = () => {
                             - Possuir formato de email;
                             - Não pode ser Nulo;                        
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
+                        <input id="email" className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
 
 
                         {/* 
@@ -138,14 +176,14 @@ const RegistrarEmprestimo = () => {
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
+                        <input id="titulo" className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
 
                         {/* 
                             Autor do Livro:
                             - String;
                             - Não pode ser Nulo;
                         */}
-                        <input className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
+                        <input id="autor" className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
 
                         <input className="my-5 btn" id="confirmar" type="submit" value="Registrar Empréstimo" />
                     </form>

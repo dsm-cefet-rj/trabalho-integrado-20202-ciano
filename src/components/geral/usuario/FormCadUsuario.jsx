@@ -34,10 +34,6 @@ const FormCadUsuario = () => {
 
 
         setRegUsuario({ ...regUsuario, [e.target.name]: e.target.value })
-
-
-
-
     }
     const onSubmitUsuarios = (e) => {
         e.preventDefault();
@@ -67,11 +63,6 @@ const FormCadUsuario = () => {
                         <span className="ml-1 text-dark font-weight-bold h6">Professor</span>
                         <input id="2" value="bibliotecario" name="categoria" className="mx-1 my-0 h-25" type="radio" />
                         <span className="ml-1 text-dark  font-weight-bold h6">bibliotecário</span>
-                        <span className="font-weight-bold dark ml-1 mr-1 h5"> Categoria:</span>
-                        <input id="0" value="aluno" className="" type="radio" name="categoria" />
-                        <span className="h5 text-dark font-weight-bold">Aluno</span>
-                        <input id="1" value="professor" name="categoria" className="mr-1 mb-1 ml-1 " type="radio" />
-                        <span className="ml-1 text-dark font-weight-bold h5">Professor</span> 2a8ae82b8644cd47bff693ef2d5aac698f8bae82
                     </div>
                     <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="text" name="matricula" placeholder="Matricula" />
                     <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="email" name="email" placeholder="E-mail" />

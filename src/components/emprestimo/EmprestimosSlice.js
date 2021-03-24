@@ -22,8 +22,8 @@ export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmpres
     return idEmprestimo;
 });
 
-export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo, { getState }) => {
-    return await httpPost(`${baseUrl}/emprestimos`, emprestimo, { headers: { Authorization: 'Bearer ' + getState().logins.currentToken } });
+export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo) => {
+    return await httpPost(`${baseUrl}/emprestimos`, emprestimo);
 });
 
 export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo, { getState }) => {

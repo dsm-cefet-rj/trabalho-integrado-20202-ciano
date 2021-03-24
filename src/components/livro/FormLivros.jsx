@@ -1,97 +1,34 @@
 import React, { useState } from 'react';
-import ErrorFormulario4 from './validacaolivro/MensagemErro4';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addLivroServer } from './LivroSlice';
 const FormLivros = (props) => {
+    const dispatch = useDispatch();
+    let history = useHistory();
     const [formLivro, setFormLivro] = useState({
+        id: "",
         titulo: "",
         genero: "",
         autor: "",
         isbn: "",
         quantidade: "",
         localizacao: "",
-        erros1: false,
-        erros2: false,
-        erros4: false,
-        erros5: false,
-        erros3: false,
+
     })
-
     const onChange = (e) => {
-        e.target.value = e.target.value.trim();
-
-        if ([e.target.name].toString() === "isbn") {
-
-
-            if (/[^0-9]/gi.test(e.target.value)) {
-                formLivro.erros5 = true;
-            }
-            else {
-                formLivro.erros5 = false;
-
-            }
-            if (((document.getElementById("isbn").value.length !== 10) && (document.getElementById("isbn").value.length !== 13))) {
-                formLivro.erros4 = true;
-            } else {
-                formLivro.erros4 = false;
-            }
-
-        }
-        if ([e.target.name].toString() === "quantidade") {
-
-
-            if (/[^0-9]/gi.test(e.target.value)) {
-                formLivro.erros1 = true;
-            }
-            else {
-                formLivro.erros1 = false;
-
-            }
-            if (((document.getElementById("quantidade").value.length < 1))) {
-                formLivro.erros2 = true;
-            } else {
-                formLivro.erros2 = false;
-            }
-
-        }
         setFormLivro({
             ...formLivro,
             [e.target.name]: e.target.value
         })
-
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!formLivro.erros1 && !formLivro.erros2 && !formLivro.erros4 && !formLivro.erros5 &&
-            formLivro.titulo && formLivro.genero && formLivro.autor && formLivro.isbn &&
-            formLivro.quantidade && formLivro.localizacao) {
-
-            e.target.reset()
-            formLivro.titulo = "";
-            formLivro.genero = "";
-            formLivro.autor = "";
-            formLivro.isbn = "";
-            formLivro.quantidade = "";
-            formLivro.localizacao = "";
-
-        } else {
-            setTimeout(() => {
-                setFormLivro({
-                    erros3: false,
-                })
-            }, 3000);
-            setFormLivro({
-                erros3: true,
-            })
-        }
+        console.log(formLivro)
+        dispatch(addLivroServer(formLivro));
+        history.push("");
     }
     return (
         <>
-            <div className="align-self-center my-2 h5 w-25   text-center" >
-                <ErrorFormulario4 erros1={formLivro.erros1} erros2={formLivro.erros2}
-                    erros3={formLivro.erros3} erros4={formLivro.erros4} erros5={formLivro.erros5}
-                />
-            </div>
-
-
             <section className="perfil_ajuste  row  justify-content-center  corpo_login  " >
 
                 <form onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >

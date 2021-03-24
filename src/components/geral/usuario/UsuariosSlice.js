@@ -2,7 +2,9 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import { baseUrl } from '../../../baseUrl';
 import { httpDelete, httpGet, httpPost, httpPut } from '../../../utils';
 
-const usuariosAdapter = createEntityAdapter();
+const usuariosAdapter = createEntityAdapter(
+
+);
 
 const initialState = usuariosAdapter.getInitialState({
     status: 'not_loaded',

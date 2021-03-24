@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CabecalhoVoltar from '../../utils/CabecalhoVoltar';
 import FormCadastrarUsuario from './FormCadUsuario';
-import { deleteUsuario } from './UsuariosSlice';
 import { selectAllUsuarios, deleteUsuariosServer, fetchUsuarios } from './UsuariosSlice';
 const CadastrarUsuario = () => {
     const usuarios = useSelector(selectAllUsuarios)
@@ -11,7 +10,6 @@ const CadastrarUsuario = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (status === 'not_loaded') {
-            console.log("oiiiiii")
             dispatch(fetchUsuarios())
             console.log(status)
         } else if (status === 'failed') {
@@ -22,7 +20,7 @@ const CadastrarUsuario = () => {
     if (status === 'loaded' || status === 'saved' || status === 'deleted') {
         formulario = <FormCadastrarUsuario />;
     } else if (status === 'loading') {
-        formulario = <div className="alert h3 text-sucess text-center mt-2 alert-success">Carregando os usuarios...</div>
+        formulario = <div className="alert h3 text-sucess text-center mt-2 alert-success">carregando...</div>
     } else if (status === 'failed') {
         formulario = <div className="alert h3 text-danger text-center mt-2 alert-danger" >Error: {error}</div>
     }
