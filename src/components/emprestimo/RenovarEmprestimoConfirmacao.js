@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { adiarData } from '../../utils';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from './EmprestimosSlice';
 import InfosGeraisEmprestimo from './InfosGeraisEmprestimo';
-import { adiarData } from '../../utils';
 
 const RenovarEmprestimoConfirmacao = () => {
-    let diasDeAcrescimo = 15;
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     let { id } = useParams();
     id = parseInt(id);
+    
+    let diasDeAcrescimo = 15;
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimo = useSelector(state => selectEmprestimoById(state, id));
-
-
-    // const [updateEmprestimo, setUpdateEmprestimo] = useState();
-
-    // console.log(emprestimo);
 
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded')
@@ -31,7 +27,7 @@ const RenovarEmprestimoConfirmacao = () => {
 
     function onClickRenovarEmprestimo(e) {
         e.preventDefault();
-        
+
         let updateEmprestimo = {
             "id": emprestimo.id,
             "livroId": emprestimo.livroId,
@@ -42,8 +38,8 @@ const RenovarEmprestimoConfirmacao = () => {
             "data_excluido": null
         }
 
-         dispatch(updateEmprestimoServer(updateEmprestimo));
-        // history.push('/emprestimo/consultar/');
+        dispatch(updateEmprestimoServer(updateEmprestimo));
+        history.push('/emprestimo');
     }
 
     let informacoes;

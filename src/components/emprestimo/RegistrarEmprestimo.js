@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { fetchUsuarios, selectAllUsuarios } from '../../components/geral/usuario/UsuariosSlice';
+import { adiarData, formatData } from '../../utils';
+import { addEmprestimoServer } from '../emprestimo/EmprestimosSlice';
+import { fetchLivro, selectAllLivro } from '../livro/LivroSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
-import { selectAllUsuarios, deleteUsuariosServer, fetchUsuarios } from '../../components/geral/usuario/UsuariosSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectAllLivro, fetchLivro } from '../livro/LivroSlice';
-import { addEmprestimoServer, fetchEmprestimo } from '../emprestimo/EmprestimosSlice';
-import { useHistory } from 'react-router-dom';
-import { formatData, adiarData } from '../../utils';
 
 const RegistrarEmprestimo = () => {
     let history = useHistory();
+    const dispatch = useDispatch();
+
+    let diasDeAcrescimo = 15;
     let usuarioId1 = "";
     let livroId1 = "";
-    const emprestimos = useSelector(selectAllUsuarios);
-    const livros = useSelector(selectAllLivro);
-    const status = useSelector(state => state.emprestimos.status);
-    const error = useSelector(state => state.emprestimos.error);
 
+    const emprestimos = useSelector(selectAllUsuarios);
+    const status = useSelector(state => state.emprestimos.status);
+    // const error = useSelector(state => state.emprestimos.error);
+
+    const livros = useSelector(selectAllLivro);
     const status1 = useSelector(state => state.livros.status);
-    const error1 = useSelector(state => state.livros.error);
-    const dispatch = useDispatch();
+    // const error1 = useSelector(state => state.livros.error);
 
     useEffect(() => {
         if (status === 'not_loaded' || status1 === 'not_loaded') {
@@ -30,7 +33,7 @@ const RegistrarEmprestimo = () => {
             setTimeout(() => dispatch(fetchUsuarios()), 5000);
             setTimeout(() => dispatch(fetchLivro()), 5000);
         }
-    }, [status, dispatch]);
+    }, [status, status1, dispatch]);
 
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',
@@ -42,16 +45,15 @@ const RegistrarEmprestimo = () => {
             ...regEmprestimo,
             [e.target.name]: e.target.value
         })
-
     }
-    
+
     const onSubmitLivro = (e) => {
         e.preventDefault();
         let titulo = document.getElementById("titulo");
         let autor = document.getElementById("autor");
-        if (livros.toString() != "undefined") {
+        if (livros.toString() !== 'undefined') {
             const livros1 = livros.filter(liv1 => {
-                return liv1.isbn == Number(regEmprestimo.isbn)
+                return liv1.isbn === Number(regEmprestimo.isbn)
             }
             ).map(liv2 => { return { titulo: liv2.titulo, autores: liv2.autores, id: liv2.id } })
             if (livros1.length > 0) {
@@ -73,9 +75,9 @@ const RegistrarEmprestimo = () => {
         e.preventDefault();
         let nome1 = document.getElementById("nome");
         let email1 = document.getElementById("email")
-        if (emprestimos.toString() != "undefined") {
+        if (emprestimos.toString() !== "undefined") {
             const emprestimos1 = emprestimos.filter(mat1 => {
-                return mat1.matricula.toString() == regEmprestimo.matricula
+                return mat1.matricula.toString() === regEmprestimo.matricula
             }
             ).map(mat2 => { return { nome: mat2.nome.toString(), email: mat2.email, id: mat2.id } })
             if (emprestimos1.length > 0) {
@@ -95,10 +97,10 @@ const RegistrarEmprestimo = () => {
 
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
-        
+
         let hoje = formatData(new Date());
-        let diaDevolucao = adiarData(hoje,15);
-        
+        let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
+
         dispatch(addEmprestimoServer({
             id: "", livroId: livroId1, usuarioId: usuarioId1, data_emprestimo: hoje,
             data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
