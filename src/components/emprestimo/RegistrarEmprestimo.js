@@ -13,12 +13,12 @@ const RegistrarEmprestimo = () => {
     const dispatch = useDispatch();
 
     let diasDeAcrescimo = 15;
-    let usuarioId1 = "";
-    let livroId1 = "";
+    let usuario = {};
+    let livro = {};
 
-    const emprestimos = useSelector(selectAllUsuarios);
-    const status = useSelector(state => state.emprestimos.status);
-    // const error = useSelector(state => state.emprestimos.error);
+    const usuarios = useSelector(selectAllUsuarios);
+    const status = useSelector(state => state.usuarios.status);
+    // const error = useSelector(state => state.usuarios.error);
 
     const livros = useSelector(selectAllLivro);
     const status1 = useSelector(state => state.livros.status);
@@ -28,7 +28,6 @@ const RegistrarEmprestimo = () => {
         if (status === 'not_loaded' || status1 === 'not_loaded') {
             dispatch(fetchUsuarios())
             dispatch(fetchLivro())
-            console.log(status)
         } else if (status === 'failed' || status1 === 'failed') {
             setTimeout(() => dispatch(fetchUsuarios()), 5000);
             setTimeout(() => dispatch(fetchLivro()), 5000);
@@ -51,21 +50,18 @@ const RegistrarEmprestimo = () => {
         e.preventDefault();
         let titulo = document.getElementById("titulo");
         let autor = document.getElementById("autor");
-        if (livros.toString() !== 'undefined') {
-            const livros1 = livros.filter(liv1 => {
-                return liv1.isbn === Number(regEmprestimo.isbn)
-            }
-            ).map(liv2 => { return { titulo: liv2.titulo, autores: liv2.autores, id: liv2.id } })
-            if (livros1.length > 0) {
-                titulo.value = livros1[0].titulo
-                autor.value = livros1[0].autores
-                livroId1 = livros1[0].id;
+        if (livros !== 'undefined') {
+            livro = livros.filter(livro => { return livro.isbn === Number(regEmprestimo.isbn)})[0];
+            
+            if (livro) {
+                titulo.value = livro.titulo;
+                autor.value = livro.autores;
                 autor.style.color = "blue";
                 titulo.style.color = "blue";
             } else {
-                titulo.value = "Titulo não encontrado"
+                titulo.value = "Titulo não encontrado";
                 titulo.style.color = "red";
-                autor.value = "Autor não encontrado"
+                autor.value = "Autor não encontrado";
                 autor.style.color = "red";
             }
         }
@@ -75,20 +71,17 @@ const RegistrarEmprestimo = () => {
         e.preventDefault();
         let nome1 = document.getElementById("nome");
         let email1 = document.getElementById("email")
-        if (emprestimos.toString() !== "undefined") {
-            const emprestimos1 = emprestimos.filter(mat1 => {
-                return mat1.matricula.toString() === regEmprestimo.matricula
-            }
-            ).map(mat2 => { return { nome: mat2.nome.toString(), email: mat2.email, id: mat2.id } })
-            if (emprestimos1.length > 0) {
-                email1.value = emprestimos1[0].email
-                nome1.value = emprestimos1[0].nome
-                usuarioId1 = emprestimos1[0].id
+        if (usuarios !== "undefined") {
+            usuario = usuarios.filter(usuario => { return usuario.matricula === regEmprestimo.matricula})[0];
+            
+            if (usuario) {
+                email1.value = usuario.email;
+                nome1.value = usuario.nome;
                 nome1.style.color = "green";
                 email1.style.color = "green";
             } else {
-                email1.value = "email não encontrado"
-                nome1.value = "nome não encontrado"
+                email1.value = "email não encontrado";
+                nome1.value = "nome não encontrado";
                 email1.style.color = "red";
                 nome1.style.color = "red";
             }
@@ -98,14 +91,18 @@ const RegistrarEmprestimo = () => {
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
 
-        let hoje = formatData(new Date());
-        let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
-
-        dispatch(addEmprestimoServer({
-            id: "", livroId: livroId1, usuarioId: usuarioId1, data_emprestimo: hoje,
-            data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
-        }));
-        history.push("/emprestimo");
+        if(usuario && livro){
+            let hoje = formatData(new Date());
+            let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
+    
+            dispatch(addEmprestimoServer({
+                id: "", livroId: livro.id, usuarioId: usuario.id, data_emprestimo: hoje,
+                data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
+            }));
+            history.push("/emprestimo");
+        }
+        else
+            window.alert("O Livro e o Usuário devem existir no sistema!");
     }
 
     return (

@@ -39,15 +39,6 @@
       "qtd_total": 30,
       "qtd_disponivel": 20,
       "data_excluido": null
-    },
-    {
-      "titulo": "ddd",
-      "genero": "ggggggg",
-      "autor": "",
-      "isbn": "",
-      "quantidade": "",
-      "localizacao": "",
-      "id": 4
     }
   ],
   "usuarios": [
@@ -166,33 +157,6 @@
       "usuarioId": 4,
       "data_emprestimo": "24/03/2021",
       "data_devolucao": "09/04/2021",
-      "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 6,
-      "livroId": 2,
-      "usuarioId": 1,
-      "data_emprestimo": "24/03/2021",
-      "data_devolucao": "09/04/2021",
-      "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 7,
-      "livroId": 3,
-      "usuarioId": "",
-      "data_emprestimo": "24/03/2021",
-      "data_devolucao": "08/04/2021",
-      "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 8,
-      "livroId": 2,
-      "usuarioId": "",
-      "data_emprestimo": "24/03/2021",
-      "data_devolucao": "08/04/2021",
       "data_devolvido": null,
       "data_excluido": null
     }
