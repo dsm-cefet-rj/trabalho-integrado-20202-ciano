@@ -21,11 +21,6 @@ const ConsultarEmprestimo = () => {
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimos = useSelector(selectAllEmprestimos);
 
-    let livros = [];
-    if (emprestimos.length > 0) {
-        livros = emprestimos.map((emprestimo) => emprestimo.livro);
-    }
-
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded') {
             dispatch(fetchEmprestimosUsuario(id));

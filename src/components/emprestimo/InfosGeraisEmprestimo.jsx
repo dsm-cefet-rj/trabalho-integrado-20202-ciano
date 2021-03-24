@@ -26,7 +26,8 @@ let autoresFormatado = (autores) => {
     let autorF = ["Autor:", ""];
     if (autores.length > 0) {
         let aux = 0;
-        autores.map(
+        
+        autores.forEach(
             (autor) => {
                 if (aux === 0)
                     autorF[1] = autor;

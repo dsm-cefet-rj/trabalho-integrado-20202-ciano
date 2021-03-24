@@ -1,45 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
-import { fetchEmprestimos, selectEmprestimoById } from './EmprestimosSlice';
+import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from './EmprestimosSlice';
 import InfosGeraisEmprestimo from './InfosGeraisEmprestimo';
-
-function DataRenovacaoString(dataString) {
-    let diasDeAcrescimo = 15;
-    let dataArr = dataString.split("/");
-    var data = new Date(dataArr[2], dataArr[1], dataArr[0]);
-    data.setDate(data.getDate() + diasDeAcrescimo);
-
-    return (
-        ('0' + data.getDate()).slice(-2) + "/" + ('0' + data.getMonth()).slice(-2) + "/" + data.getFullYear()
-    );
-}
+import { adiarData } from '../../utils';
 
 const RenovarEmprestimoConfirmacao = () => {
+    let diasDeAcrescimo = 15;
+    const history = useHistory();
+    const dispatch = useDispatch()
     let { id } = useParams();
     id = parseInt(id);
-    const dispatch = useDispatch();
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimo = useSelector(state => selectEmprestimoById(state, id));
+
+
+    // const [updateEmprestimo, setUpdateEmprestimo] = useState();
+
+    // console.log(emprestimo);
 
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded')
             dispatch(fetchEmprestimos());
     }, [emprestimosStatus, dispatch]);
 
-    let informacoes;
 
+    function onClickRenovarEmprestimo(e) {
+        e.preventDefault();
+        
+        let updateEmprestimo = {
+            "id": emprestimo.id,
+            "livroId": emprestimo.livroId,
+            "usuarioId": emprestimo.usuarioId,
+            "data_emprestimo": emprestimo.data_emprestimo,
+            "data_devolucao": adiarData(emprestimo.data_devolucao, diasDeAcrescimo),
+            "data_devolvido": null,
+            "data_excluido": null
+        }
+
+         dispatch(updateEmprestimoServer(updateEmprestimo));
+        // history.push('/emprestimo/consultar/');
+    }
+
+    let informacoes;
     if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo) {
+        let dataRenovacao = adiarData(emprestimo.data_devolucao, diasDeAcrescimo);
         informacoes =
             <>
                 <InfosGeraisEmprestimo emprestimo={emprestimo} />
 
-                <h3 className="h4 text-center">Deseja renovar o empréstimo para o dia ({DataRenovacaoString(emprestimo.data_devolucao)})?</h3>
-                <Link to='/emprestimo/renovar' className="btn align-self-end text-white botao">SIM</Link>
+                <h3 className="h4 text-center">Deseja renovar o empréstimo para o dia ({dataRenovacao})?</h3>
+                <button onClick={onClickRenovarEmprestimo} className="btn align-self-end text-white botao">SIM</button>
             </>
     } else if (emprestimosStatus === 'loading') {
         informacoes = <div className="alert alert-info w-100" >Carregando informações do Empréstimo...</div>

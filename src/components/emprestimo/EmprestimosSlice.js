@@ -17,8 +17,8 @@ export const fetchEmprestimosUsuario = createAsyncThunk('emprestimos/fetchEmpres
     return await httpGet(`${baseUrl}/emprestimos?usuarioId=${idUsuario}&_expand=usuario&_expand=livro`);
 });
 
-export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo, { getState }) => {
-    await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`, { headers: { Authorization: 'Bearer ' + getState().logins.currentToken } });
+export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo) => {
+    await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`);
     return idEmprestimo;
 });
 
@@ -26,8 +26,8 @@ export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoSe
     return await httpPost(`${baseUrl}/emprestimos`, emprestimo);
 });
 
-export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo, { getState }) => {
-    return await httpPut(`${baseUrl}/emprestimos/${emprestimo.id}`, emprestimo, { headers: { Authorization: 'Bearer ' + getState().logins.currentToken } });
+export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo) => {
+    return await httpPut(`${baseUrl}/emprestimos/${emprestimo.id}`, emprestimo);
 });
 
 export const EmprestimosSlice = createSlice({

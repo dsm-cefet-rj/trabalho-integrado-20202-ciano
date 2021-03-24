@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectAllLivro, fetchLivro } from '../livro/LivroSlice';
 import { addEmprestimoServer, fetchEmprestimo } from '../emprestimo/EmprestimosSlice';
 import { useHistory } from 'react-router-dom';
+import { formatData, adiarData } from '../../utils';
 
 const RegistrarEmprestimo = () => {
     let history = useHistory();
@@ -15,9 +16,11 @@ const RegistrarEmprestimo = () => {
     const livros = useSelector(selectAllLivro);
     const status = useSelector(state => state.emprestimos.status);
     const error = useSelector(state => state.emprestimos.error);
+
     const status1 = useSelector(state => state.livros.status);
     const error1 = useSelector(state => state.livros.error);
     const dispatch = useDispatch();
+
     useEffect(() => {
         if (status === 'not_loaded' || status1 === 'not_loaded') {
             dispatch(fetchUsuarios())
@@ -27,20 +30,13 @@ const RegistrarEmprestimo = () => {
             setTimeout(() => dispatch(fetchUsuarios()), 5000);
             setTimeout(() => dispatch(fetchLivro()), 5000);
         }
-    }, [status, dispatch])
+    }, [status, dispatch]);
+
     const [regEmprestimo, setRegEmprestimo] = useState({
         matricula: '',
         isbn: '',
     });
-    function DataRenovacaoString(dataString) {
-        let diasDeAcrescimo = 15;
-        let dataArr = dataString.split("/");
-        var data = new Date(dataArr[2], dataArr[1], dataArr[0]);
-        data.setDate(data.getDate() + diasDeAcrescimo);
-        return (
-            ('0' + data.getDate()).slice(-2) + "/" + ('0' + data.getMonth()).slice(-2) + "/" + data.getFullYear()
-        );
-    }
+
     const onChange = (e) => {
         setRegEmprestimo({
             ...regEmprestimo,
@@ -48,6 +44,7 @@ const RegistrarEmprestimo = () => {
         })
 
     }
+    
     const onSubmitLivro = (e) => {
         e.preventDefault();
         let titulo = document.getElementById("titulo");
@@ -71,6 +68,7 @@ const RegistrarEmprestimo = () => {
             }
         }
     }
+
     const onSubmitUsuario = (e) => {
         e.preventDefault();
         let nome1 = document.getElementById("nome");
@@ -92,20 +90,17 @@ const RegistrarEmprestimo = () => {
                 email1.style.color = "red";
                 nome1.style.color = "red";
             }
-
         }
-
     }
+
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
-        let hoje = new Date();
-        let diaEmprestimo = hoje.getDate();
-        let mes = hoje.getMonth() + 1;
-        let ano = hoje.getFullYear();
-        let dataEmprestimo = `${("0" + diaEmprestimo).slice(-2)}/${("0" + mes).slice(-2)}/${ano}`;
-        let diaDevolucao = DataRenovacaoString(dataEmprestimo)
+        
+        let hoje = formatData(new Date());
+        let diaDevolucao = adiarData(hoje,15);
+        
         dispatch(addEmprestimoServer({
-            id: "", livroId: livroId1, usuarioId: usuarioId1, data_emprestimo: dataEmprestimo,
+            id: "", livroId: livroId1, usuarioId: usuarioId1, data_emprestimo: hoje,
             data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
         }));
         history.push("/emprestimo");

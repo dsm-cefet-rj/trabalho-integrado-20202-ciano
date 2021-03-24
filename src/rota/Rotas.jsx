@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ConsultarEmprestimo from '../components/emprestimo/ConsultarEmprestimo';
-import ConsultarMatricula from '../components/emprestimo/ConsultarMatricula';
 import EncerrarEmprestimo from '../components/emprestimo/EncerrarEmprestimo';
 import EncerrarEmprestimoConfirmacao from '../components/emprestimo/EncerrarEmprestimoConfirmacao';
 import ManterEmprestimo from '../components/emprestimo/ManterEmprestimo';
@@ -38,7 +37,7 @@ function Rotas() {
 				<Route path="/emprestimo/registrar" component={RegistrarEmprestimo} />
 				<Route path="/emprestimo/encerrar" component={EncerrarEmprestimo} exact />
 				<Route path="/emprestimo/encerrar/confirmacao" component={EncerrarEmprestimoConfirmacao} />
-				<Route path="/emprestimo/consultar" component={ConsultarMatricula} exact/>
+				<Route path="/emprestimo/consultar" component={RenovarEmprestimo} exact />
 				<Route path="/emprestimo/consultar/:id" component={ConsultarEmprestimo} />
 				<Route path="/emprestimo/renovar" component={RenovarEmprestimo} exact />
 				<Route path="/emprestimo/renovar/:id" component={RenovarEmprestimoConfirmacao} />

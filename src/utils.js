@@ -50,7 +50,15 @@ export const formatData = function(date) {
   diaF = (dia.length === 1) ? '0'+dia : dia,
   mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
   mesF = (mes.length === 1) ? '0'+mes : mes,
-  anoF = data.getFullYear(),
-  horaF = data.getHours();
-  return diaF+"/"+mesF+"/"+anoF+' - '+horaF+' horas';
+  anoF = data.getFullYear();
+
+  return diaF+"/"+mesF+"/"+anoF;
+}
+
+export function adiarData(dataString, diasDeAcrescimo) {
+  let dataArr = dataString.split("/");
+  let data = new Date(dataArr[2], (dataArr[1] - 1), dataArr[0]);
+  data.setDate(data.getDate() + diasDeAcrescimo);
+
+  return  formatData(data);
 }
