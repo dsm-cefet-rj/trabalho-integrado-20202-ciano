@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUsuarioServer } from './UsuariosSlice';
-
 const FormCadUsuario = () => {
+    let history =useHistory();
+    
     const dispatch = useDispatch();
 
     const [enderecoUsuarios, setEnderecoUsuarios] = useState({
@@ -46,8 +48,9 @@ const FormCadUsuario = () => {
             }
         }
         dispatch(addUsuarioServer(regUsuario));
-    };
+        history.push('/menu/bibliotecario')
 
+    }
     return (
         <div>
             <section className="perfil_ajuste row justify-content-center corpo_login p-3">
@@ -62,6 +65,8 @@ const FormCadUsuario = () => {
                         <span className="ml-1 text-dark font-weight-bold h6">Professor</span>
                         <input id="2" value="bibliotecario" name="categoria" className="mx-1 my-0 h-25" type="radio" />
                         <span className="ml-1 text-dark  font-weight-bold h6">bibliotecário</span>
+
+
                     </div>
 
                     <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="text" name="matricula" placeholder="Matricula" />

@@ -18,7 +18,7 @@ export const fetchLivro = createAsyncThunk('livros/fetchLivro',
     });
 
 export const deleteLivroServer = createAsyncThunk('livro/deleteLivroServer', async (idLivro) => {
-    await httpDelete(`${baseUrl}/livro/${idLivro}`);
+    await httpDelete(`${baseUrl}/livros/${idLivro}`);
     return idLivro;
 });
 export const addLivroServer = createAsyncThunk('livro/addLivroServer', async (livro) => {

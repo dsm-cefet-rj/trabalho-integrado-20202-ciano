@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addLivroServer } from './LivroSlice';
+
 const FormLivros = (props) => {
     const dispatch = useDispatch();
     let history = useHistory();
@@ -23,15 +24,14 @@ const FormLivros = (props) => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(formLivro)
         dispatch(addLivroServer(formLivro));
-        history.push("");
+        history.push("/livro/consultar/:id");
     }
     return (
         <>
             <section className="perfil_ajuste  row  justify-content-center  corpo_login  " >
 
-                <form onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
+                <form hidden={props.formHidden} onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
                     <div className="my-2 text-center">
 
                     </div>

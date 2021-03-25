@@ -19,6 +19,9 @@ import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/Informaco
 import ManterRelatorio from '../components/relatorio/ManterRelatorio';
 import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
+import ConsultarLivro from '../components/livro/ConsultarLivro';
+import ListandoLivro from '../components/livro/ListaDeLivros';
+import DeletarLivro from '../components/livro/ListaDeLivros';
 
 function Rotas() {
 	return (
@@ -47,10 +50,12 @@ function Rotas() {
 				<Route path="/relatorio/livros/devolucoes" component={RelatorioDevolucoesLivros} exact />
 				<Route path="/relatorio/livros/devolucoes/informacoes" component={InformacoesDetalhadasNaoDevolvido} />
 				<Route path="/relatorio/livros/emprestados" component={RelatorioLivrosEmprestado} />
-
+				
 				{/* ---------------- Livro ---------------- */}
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
 				<Route path="/livro/atualizar" component={AtualizarLivro} />
+				<Route path="/livro/consultar" component={ConsultarLivro} />
+				<Route path="/livro/consultar/listagem/:id" component={ListandoLivro} />
 				<Route path="/livro/informacoes/consulta" component={InformacoesDetalhadasConsulta} />
 			</Switch>
 		</Router>
