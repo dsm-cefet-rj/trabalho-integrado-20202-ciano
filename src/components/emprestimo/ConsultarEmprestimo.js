@@ -20,7 +20,7 @@ const ConsultarEmprestimo = () => {
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimos = useSelector(selectAllEmprestimos);
-
+    
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded') {
             dispatch(fetchEmprestimosUsuario(id));
@@ -65,7 +65,9 @@ const ConsultarEmprestimo = () => {
 
     let LivrosEmprestados = '';
     if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
-        LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimos} />
+        let emprestimosValidos = emprestimos.filter((emprestimo) => emprestimo.data_devolvido === null);
+        
+        LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} />
 
     } else if (emprestimosStatus === 'loading') {
         LivrosEmprestados = <div className="alert alert-info w-100">Carregando emprestimos...</div>

@@ -120,8 +120,8 @@
       "livroId": 1,
       "usuarioId": 2,
       "data_emprestimo": "10/03/2020",
-      "data_devolucao": "03/02/2021",
-      "data_devolvido": "25/03/2021",
+      "data_devolucao": "18/02/2021",
+      "data_devolvido": null,
       "data_excluido": null
     },
     {
@@ -130,7 +130,7 @@
       "usuarioId": 2,
       "data_emprestimo": "20/03/2020",
       "data_devolucao": "20/01/2021",
-      "data_devolvido": "25/03/2021",
+      "data_devolvido": null,
       "data_excluido": null
     },
     {
