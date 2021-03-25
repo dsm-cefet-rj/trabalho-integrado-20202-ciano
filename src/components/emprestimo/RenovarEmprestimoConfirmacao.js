@@ -34,8 +34,8 @@ const RenovarEmprestimoConfirmacao = () => {
             "usuarioId": emprestimo.usuarioId,
             "data_emprestimo": emprestimo.data_emprestimo,
             "data_devolucao": adiarData(emprestimo.data_devolucao, diasDeAcrescimo),
-            "data_devolvido": null,
-            "data_excluido": null
+            "data_devolvido": emprestimo.data_devolvido,
+            "data_excluido": emprestimo.data_excluido
         }
 
         dispatch(updateEmprestimoServer(updateEmprestimo));
