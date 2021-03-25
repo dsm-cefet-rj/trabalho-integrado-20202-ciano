@@ -5,7 +5,7 @@ import { fetchUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
-import { fetchEmprestimosUsuario, selectAllEmprestimos } from './EmprestimosSlice';
+import { fetchEmprestimos, selectAllEmprestimos } from './EmprestimosSlice';
 
 
 const ConsultarEmprestimo = () => {
@@ -20,15 +20,15 @@ const ConsultarEmprestimo = () => {
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimos = useSelector(selectAllEmprestimos);
-    
+
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded') {
-            dispatch(fetchEmprestimosUsuario(id));
+            dispatch(fetchEmprestimos());
         }
         if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
         }
-    }, [emprestimosStatus, usuariosStatus, id, dispatch]);
+    }, [emprestimosStatus, usuariosStatus, dispatch]);
 
     let TabelaUsuario = '';
     if ((usuariosStatus === 'loaded' || usuariosStatus === 'saved' || usuariosStatus === 'deleted') && usuario) {
@@ -65,8 +65,8 @@ const ConsultarEmprestimo = () => {
 
     let LivrosEmprestados = '';
     if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
-        let emprestimosValidos = emprestimos.filter((emprestimo) => emprestimo.data_devolvido === null);
         
+        let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null) && (emprestimo.usuarioId === id));
         LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} />
 
     } else if (emprestimosStatus === 'loading') {
