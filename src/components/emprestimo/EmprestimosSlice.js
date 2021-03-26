@@ -13,10 +13,6 @@ export const fetchEmprestimos = createAsyncThunk('emprestimos/fetchEmprestimos',
     return await httpGet(`${baseUrl}/emprestimos?_expand=usuario&_expand=livro`);
 });
 
-export const fetchEmprestimosUsuario = createAsyncThunk('emprestimos/fetchEmprestimos', async (idUsuario) => {
-    return await httpGet(`${baseUrl}/emprestimos?usuarioId=${idUsuario}&_expand=usuario&_expand=livro`);
-});
-
 export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo) => {
     await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`);
     return idEmprestimo;
@@ -37,10 +33,6 @@ export const EmprestimosSlice = createSlice({
         [fetchEmprestimos.pending]: (state, action) => { state.status = 'loading' },
         [fetchEmprestimos.fulfilled]: (state, action) => { state.status = 'loaded'; emprestimosAdapter.setAll(state, action.payload); },
         [fetchEmprestimos.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
-
-        [fetchEmprestimosUsuario.pending]: (state, action) => { state.status = 'loading' },
-        [fetchEmprestimosUsuario.fulfilled]: (state, action) => { state.status = 'loaded'; emprestimosAdapter.setAll(state, action.payload); },
-        [fetchEmprestimosUsuario.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
 
         [deleteEmprestimoServer.pending]: (state, action) => { state.status = 'loading' },
         [deleteEmprestimoServer.fulfilled]: (state, action) => { state.status = 'deleted'; emprestimosAdapter.removeOne(state, action.payload); },

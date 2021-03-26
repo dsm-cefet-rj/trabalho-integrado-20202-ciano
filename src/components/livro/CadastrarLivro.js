@@ -15,7 +15,6 @@ const CadastrarLivro = () => {
 
         if (status === 'not_loaded') {
             dispatch(fetchLivro())
-            console.log(status)
         } else if (status === 'failed') {
             setTimeout(() => dispatch(fetchLivro()), 5000);
         }

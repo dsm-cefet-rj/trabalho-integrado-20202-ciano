@@ -39,15 +39,6 @@
       "qtd_total": 30,
       "qtd_disponivel": 20,
       "data_excluido": null
-    },
-    {
-      "id": 4,
-      "titulo": "hhhhhhhhhhhhh",
-      "genero": "fffffffffffff",
-      "autor": "ggggggggggggg",
-      "isbn": "jjjjjjjjjjjjjpppppppp",
-      "quantidade": "11",
-      "localizacao": "kkkkkkkkkkk"
     }
   ],
   "usuarios": [
@@ -104,23 +95,6 @@
         "cep": 22050020
       },
       "data_excluido": null
-    },
-    {
-      "id": 4,
-      "matricula": "1843234BCD",
-      "senha": "hhh",
-      "nome": "diogo",
-      "email": "diogo8@hotmail.com",
-      "data_nasc": "14/10/11111",
-      "telefone": "2222222222",
-      "endereco": {
-        "logradouro": "RUA 1",
-        "complemento": "336",
-        "cidade": "dd",
-        "bairro": "MARECHAL HERMES",
-        "cep": "1111111111"
-      },
-      "data_excluido": null
     }
   ],
   "emprestimos": [
@@ -143,59 +117,21 @@
       "data_excluido": null
     },
     {
-      "id": 5,
-      "matricula": "",
-      "senha": "8BVviHiMzmGQJsz",
-      "categoria": "",
-      "nome": "",
-      "email": "",
-      "data_nasc": "",
-      "telefone": "",
-      "endereco": {
-        "logradouro": "",
-        "complemento": "",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
+      "id": 3,
+      "livroId": 3,
+      "usuarioId": 1,
+      "data_emprestimo": "25/03/2021",
+      "data_devolucao": "09/04/2021",
+      "data_devolvido": null,
       "data_excluido": null
     },
     {
-      "id": 6,
-      "matricula": "gggg",
-      "senha": "gggggg",
-      "categoria": "aluno",
-      "nome": "fff",
-      "email": "",
-      "data_nasc": "14101989",
-      "telefone": "444",
-      "endereco": {
-        "logradouro": "4444444444",
-        "complemento": "22222222222222",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
-      "data_excluido": null,
-      "logradouro": "4444444444",
-      "complemento": "22222222222222"
-    },
-    {
-      "id": 7,
-      "matricula": "2055582ADM",
-      "senha": "hhhh",
-      "categoria": "professor",
-      "nome": "dffggghhgg",
-      "email": "",
-      "data_nasc": "144444444",
-      "telefone": "",
-      "endereco": {
-        "logradouro": "",
-        "complemento": "",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
+      "id": 4,
+      "livroId": 2,
+      "usuarioId": 1,
+      "data_emprestimo": "25/03/2021",
+      "data_devolucao": "09/04/2021",
+      "data_devolvido": null,
       "data_excluido": null
     }
   ]
