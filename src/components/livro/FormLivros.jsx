@@ -1,23 +1,80 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addLivroServer } from './LivroSlice';
-
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllLivro, addLivroServer, selectLivroById, updateLivroServer, fetchLivro } from './LivroSlice';
 const FormLivros = (props) => {
+    //codigo do professor
+    /*const [usuarioProjeto,setUsuarioProjeto]=useState({})
+    const usuarioProjetos= useSelector(state=>state.livros)
+    const history=useHistory()
+    const dispatch =useDispatch();
+    let{id}=useParams();
+    id=parseInt(id);
+    const [usuarioProjeto,setUsuarioProjeto]=useState(
+        id?usuarioProjetos.filter((p)=>p.id ===id)[0]??{}:{}
+    )
+    const [actionType,]=useState(
+        id?
+        usuarioProjetos.filter((p)=>p.id ===id)[0]
+        ?'updateLivro'
+        :'addLivro'
+        :'addLivro'
+    )
+    
+    const onChange = (e) => {
+           
+        setUsuarioProjeto({
+            ...usuarioProjeto,
+            [e.target.name]: e.target.value
+        })
+    }
+    
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addLivroServer(usuarioProjeto))
+        if(actionType === "addLivro"){
+            dispatch(addLivroServer(usuarioProjeto))
+        }else{
+            dispatch(updateLivroServer(usuarioProjeto))
+        }
+        
+      
+        history.push("/livro/consultar");
+    }
+    */
+    let { id } = useParams();
+    id = parseInt(id)
 
+    let atualizarLivros = useSelector(state => selectLivroById(state, id))
+    const status = useSelector(state => state.livros.status);
     const dispatch = useDispatch();
+    useEffect(() => {
+        if (status === 'not_loaded') {
+            dispatch(fetchLivro())
+        } else if (status === 'failed') {
+            setTimeout(() => dispatch(fetchLivro()), 5000);
+        }
+    }, [status, dispatch])
+    if (typeof (atualizarLivros) === "undefined") {
+
+        atualizarLivros = { };
+    }
     let history = useHistory();
     const [formLivro, setFormLivro] = useState({
-        id: "",
-        titulo: "",
-        genero: "",
-        autor: "",
-        isbn: "",
-        quantidade: "",
-        localizacao: "",
+        id: id,
+        isbn: atualizarLivros.isbn,
+        titulo: atualizarLivros.titulo,
+        edicao: atualizarLivros.edicao,
+        autores: [atualizarLivros.autores],
+        cod_localizacao: atualizarLivros.cod_localizacao,
+        qtd_total: atualizarLivros.qtd_total,
+        data_excluido: null,
 
     })
+
     const onChange = (e) => {
+
         setFormLivro({
             ...formLivro,
             [e.target.name]: e.target.value
@@ -25,37 +82,46 @@ const FormLivros = (props) => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(addLivroServer(formLivro));
-        history.push("/livro/consultar/:id");
+        formLivro.isbn = parseInt(formLivro.isbn)
+        formLivro.qtd_total = parseInt(formLivro.qtd_total)     
+
+        if (isNaN(id)) {
+            dispatch(addLivroServer(formLivro));
+
+        } else {
+            dispatch(updateLivroServer(formLivro))
+        }
+        history.push("/livro/consultar");
     }
+    
     return (
         <>
             <section className="perfil_ajuste  row  justify-content-center  corpo_login  " >
 
-                <form hidden={props.formHidden} onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
+                <form onSubmit={onSubmit} className="row flex-column perfil_formulario col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25" action="#" method="POST" >
                     <div className="my-2 text-center">
 
                     </div>
                     {/* 
-                    Título do Livro:
+                    Título do Livro:                              
                     - String;
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} className="box_perfil input_login mt-5 w-100 mb-5 " type="text" name="titulo" placeholder="Título" />
+                    <input onChange={onChange} value={formLivro.titulo} className="box_perfil input_login mt-5 w-100 mb-5 " type="text" id="titulo" name="titulo" placeholder="Título" />
 
                     {/* 
                     Gênero:
                     - String;
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} className="box_perfil mb-5  input_login w-100" type="text" name="genero" placeholder="Gênero" />
+                    <input onChange={onChange} value={formLivro.edicao} className="box_perfil mb-5  input_login w-100" type="text" name="edicao" placeholder="Edição" />
 
                     {/* 
                     Autor do Livro:
                     - String;
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} className="box_perfil input_login w-100 mb-5 " type="text" name="autor" placeholder="Autor" />
+                    <input onChange={onChange} value={formLivro.autores} className="box_perfil input_login w-100 mb-5 " type="text" name="autores" placeholder="Autor" />
 
                     {/* 
                     ISBN:
@@ -67,7 +133,7 @@ const FormLivros = (props) => {
                     - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} id="isbn" className="input_login mb-5  box_perfil w-100" type="text" name="isbn" placeholder="ISBN" />
+                    <input onChange={onChange} value={formLivro.isbn} id="isbn" className="input_login mb-5  box_perfil w-100" type="number" name="isbn" placeholder="ISBN" />
 
                     {/* 
                     Quantidade de Livros:
@@ -75,14 +141,14 @@ const FormLivros = (props) => {
                     - Minimo -> 1
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} id="quantidade" className="input_login w-100 mb-5 box_perfil" type="text" name="quantidade" placeholder="Quantidade" />
+                    <input onChange={onChange} value={formLivro.qtd_total} id="quantidade" className="input_login w-100 mb-5 box_perfil" type="number" name="qtd_total" placeholder="Quantidade" />
 
                     {/* 
                     Codigo de Localização:
                     - String
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} className="input_login w-100 mb-5 box_perfil" type="text" name="localizacao" placeholder="Cód. localização" />
+                    <input onChange={onChange} value={formLivro.cod_localizacao} className="input_login w-100 mb-5 box_perfil" type="text" name="cod_localizacao" placeholder="Cód. localização" />
 
                     <input className="mt-2 align-self-center btn" id={props.idNome} type="submit" value={props.btnNome} />
                 </form>

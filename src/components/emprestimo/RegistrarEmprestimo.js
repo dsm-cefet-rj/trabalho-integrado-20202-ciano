@@ -8,21 +8,22 @@ import { fetchLivro, selectAllLivro } from '../livro/LivroSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
 
+
 const RegistrarEmprestimo = () => {
     let history = useHistory();
     const dispatch = useDispatch();
 
     let diasDeAcrescimo = 15;
-    let usuario = {};
-    let livro = {};
+    console.log("inicio")
+
 
     const usuarios = useSelector(selectAllUsuarios);
     const status = useSelector(state => state.usuarios.status);
-    // const error = useSelector(state => state.usuarios.error);
+
 
     const livros = useSelector(selectAllLivro);
     const status1 = useSelector(state => state.livros.status);
-    // const error1 = useSelector(state => state.livros.error);
+
 
     useEffect(() => {
         if (status === 'not_loaded' || status1 === 'not_loaded') {
@@ -35,6 +36,8 @@ const RegistrarEmprestimo = () => {
     }, [status, status1, dispatch]);
 
     const [regEmprestimo, setRegEmprestimo] = useState({
+        idu: "",
+        idi: "",
         matricula: '',
         isbn: '',
     });
@@ -50,14 +53,18 @@ const RegistrarEmprestimo = () => {
         e.preventDefault();
         let titulo = document.getElementById("titulo");
         let autor = document.getElementById("autor");
+        console.log(livros !== 'undefined')
         if (livros !== 'undefined') {
-            livro = livros.filter(livro => { return livro.isbn === Number(regEmprestimo.isbn)})[0];
-            
+            let livro = livros.filter(livro => { return livro.isbn === Number(regEmprestimo.isbn) })[0];
+
             if (livro) {
+
                 titulo.value = livro.titulo;
                 autor.value = livro.autores;
+                regEmprestimo.idi = livro.id;
                 autor.style.color = "blue";
                 titulo.style.color = "blue";
+
             } else {
                 titulo.value = "Titulo não encontrado";
                 titulo.style.color = "red";
@@ -65,6 +72,7 @@ const RegistrarEmprestimo = () => {
                 autor.style.color = "red";
             }
         }
+
     }
 
     const onSubmitUsuario = (e) => {
@@ -72,11 +80,12 @@ const RegistrarEmprestimo = () => {
         let nome1 = document.getElementById("nome");
         let email1 = document.getElementById("email")
         if (usuarios !== "undefined") {
-            usuario = usuarios.filter(usuario => { return usuario.matricula === regEmprestimo.matricula})[0];
-            
+            let usuario = usuarios.filter(usuario => { return usuario.matricula === regEmprestimo.matricula })[0];
+
             if (usuario) {
                 email1.value = usuario.email;
                 nome1.value = usuario.nome;
+                regEmprestimo.idu = usuario.id;
                 nome1.style.color = "green";
                 email1.style.color = "green";
             } else {
@@ -91,20 +100,24 @@ const RegistrarEmprestimo = () => {
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
 
-        if(usuario && livro){
+        console.log(regEmprestimo.idu)
+        console.log(regEmprestimo.idi)
+
+        if (regEmprestimo.idu && regEmprestimo.idi) {
             let hoje = formatData(new Date());
             let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
-    
+
             dispatch(addEmprestimoServer({
-                id: "", livroId: livro.id, usuarioId: usuario.id, data_emprestimo: hoje,
+                id: "", livroId: regEmprestimo.idi, usuarioId: regEmprestimo.idu, data_emprestimo: hoje,
                 data_devolucao: diaDevolucao, data_devolvido: null, data_excluido: null
             }));
             history.push("/emprestimo");
         }
-        else
-            window.alert("O Livro e o Usuário devem existir no sistema!");
-    }
+        else {
+            window.alert("Um dos campos não existem")
+        }
 
+    }
     return (
         <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo="Registrar Empréstimo" link='/emprestimo' />
@@ -187,4 +200,5 @@ const RegistrarEmprestimo = () => {
         </div>
     );
 }
+
 export default RegistrarEmprestimo;

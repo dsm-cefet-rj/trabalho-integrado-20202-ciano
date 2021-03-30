@@ -2,22 +2,19 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import FormLivro from './FormLivros';
-import { fetchLivro } from './LivroSlice';
-
-
+import { fetchLivro, selectAllLivro } from './LivroSlice';
 const CadastrarLivro = () => {
-
+    let livros = useSelector(selectAllLivro)
     const status = useSelector(state => state.livros.status);
     const error = useSelector(state => state.livros.error);
     const dispatch = useDispatch();
 
     useEffect(() => {
-
         if (status === 'not_loaded') {
             dispatch(fetchLivro())
             console.log(status)
         } else if (status === 'failed') {
-            setTimeout(() => dispatch(fetchLivro()), 5000);
+            dispatch(fetchLivro());
         }
     }, [status, dispatch])
 
@@ -33,10 +30,8 @@ const CadastrarLivro = () => {
     return (
 
         <div className="container-fluid d-flex flex-column">
-            <CabecalhoVoltar titulo="Cadastrar Livro" link='/menu/bibliotecario' />
-            
+            <CabecalhoVoltar titulo="Cadastrar Livro" link='/menu/bibliotecario' />            
             {formulario}
-
         </div>
     );
 }

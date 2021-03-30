@@ -20,8 +20,8 @@ import ManterRelatorio from '../components/relatorio/ManterRelatorio';
 import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
 import ConsultarLivro from '../components/livro/ConsultarLivro';
-import ListandoLivro from '../components/livro/ListaDeLivros';
-import DeletarLivro from '../components/livro/ListaDeLivros';
+import ListandoLivros from '../components/livro/ListandoLivros';
+import DeletandoLivro from '../components/livro/DeletarLivro';
 
 function Rotas() {
 	return (
@@ -53,10 +53,12 @@ function Rotas() {
 				
 				{/* ---------------- Livro ---------------- */}
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
-				<Route path="/livro/atualizar" component={AtualizarLivro} />
+				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
+				<Route path="/Deletando/Livro/:id" component={DeletandoLivro} />
 				<Route path="/livro/consultar" component={ConsultarLivro} />
-				<Route path="/livro/consultar/listagem/:id" component={ListandoLivro} />
-				<Route path="/livro/informacoes/consulta" component={InformacoesDetalhadasConsulta} />
+
+				<Route path="/livro/consultar/listagem/:id" component={ListandoLivros} exact/>
+				<Route path="/livro/informacoes/consulta/:id" component={InformacoesDetalhadasConsulta} />
 			</Switch>
 		</Router>
 	);

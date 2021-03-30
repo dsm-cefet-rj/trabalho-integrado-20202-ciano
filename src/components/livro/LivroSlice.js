@@ -25,7 +25,7 @@ export const addLivroServer = createAsyncThunk('livro/addLivroServer', async (li
     return await httpPost(`${baseUrl}/livros`, livro);
 })
 export const updateLivroServer = createAsyncThunk('livro/updateLivroServer', async (livro) => {
-    return await httpPut(`${baseUrl}/livros`, livro);
+    return await httpPut(`${baseUrl}/livros/${livro.id}`, livro);
 })
 export const LivroSlice = createSlice({
     name: 'livros',

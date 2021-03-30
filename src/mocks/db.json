@@ -1,53 +1,14 @@
 {
   "livros": [
     {
-      "id": 1,
-      "isbn": 9788522106608,
-      "titulo": "Calculo Vol.1",
-      "edicao": "3ª",
-      "autores": [
-        "James Stewart"
-      ],
-      "cod_localizacao": "S15P5-6",
-      "qtd_total": 22,
-      "qtd_disponivel": 13,
+      "id": 10,
+      "isbn": 888888888888,
+      "titulo": "vascao",
+      "edicao": "4",
+      "autores": "ulisses",
+      "cod_localizacao": "88888888888888888888",
+      "qtd_total": 10,
       "data_excluido": null
-    },
-    {
-      "id": 2,
-      "isbn": 9788540701694,
-      "titulo": "Álgebra Linear com Aplicações",
-      "edicao": "10ª",
-      "autores": [
-        "Howard Anton"
-      ],
-      "cod_localizacao": "S15P1-1",
-      "qtd_total": 20,
-      "qtd_disponivel": 5,
-      "data_excluido": null
-    },
-    {
-      "id": 3,
-      "isbn": 9788576081739,
-      "titulo": "Use a Cabeça!: Java",
-      "edicao": "2ª",
-      "autores": [
-        "Kathy Sierra",
-        "Bert Bates"
-      ],
-      "cod_localizacao": "S15P1-1",
-      "qtd_total": 30,
-      "qtd_disponivel": 20,
-      "data_excluido": null
-    },
-    {
-      "id": 4,
-      "titulo": "hhhhhhhhhhhhh",
-      "genero": "fffffffffffff",
-      "autor": "ggggggggggggg",
-      "isbn": "jjjjjjjjjjjjjpppppppp",
-      "quantidade": "11",
-      "localizacao": "kkkkkkkkkkk"
     }
   ],
   "usuarios": [
@@ -121,81 +82,38 @@
         "cep": "1111111111"
       },
       "data_excluido": null
+    },
+    {
+      "id": 5,
+      "matricula": "ggggg",
+      "senha": "uuuuuuuuuuuuu",
+      "categoria": "aluno",
+      "nome": "",
+      "email": "aa@ll.çç",
+      "data_nasc": "444444",
+      "telefone": "5555555555",
+      "endereco": {
+        "logradouro": "jjjjjjj",
+        "complemento": "jjjjjjjjjjjjjjjjjjj",
+        "cidade": "ggggggggggggg",
+        "bairro": "ggggggggggg",
+        "cep": "pppppppppppppp"
+      },
+      "data_excluido": null,
+      "logradouro": "jjjjjjj",
+      "complemento": "jjjjjjjjjjjjjjjjjjj",
+      "cidade": "ggggggggggggg",
+      "bairro": "ggggggggggg",
+      "cep": "pppppppppppppp"
     }
   ],
   "emprestimos": [
     {
-      "id": 1,
-      "livroId": 1,
-      "usuarioId": 2,
-      "data_emprestimo": "10/03/2020",
-      "data_devolucao": "18/02/2021",
+      "id": 8,
+      "usuarioId": 3,
+      "data_emprestimo": "28/03/2021",
+      "data_devolucao": "12/04/2021",
       "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 2,
-      "livroId": 3,
-      "usuarioId": 2,
-      "data_emprestimo": "20/03/2020",
-      "data_devolucao": "20/01/2021",
-      "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 5,
-      "matricula": "",
-      "senha": "8BVviHiMzmGQJsz",
-      "categoria": "",
-      "nome": "",
-      "email": "",
-      "data_nasc": "",
-      "telefone": "",
-      "endereco": {
-        "logradouro": "",
-        "complemento": "",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
-      "data_excluido": null
-    },
-    {
-      "id": 6,
-      "matricula": "gggg",
-      "senha": "gggggg",
-      "categoria": "aluno",
-      "nome": "fff",
-      "email": "",
-      "data_nasc": "14101989",
-      "telefone": "444",
-      "endereco": {
-        "logradouro": "4444444444",
-        "complemento": "22222222222222",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
-      "data_excluido": null,
-      "logradouro": "4444444444",
-      "complemento": "22222222222222"
-    },
-    {
-      "id": 7,
-      "matricula": "2055582ADM",
-      "senha": "hhhh",
-      "categoria": "professor",
-      "nome": "dffggghhgg",
-      "email": "",
-      "data_nasc": "144444444",
-      "telefone": "",
-      "endereco": {
-        "logradouro": "",
-        "complemento": "",
-        "cidade": "",
-        "bairro": "",
-        "cep": ""
-      },
       "data_excluido": null
     }
   ]

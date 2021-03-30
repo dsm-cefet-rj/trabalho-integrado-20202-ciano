@@ -12,11 +12,9 @@ const ConsultarEmprestimo = () => {
     let { id } = useParams();
     id = parseInt(id);
     const dispatch = useDispatch();
-
     const usuariosStatus = useSelector(state => state.usuarios.status);
     const usuariosError = useSelector(state => state.usuarios.error);
     const usuario = useSelector(state => selectUsuarioById(state, id));
-
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
     const emprestimos = useSelector(selectAllEmprestimos);
