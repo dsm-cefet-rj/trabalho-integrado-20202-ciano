@@ -156,8 +156,13 @@ background-color:  #436D7C ;
     margin:1rem;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 5px; 
-
 }
+
+.perfil_formulario2{
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 5px; 
+}
+
 .cabecalho_perfil{
     height: 4.5rem;
 }

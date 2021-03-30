@@ -12,7 +12,6 @@ const CadastrarLivro = () => {
     useEffect(() => {
         if (status === 'not_loaded') {
             dispatch(fetchLivro())
-            console.log(status)
         } else if (status === 'failed') {
             dispatch(fetchLivro());
         }

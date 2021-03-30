@@ -22,9 +22,13 @@ const ConsultarEmprestimo = () => {
     useEffect(() => {
         if (emprestimosStatus === 'not_loaded') {
             dispatch(fetchEmprestimos());
+        } else if (emprestimosStatus === 'failed') {
+            setTimeout(() => dispatch(fetchEmprestimos()), 5000);
         }
         if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
+        }else if (usuariosStatus === 'failed') {
+            setTimeout(() => dispatch(fetchUsuarios()), 5000);
         }
     }, [emprestimosStatus, usuariosStatus, dispatch]);
 

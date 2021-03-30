@@ -1,16 +1,14 @@
-import * as yup from 'yup';
+import { number, object, setLocale, string } from 'yup';
 import { ptForm } from 'yup-locale-pt';
 
-yup.setLocale(ptForm);
+setLocale(ptForm);
 
-const SchemaLivro = yup.object().shape({
+export let livroSchema = object().shape({
 
-    titulo: yup.string().required(),
-    genero: yup.string().required(),
-    autor: yup.string().required(),
-    isbn: yup.string().required(),
-    quantidade: yup.number().required(),
-    codLocalizacao: yup.number().required(),
+    titulo: string().required(),
+    genero: string().required(),
+    autor: string().required(),
+    isbn: number().required(),
+    quantidade: number().min(1).required(),
+    codLocalizacao: string().required(),
 });
-
-export default SchemaLivro;
