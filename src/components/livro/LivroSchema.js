@@ -3,12 +3,14 @@ import { ptForm } from 'yup-locale-pt';
 
 setLocale(ptForm);
 
-export let livroSchema = object().shape({
+const livroSchema = object().shape({
 
     titulo: string().required(),
-    genero: string().required(),
+    edicao: string().required(),
     autor: string().required(),
-    isbn: number().required(),
+    isbn: string().required(),
     quantidade: number().min(1).required(),
     codLocalizacao: string().required(),
 });
+
+export default livroSchema;

@@ -56,7 +56,6 @@ function Rotas() {
 				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
 				<Route path="/Deletando/Livro/:id" component={DeletandoLivro} />
 				<Route path="/livro/consultar" component={ConsultarLivro} />
-
 				<Route path="/livro/consultar/listagem/:id" component={ListandoLivros} exact/>
 				<Route path="/livro/informacoes/consulta/:id" component={InformacoesDetalhadasConsulta} />
 			</Switch>

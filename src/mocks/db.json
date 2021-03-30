@@ -1,19 +1,6 @@
 {
   "livros": [
     {
-      "id": 1,
-      "isbn": 9788522106608,
-      "titulo": "Calculo Vol.1",
-      "edicao": "3ª",
-      "autores": [
-        "James Stewart"
-      ],
-      "cod_localizacao": "S15P5-6",
-      "qtd_total": 22,
-      "qtd_disponivel": 13,
-      "data_excluido": null
-    },
-    {
       "id": 2,
       "isbn": 9788540701694,
       "titulo": "Álgebra Linear com Aplicações",
@@ -98,15 +85,6 @@
     }
   ],
   "emprestimos": [
-    {
-      "id": 1,
-      "livroId": 1,
-      "usuarioId": 2,
-      "data_emprestimo": "10/03/2020",
-      "data_devolucao": "18/02/2021",
-      "data_devolvido": null,
-      "data_excluido": null
-    },
     {
       "id": 2,
       "livroId": 3,

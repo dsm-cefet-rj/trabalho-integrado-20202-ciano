@@ -4,6 +4,7 @@ import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import FormLivro from './FormLivros';
 import { fetchLivro } from './LivroSlice';
 const CadastrarLivro = () => {
+
     // let livros = useSelector(selectAllLivro);
     const status = useSelector(state => state.livros.status);
     const error = useSelector(state => state.livros.error);
@@ -26,6 +27,7 @@ const CadastrarLivro = () => {
     } else if (status === 'failed') {
         formulario = <div className="alert h3 text-danger text-center mt-2 alert-danger" >Error: {error}</div>
     }
+    
     return (
 
         <div className="container-fluid d-flex flex-column">
