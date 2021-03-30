@@ -8,7 +8,7 @@ function ListandoLivros(props) {
     const dispatch = useDispatch();
     const status = useSelector(state => state.livros.status);
     let listaLivros = useSelector(selectAllLivro);
-    let livroFiltrado = listaLivros.filter(id => props.titulo.toLowerCase() === id.titulo.toLowerCase());
+    let livroFiltrado = listaLivros.filter(livro => props.titulo.toLowerCase() === livro.titulo.toLowerCase());
 
     if (typeof livroFiltrado[0] === 'undefined') {
         livroFiltrado = listaLivros;
@@ -33,23 +33,23 @@ function ListandoLivros(props) {
     return (
         <table className="table  table-striped my-1 ">
             <tbody>
-                {livroFiltrado.map((livro3, index) =>
+                {livroFiltrado.map((livro, index) =>
                     <tr key={index}>
                         <td className="text-center">
-                            <a href={`/livro/informacoes/consulta/${livro3.id}`}>
+                            <a href={`/livro/informacoes/consulta/${livro.id}`}>
                                 <img src={CapaLivro} className=" ml-1 ajuste3" alt="imagem" />
                             </a>
                         </td>
                         <td className="d-flex flex-column justify-content-center align-items-center ">
-                            <a href={`/livro/informacoes/consulta/${livro3.id}`}><div className="font-weight-bold mt-3 mb-1  h4">{livro3.titulo}</div></a>
-                            <a href={`/livro/informacoes/consulta/${livro3.id}`}> <div className="font-weight-bold  h4">{livro3.autores}</div></a>
+                            <a href={`/livro/informacoes/consulta/${livro.id}`}><div className="font-weight-bold mt-3 mb-1  h4">{livro.titulo}</div></a>
+                            <a href={`/livro/informacoes/consulta/${livro.id}`}> <div className="font-weight-bold  h4">{livro.autores}</div></a>
                         </td>
                         <td >
                             <form className="d-flex flex-column justify-content-center align-items-center " onSubmit={onSubmitConsultar} method="POST">
-                                <Link to={`/livro/atualizar/${livro3.id}`}>
+                                <Link to={`/livro/atualizar/${livro.id}`}>
                                     <input id="Atualizar" type="submit" value="Atualizar" className="btn mt-2 w-100 mr-5  mb-1 btn-primary" />
                                 </Link>
-                                <Link to={`/Deletando/Livro/${livro3.id}`}>
+                                <Link to={`/Deletando/Livro/${livro.id}`}>
                                     <input id="Deletar" type="submit" value="Deletar" className="btn mr-5 w-100 btn-danger" />
                                 </Link>
                             </form>

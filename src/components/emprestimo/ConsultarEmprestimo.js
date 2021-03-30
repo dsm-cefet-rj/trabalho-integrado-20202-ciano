@@ -68,7 +68,9 @@ const ConsultarEmprestimo = () => {
     let LivrosEmprestados = '';
     if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
         
-        let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null) && (emprestimo.usuarioId === id));
+        let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null) 
+            && (emprestimo.data_excluido === null) && (emprestimo.usuarioId === id));
+            
         LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} />
 
     } else if (emprestimosStatus === 'loading') {

@@ -38,13 +38,11 @@
       "email": "exemproemail@gmail.com",
       "data_nasc": "25/05/1998",
       "telefone": "(21) 93939-3399",
-      "endereco": {
-        "logradouro": "Avenida Presidente Vargas nº20",
-        "complemento": "BLOCO 03, AP202",
-        "cidade": "Rio de Janeiro",
-        "bairro": "Centro",
-        "cep": 20560070
-      },
+      "logradouro": "Avenida Presidente Vargas nº20",
+      "complemento": "BLOCO 03, AP202",
+      "cidade": "Rio de Janeiro",
+      "bairro": "Centro",
+      "cep": 20560070,
       "data_excluido": null
     },
     {
@@ -56,13 +54,11 @@
       "email": "mariaclaraexemplor@gmail.com",
       "data_nasc": "18/09/1995",
       "telefone": "(21) 2569-6969",
-      "endereco": {
-        "logradouro": "Rua Viana Drumond nº78",
-        "complemento": "AP704",
-        "cidade": "Rio de Janeiro",
-        "bairro": "Vila Isabel",
-        "cep": 20560070
-      },
+      "logradouro": "Rua Viana Drumond nº78",
+      "complemento": "AP704",
+      "cidade": "Rio de Janeiro",
+      "bairro": "Vila Isabel",
+      "cep": 20560070,
       "data_excluido": null
     },
     {
@@ -74,13 +70,11 @@
       "email": "pedroenriqueexemplor@gmail.com",
       "data_nasc": "02/12/2000",
       "telefone": "(21) 99999-9999",
-      "endereco": {
-        "logradouro": "Rua Ednaldo Pereira nº78",
-        "complemento": "AP704",
-        "cidade": "Rio de Janeiro",
-        "bairro": "Copacabana",
-        "cep": 22050020
-      },
+      "logradouro": "Rua Ednaldo Pereira nº78",
+      "complemento": "AP704",
+      "cidade": "Rio de Janeiro",
+      "bairro": "Copacabana",
+      "cep": 22050020,
       "data_excluido": null
     }
   ],

@@ -104,7 +104,7 @@ const RegistrarEmprestimo = () => {
         }
     }
 
-    const onSubmitEmprestimo = (e) => {
+    const handleClickRegistrarEmprestimo = (e) => {
         e.preventDefault();
 
         if (regEmprestimo.idu && regEmprestimo.idi) {
@@ -177,7 +177,7 @@ const RegistrarEmprestimo = () => {
                         &nbsp;<p>{errors.autor?.message}</p>
                     </div>
 
-                    <button className="my-5 btn" id="confirmar" onClick={onSubmitEmprestimo}>Registrar Empréstimo</button>
+                    <button className="my-5 btn" id="confirmar" onClick={handleClickRegistrarEmprestimo}>Registrar Empréstimo</button>
                 </div>
             </section>
         </div>
