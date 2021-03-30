@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { deleteLivroServer } from './LivroSlice';
-import { useParams, useHistory,Link } from 'react-router-dom';
+
 function DeletandoLivro() {
     let dispatch = useDispatch();
     let history = useHistory()

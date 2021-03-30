@@ -6,7 +6,6 @@ import { adiarData, formatData } from '../../utils';
 import { addEmprestimoServer } from '../emprestimo/EmprestimosSlice';
 import { fetchLivro, selectAllLivro } from '../livro/LivroSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
-import ErrorFormulario2 from './validacaoemprestimo/MensagemErro2';
 
 
 const RegistrarEmprestimo = () => {
@@ -53,8 +52,7 @@ const RegistrarEmprestimo = () => {
         e.preventDefault();
         let titulo = document.getElementById("titulo");
         let autor = document.getElementById("autor");
-        console.log(livros !== 'undefined')
-        if (livros !== 'undefined') {
+        if (typeof livros !== 'undefined') {
             let livro = livros.filter(livro => { return livro.isbn === Number(regEmprestimo.isbn) })[0];
 
             if (livro) {
@@ -67,8 +65,8 @@ const RegistrarEmprestimo = () => {
 
             } else {
                 titulo.value = "Titulo não encontrado";
-                titulo.style.color = "red";
                 autor.value = "Autor não encontrado";
+                titulo.style.color = "red";
                 autor.style.color = "red";
             }
         }
@@ -78,8 +76,8 @@ const RegistrarEmprestimo = () => {
     const onSubmitUsuario = (e) => {
         e.preventDefault();
         let nome1 = document.getElementById("nome");
-        let email1 = document.getElementById("email")
-        if (usuarios !== "undefined") {
+        let email1 = document.getElementById("email");
+        if (typeof usuarios !== "undefined") {
             let usuario = usuarios.filter(usuario => { return usuario.matricula === regEmprestimo.matricula })[0];
 
             if (usuario) {
@@ -100,10 +98,7 @@ const RegistrarEmprestimo = () => {
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
 
-        console.log(regEmprestimo.idu)
-        console.log(regEmprestimo.idi)
-
-        if (regEmprestimo.idu && regEmprestimo.idi) {
+        if (typeof regEmprestimo.idu !== 'undefined' && typeof regEmprestimo.idi !== 'undefined') {
             let hoje = formatData(new Date());
             let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
 
@@ -121,30 +116,34 @@ const RegistrarEmprestimo = () => {
     return (
         <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo="Registrar Empréstimo" link='/emprestimo' />
-            <div className="col-11 h5 mt-2 col-sm-8 col-md-6 col-lg-4  mx-auto text-center  ">
-                <ErrorFormulario2 erros1={regEmprestimo.erros1} erros2={regEmprestimo.erros2}
-                    erros3={regEmprestimo.erros3} erros4={regEmprestimo.erros4} erros5={regEmprestimo.erros5}
-                />
-            </div>
+
             <section className="row justify-content-center align-items-start flex-grow-1">
-                <div className="row conteudo col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">
+                <div className="row conteudo justify-content-center col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">
 
-                    <form onSubmit={onSubmitUsuario} className="row mx-4 justify-content-center w-100 mt-5 p-0" action="#" method="POST">
-                        <div className="input-group">
-                            {/* 
-                                Matricula:
-                                - String
-                                - Máximo de Caracteres -> 20
-                                - Não pode ser Nulo
-                            */}
-                            <input onChange={onChange} type="text" className="input_login form-control m-0" name="matricula" id="matricula" placeholder="Matrícula" />
-                            <input type="submit" className="btn btn-outline-primary " value="Consultar" id="consultar-matricula" />
-                        </div>
-                    </form>
+                    <div className="row mx-4 border border-secondary rounded justify-content-center w-100 mt-5 p-2">
+                        <label className="h4">Usuário</label>
+                        <form onSubmit={onSubmitUsuario} className="w-100">
+                            <div className="input-group">
+                                {/* 
+                                    Matricula:
+                                    - String
+                                    - Máximo de Caracteres -> 20
+                                    - Não pode ser Nulo
+                                */}
+                                <input onChange={onChange} type="text" className="input_login form-control m-0" name="matricula" id="matricula" placeholder="Matrícula" />
+                                <input type="submit" className="btn btn-outline-primary" value="Consultar" id="consultar-matricula" />
+                            </div>
+                        </form>
 
-                    <form onSubmit={onSubmitLivro} className="row mx-4 justify-content-center w-100" action="#" method="POST">
-                        <div className="input-group w-100">
-                            {/* 
+                        <input id="nome" className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
+                        <input id="email" className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
+                    </div><br />
+
+                    <div className="row mx-4 border border-secondary rounded justify-content-center w-100 mt-2 p-2">
+                        <label className="h4">Livro</label>
+                        <form onSubmit={onSubmitLivro} className=" w-100">
+                            <div className="input-group w-100">
+                                {/* 
                                 ISBN:
                                 - int;
                                 - Existe dois padrões de ISBN (ISBN-10 e ISBN-13);
@@ -154,47 +153,16 @@ const RegistrarEmprestimo = () => {
                                 - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
                                 - Não pode ser Nulo;
                             */}
-                            <input onChange={onChange} type="text" className="input_login form-control my-2" id="isbn" name="isbn" placeholder="ISBN" />
-                            <input type="submit" className="btn btn-outline-primary my-2" value="Consultar" id="consultar-isbn" />
-                        </div>
-                    </form>
+                                <input onChange={onChange} type="text" className="input_login form-control my-2" id="isbn" name="isbn" placeholder="ISBN" />
+                                <input type="submit" className="btn btn-outline-primary my-2" value="Consultar" id="consultar-isbn" />
+                            </div>
+                        </form>
 
-
-                    <form onSubmit={onSubmitEmprestimo} className="row mx-4 justify-content-center" action="#" method="POST">
-                        {/* 
-                            Nome Usuário:
-                            - String
-                            - Não pode ser Nulo;
-                        */}
-                        <input id="nome" className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
-
-
-                        {/*
-                            Email Usuário:
-                            - String;
-                            - Possuir formato de email;
-                            - Não pode ser Nulo;                        
-                        */}
-                        <input id="email" className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
-
-
-                        {/* 
-                            Título do Livro:
-                            - String;
-                            - Não pode ser Nulo;
-                        */}
                         <input id="titulo" className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
-
-                        {/* 
-                            Autor do Livro:
-                            - String;
-                            - Não pode ser Nulo;
-                        */}
                         <input id="autor" className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
+                    </div>
 
-                        <input className="my-5 btn" id="confirmar" type="submit" value="Registrar Empréstimo" />
-                    </form>
-
+                    <button className="my-5 btn" id="confirmar" onClick={onSubmitEmprestimo}>Registrar Empréstimo</button>
                 </div>
             </section>
         </div>

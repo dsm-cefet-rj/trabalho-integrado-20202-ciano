@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import CapaLivro from '../img/capa-livro-exemplo.svg';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
-import CapaLivro from '../img/capa-livro-exemplo.svg';
-import { useHistory, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllLivro, selectLivroById, fetchLivro } from './LivroSlice';
+import { fetchLivro, selectLivroById } from './LivroSlice';
 
 
 const InformacoesDetalhadasConsulta = () => {

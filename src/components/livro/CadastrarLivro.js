@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import FormLivro from './FormLivros';
-import { fetchLivro, selectAllLivro } from './LivroSlice';
+import { fetchLivro } from './LivroSlice';
 const CadastrarLivro = () => {
-    let livros = useSelector(selectAllLivro)
+    // let livros = useSelector(selectAllLivro);
     const status = useSelector(state => state.livros.status);
     const error = useSelector(state => state.livros.error);
     const dispatch = useDispatch();
