@@ -7,8 +7,13 @@ import { addEmprestimoServer } from '../emprestimo/EmprestimosSlice';
 import { fetchLivro, selectAllLivro } from '../livro/LivroSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import emprestimoSchema from './EmprestimoSchema';
+
 
 const RegistrarEmprestimo = () => {
+
     let history = useHistory();
     const dispatch = useDispatch();
 
@@ -22,6 +27,10 @@ const RegistrarEmprestimo = () => {
 
     const livros = useSelector(selectAllLivro);
     const status1 = useSelector(state => state.livros.status);
+
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(emprestimoSchema),
+    });
 
 
     useEffect(() => {
@@ -122,7 +131,7 @@ const RegistrarEmprestimo = () => {
 
                     <div className="row mx-4 border border-secondary rounded justify-content-center w-100 mt-5 p-2">
                         <label className="h4">Usuário</label>
-                        <form onSubmit={onSubmitUsuario} className="w-100">
+                        <form onSubmit={handleSubmit(onSubmitUsuario)} className="w-100">
                             <div className="input-group">
                                 {/* 
                                     Matricula:
@@ -130,18 +139,21 @@ const RegistrarEmprestimo = () => {
                                     - Máximo de Caracteres -> 20
                                     - Não pode ser Nulo
                                 */}
-                                <input onChange={onChange} type="text" className="input_login form-control m-0" name="matricula" id="matricula" placeholder="Matrícula" />
+                                <input onChange={onChange} type="text" className="input_login form-control m-0" name="matricula" id="matricula" placeholder="Matrícula" ref={register} />
+                                &nbsp;<p>{errors.matricula?.message}</p>
                                 <input type="submit" className="btn btn-outline-primary" value="Consultar" id="consultar-matricula" />
                             </div>
                         </form>
 
-                        <input id="nome" className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" disabled />
-                        <input id="email" className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" disabled />
+                        <input id="nome" className="input_login w-100 my-2 form-control" type="text" name="nome-usuario" placeholder="Nome" ref={register} disabled />
+                        &nbsp;<p>{errors.nome?.message}</p>
+                        <input id="email" className="input_login w-100 my-2 form-control" type="email" name="email-usuario" placeholder="E-mail" ref={register} disabled />
+                        &nbsp;<p>{errors.email?.message}</p>
                     </div><br />
 
                     <div className="row mx-4 border border-secondary rounded justify-content-center w-100 mt-2 p-2">
                         <label className="h4">Livro</label>
-                        <form onSubmit={onSubmitLivro} className=" w-100">
+                        <form onSubmit={handleSubmit(onSubmitLivro)} className=" w-100">
                             <div className="input-group w-100">
                                 {/* 
                                 ISBN:
@@ -153,13 +165,16 @@ const RegistrarEmprestimo = () => {
                                 - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
                                 - Não pode ser Nulo;
                             */}
-                                <input onChange={onChange} type="text" className="input_login form-control my-2" id="isbn" name="isbn" placeholder="ISBN" />
+                                <input onChange={onChange} type="text" className="input_login form-control my-2" id="isbn" name="isbn" placeholder="ISBN" ref={register} />
+                                &nbsp;<p>{errors.isbn?.message}</p>
                                 <input type="submit" className="btn btn-outline-primary my-2" value="Consultar" id="consultar-isbn" />
                             </div>
                         </form>
 
-                        <input id="titulo" className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" disabled />
-                        <input id="autor" className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" disabled />
+                        <input id="titulo" className="input_login w-100 my-2 form-control" type="text" name="titulo-livro" placeholder="Título" ref={register} disabled />
+                        &nbsp;<p>{errors.titulo?.message}</p>
+                        <input id="autor" className="input_login w-100 my-2 form-control" type="text" name="autor-livro" placeholder="Autor" ref={register} disabled />
+                        &nbsp;<p>{errors.autor?.message}</p>
                     </div>
 
                     <button className="my-5 btn" id="confirmar" onClick={onSubmitEmprestimo}>Registrar Empréstimo</button>
