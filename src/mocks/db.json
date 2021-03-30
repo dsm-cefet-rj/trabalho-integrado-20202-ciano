@@ -133,6 +133,15 @@
       "data_devolucao": "09/04/2021",
       "data_devolvido": null,
       "data_excluido": null
+    },
+    {
+      "id": 5,
+      "livroId": 2,
+      "usuarioId": 1,
+      "data_emprestimo": "30/03/2021",
+      "data_devolucao": "14/04/2021",
+      "data_devolvido": null,
+      "data_excluido": null
     }
   ]
 }

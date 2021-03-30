@@ -98,7 +98,7 @@ const RegistrarEmprestimo = () => {
     const onSubmitEmprestimo = (e) => {
         e.preventDefault();
 
-        if (typeof regEmprestimo.idu !== 'undefined' && typeof regEmprestimo.idi !== 'undefined') {
+        if (regEmprestimo.idu && regEmprestimo.idi) {
             let hoje = formatData(new Date());
             let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
 
