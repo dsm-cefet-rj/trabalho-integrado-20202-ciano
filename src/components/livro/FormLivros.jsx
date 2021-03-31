@@ -7,55 +7,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import livroSchema from './LivroSchema';
 
-const FormLivros = (props) => {
-    //codigo do professor
-    /*const [usuarioProjeto,setUsuarioProjeto]=useState({})
-    const usuarioProjetos= useSelector(state=>state.livros)
-    const history=useHistory()
-    const dispatch =useDispatch();
-    let{id}=useParams();
-    id=parseInt(id);
-    const [usuarioProjeto,setUsuarioProjeto]=useState(
-        id?usuarioProjetos.filter((p)=>p.id ===id)[0]??{}:{}
-    )
-    const [actionType,]=useState(
-        id?
-        usuarioProjetos.filter((p)=>p.id ===id)[0]
-        ?'updateLivro'
-        :'addLivro'
-        :'addLivro'
-    )
-    
-    const onChange = (e) => {
-           
-        setUsuarioProjeto({
-            ...usuarioProjeto,
-            [e.target.name]: e.target.value
-        })
-    }
-    
-    
-    const onSubmit = (e) => {
-        e.preventDefault();
-        dispatch(addLivroServer(usuarioProjeto))
-        if(actionType === "addLivro"){
-            dispatch(addLivroServer(usuarioProjeto))
-        }else{
-            dispatch(updateLivroServer(usuarioProjeto))
-        }
-        
-      
-        history.push("/livro/consultar");
-    }
-    */
-
+const FormLivros = () => {
     let { id } = useParams();
     id = parseInt(id)
-
-    let atualizarLivros = useSelector(state => selectLivroById(state, id))
-
-    const status = useSelector(state => state.livros.status);
+    const history = useHistory();
     const dispatch = useDispatch();
+    
+    let livroFound = useSelector(state => selectLivroById(state, id))
+    const status = useSelector(state => state.livros.status);
 
     useEffect(() => {
         if (status === 'not_loaded') {
@@ -64,24 +23,18 @@ const FormLivros = (props) => {
             setTimeout(() => dispatch(fetchLivro()), 5000);
         }
     }, [status, dispatch])
-    if (typeof (atualizarLivros) === "undefined") {
 
-        atualizarLivros = { };
-    }
-
-    let history = useHistory();
-
-    const [formLivro, setFormLivro] = useState({
-        id: id,
-        isbn: atualizarLivros.isbn,
-        titulo: atualizarLivros.titulo,
-        edicao: atualizarLivros.edicao,
-        autores: [atualizarLivros.autores],
-        cod_localizacao: atualizarLivros.cod_localizacao,
-        qtd_total: atualizarLivros.qtd_total,
-        data_excluido: null,
-
-    })
+    const [formLivro, setFormLivro] = useState(
+        id?livroFound??{}:{}
+    )
+    
+    const [actionType,]=useState(
+        id?
+        livroFound
+        ?'updateLivro'
+        :'addLivro'
+        :'addLivro'
+    )
 
     const onChange = (e) => {
 
@@ -94,9 +47,9 @@ const FormLivros = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         formLivro.isbn = parseInt(formLivro.isbn)
-        formLivro.qtd_total = parseInt(formLivro.qtd_total)     
+        formLivro.qtd_total = parseInt(formLivro.qtd_total)
 
-        if (isNaN(id)) {
+        if (actionType === "addLivro") {
             dispatch(addLivroServer(formLivro));
 
         } else {
@@ -108,7 +61,7 @@ const FormLivros = (props) => {
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(livroSchema),
     });
-    
+
     return (
         <>
             <section className="perfil_ajuste  row  justify-content-center  corpo_login  " >
@@ -166,7 +119,7 @@ const FormLivros = (props) => {
                     <input onChange={onChange} value={formLivro.cod_localizacao} className="input_login w-100 mb-5 box_perfil" type="text" name="cod_localizacao" placeholder="Cód. localização" ref={register} />
                     &nbsp;<p>{errors.cod_localizacao?.message}</p>
 
-                    <input className="mt-2 align-self-center btn" id={props.idNome} type="submit" value={props.btnNome} />
+                    <input className="mt-2 align-self-center btn" id={(actionType === "addLivro")?'cadastrar':'atualizar'} type="submit" value={(actionType === "addLivro")?'Cadastrar':'Atualizar'} />
                 </form>
             </section>
         </>

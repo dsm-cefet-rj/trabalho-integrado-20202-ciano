@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
-import { httpDelete, httpGet, httpPut, httpPost } from '../../utils';
+import { httpDelete, httpGet, httpPut, httpPost, formatData } from '../../utils';
 import { baseUrl } from '../../baseUrl';
 
 const emprestimosAdapter = createEntityAdapter();
@@ -10,12 +10,28 @@ const initialState = emprestimosAdapter.getInitialState({
 });
 
 export const fetchEmprestimos = createAsyncThunk('emprestimos/fetchEmprestimos', async () => {
-    return await httpGet(`${baseUrl}/emprestimos?_expand=usuario&_expand=livro`);
+    let emprestimos = await httpGet(`${baseUrl}/emprestimos?_expand=usuario&_expand=livro`);
+    return emprestimos.filter(emprestimo => emprestimo.data_excluido === null); //Retorna apenas os emprestimos que não foram excluidos
 });
 
 export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo) => {
     await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`);
     return idEmprestimo;
+});
+
+export const softDeleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (emprestimo) => {
+    
+    let emprestimoExcluido = {
+        "id": emprestimo.id,
+        "livroId": emprestimo.livroId,
+        "usuarioId": emprestimo.usuarioId,
+        "data_emprestimo": emprestimo.data_emprestimo,
+        "data_devolucao": emprestimo.data_devolucao,
+        "data_devolvido": emprestimo.data_devolvido,
+        "data_excluido": formatData(new Date())
+    }
+
+    await httpPut(`${baseUrl}/emprestimos/${emprestimoExcluido.id}`, emprestimoExcluido);
 });
 
 export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo) => {

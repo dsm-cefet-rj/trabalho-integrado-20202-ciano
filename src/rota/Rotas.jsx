@@ -14,14 +14,13 @@ import MenuInicialBibliotecario from '../components/geral/usuario/MenuInicialBib
 import MenuInicialUsuario from '../components/geral/usuario/MenuInicialUsuario';
 import AtualizarLivro from '../components/livro/AtualizarLivro';
 import CadastrarLivro from '../components/livro/CadastrarLivro';
+import ConsultarLivro from '../components/livro/ConsultarLivro';
 import InformacoesDetalhadasConsulta from '../components/livro/InformacoesDetalhadasConsulta';
+import ListandoLivros from '../components/livro/ListandoLivros';
 import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
 import ManterRelatorio from '../components/relatorio/ManterRelatorio';
 import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
-import ConsultarLivro from '../components/livro/ConsultarLivro';
-import ListandoLivros from '../components/livro/ListandoLivros';
-import DeletandoLivro from '../components/livro/DeletarLivro';
 
 function Rotas() {
 	return (
@@ -54,7 +53,6 @@ function Rotas() {
 				{/* ---------------- Livro ---------------- */}
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
 				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
-				<Route path="/Deletando/Livro/:id" component={DeletandoLivro} />
 				<Route path="/livro/consultar" component={ConsultarLivro} />
 				<Route path="/livro/consultar/listagem/:id" component={ListandoLivros} exact/>
 				<Route path="/livro/informacoes/consulta/:id" component={InformacoesDetalhadasConsulta} />
