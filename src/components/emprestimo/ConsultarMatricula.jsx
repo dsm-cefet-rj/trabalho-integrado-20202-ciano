@@ -1,76 +1,52 @@
-import React, { useState } from 'react';
-import ErrorFormulario from './validacaoemprestimo/MensagemErro1';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import emprestimoSchema from './EmprestimoSchema';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { fetchUsuarios, selectAllUsuarios } from '../geral/usuario/UsuariosSlice';
+import matriculaSchema from './ConsultarMatriculaSchema';
 
-const ConsultarMatricula = () => {
 
-    const [dados, setDados] = useState({
-        matricula: "",
-        erros1: false,
-        erros2: false,
-        erro3: false
+const ConsultarMatricula = (props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    });
+    const usuarios = useSelector(selectAllUsuarios);
+    const status = useSelector(state => state.usuarios.status);
+    // const error = useSelector(state => state.usuarios.error);
 
-    const onChange = (e) => {
-        e.target.value = e.target.value.trim();
+    const [matriculaOnLoad] = useState(matriculaSchema.cast({}));
 
-        if (/[0-9,a-z]{21}/gi.test(e.target.value)) {
-
-            dados.erros1 = true;
-        } else {
-            dados.erros1 = false;
+    useEffect(() => {
+        if (status === 'not_loaded') {
+            dispatch(fetchUsuarios());
+        } else if (status === 'failed') {
+            setTimeout(() => dispatch(fetchUsuarios()), 5000);
         }
-        if (/[!,",/,.,=,:,_,^,~,`,´,\-,>,<,|,;,*,#,+,&,¨,%,$,@]/gi.test(e.target.value)) {
-            dados.erros2 = true;
+    }, [status, dispatch]);
+
+    const onSubmit = (form) => {
+        let usuario = usuarios.filter(usuario => usuario.matricula === form.matricula)[0];
+
+        if(typeof usuario !== 'undefined'){
+            history.push(props.rota + usuario.id);
         }
-        else {
-            dados.erros2 = false;
-        }
-
-        setDados({
-            ...dados,
-            [e.target.name]: e.target.value
-        })
-
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (!dados.erros1 && !dados.erros2 && dados.matricula) {
-
-            e.target.reset()
-            dados.matricula = "";
-        } else {
-            setTimeout(() => {
-                setDados({
-                    erro3: false,
-                })
-            }, 3000);
-            setDados({
-                erro3: true,
-            })
-
+        else{
+            window.alert("Matrícula não existe!");
         }
     }
 
     const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(emprestimoSchema),
+        resolver: yupResolver(matriculaSchema),
     });
 
     return (
         <div className="mt-2">
-            <div className="col-11 h5 col-sm-8 col-md-6 col-lg-4  mx-auto text-center  ">
-                <ErrorFormulario erros1={dados.erros1} erros2={dados.erros2} erros3={dados.erro3} />
-            </div>
             <section className="row justify-content-center corpo_login my-5">
-                <form onSubmit={handleSubmit(onSubmit)} className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25" action="#" method="POST">
-                    <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula do Aluno</h3>
-                    <input onChange={onChange} className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" ref={register} />
-                    &nbsp;<p>{errors.matricula?.message}</p>
+                <form onSubmit={handleSubmit(onSubmit)} className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25">
+                    <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula</h3>
+                    <input className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" defaultValue={matriculaOnLoad.matricula} ref={register} />
+                    &nbsp;<span>{errors.matricula?.message}</span>
                     <input className="btn btn-block align-self-center" id="pesq" type="submit" value="Pesquisar" />
                 </form>
             </section>

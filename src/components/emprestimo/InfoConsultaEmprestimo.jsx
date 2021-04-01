@@ -2,13 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice';
-import CabecalhoVoltar from '../utils/CabecalhoVoltar';
-import Rodape from '../utils/Rodape';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
 import { fetchEmprestimos, selectAllEmprestimos } from './EmprestimosSlice';
 
 
-const ConsultarEmprestimo = () => {
+const InfoConsultaEmprestimo = (props) => {
     let { id } = useParams();
     id = parseInt(id);
     const dispatch = useDispatch();
@@ -27,7 +25,7 @@ const ConsultarEmprestimo = () => {
         }
         if (usuariosStatus === 'not_loaded') {
             dispatch(fetchUsuarios());
-        }else if (usuariosStatus === 'failed') {
+        } else if (usuariosStatus === 'failed') {
             setTimeout(() => dispatch(fetchUsuarios()), 5000);
         }
     }, [emprestimosStatus, usuariosStatus, dispatch]);
@@ -67,11 +65,11 @@ const ConsultarEmprestimo = () => {
 
     let LivrosEmprestados = '';
     if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
-        
-        let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null) 
+
+        let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null)
             && (emprestimo.data_excluido === null) && (emprestimo.usuarioId === id));
-            
-        LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} />
+
+        LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} rota={props.rota} />
 
     } else if (emprestimosStatus === 'loading') {
         LivrosEmprestados = <div className="alert alert-info w-100">Carregando emprestimos...</div>
@@ -81,23 +79,18 @@ const ConsultarEmprestimo = () => {
     }
 
     return (
-        <div className="container-fluid d-flex flex-column">
+        <section className="row justify-content-center flex-grow-1">
+            <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 align-items-start conteudo">
 
-            <CabecalhoVoltar titulo="Consultar Empréstimo" link='/emprestimo' />
-            <section className="row justify-content-center flex-grow-1">
-                <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 align-items-start conteudo">
+                {TabelaUsuario}
 
-                    {TabelaUsuario}
-
-                    <div className="align-items-start mt-4 w-100">
-                        <h3 className="text-center">Livros em posse:</h3>
-                        {LivrosEmprestados}
-                    </div>
+                <div className="align-items-start mt-4 w-100">
+                    <h3 className="text-center">Livros em posse:</h3>
+                    {LivrosEmprestados}
                 </div>
-            </section>
-            <Rodape />
-        </div >
+            </div>
+        </section>
     );
 }
 
-export default ConsultarEmprestimo;
+export default InfoConsultaEmprestimo;

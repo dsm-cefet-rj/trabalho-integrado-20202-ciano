@@ -1,4 +1,4 @@
-import { date, string, number, object, setLocale } from 'yup';
+import { date, object, setLocale, string } from 'yup';
 import { pt } from 'yup-locale-pt';
 
 setLocale(pt)

@@ -42,7 +42,7 @@ let autoresFormatado = (autores) => {
     return autorF;
 }
 
-const InfosGeraisEmprestimo = (props) => {
+const InfoCompletaEmprestimo = (props) => {
     let emprestimo = props.emprestimo;
     let usuario = emprestimo.usuario;
     let livro = emprestimo.livro;
@@ -61,7 +61,6 @@ const InfosGeraisEmprestimo = (props) => {
                     { th: autores[0], td: autores[1] },
                     { th: 'Cod. Localização:', td: livro.cod_localizacao },
                     { th: 'ISBN:', td: livro.isbn },
-                    { th: 'QTD Disponível:', td: livro.qtd_disponivel },
                     { th: 'QTD Total:', td: livro.qtd_total }
                 ]} />
 
@@ -72,11 +71,12 @@ const InfosGeraisEmprestimo = (props) => {
 
                 <TabelaFormatada titulo="Empréstimo" informacoes={[
                     { th: 'Data de Emprestimo:', td: emprestimo.data_emprestimo },
-                    { th: 'Data de Devolução:', td: emprestimo.data_devolucao }
+                    { th: 'Data de Devolução:', td: emprestimo.data_devolucao },
+                    { th: 'Data de Devolvido:', td: (emprestimo.data_devolvido ? emprestimo.data_devolvido : 'Não Devolvido' )}
                 ]} />
 
             </div>
         </>
     );
 }
-export default InfosGeraisEmprestimo;
+export default InfoCompletaEmprestimo;

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { adiarData } from '../../utils';
-import CabecalhoVoltar from '../utils/CabecalhoVoltar';
-import Rodape from '../utils/Rodape';
-import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from './EmprestimosSlice';
-import InfosGeraisEmprestimo from './InfosGeraisEmprestimo';
+import { adiarData } from '../../../utils';
+import CabecalhoVoltar from '../../utils/CabecalhoVoltar';
+import Rodape from '../../utils/Rodape';
+import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from '../EmprestimosSlice';
+import InfoCompletaEmprestimo from '../InfoCompletaEmprestimo';
 
 const RenovarEmprestimoConfirmacao = () => {
     const history = useHistory();
@@ -47,7 +47,7 @@ const RenovarEmprestimoConfirmacao = () => {
         let dataRenovacao = adiarData(emprestimo.data_devolucao, diasDeAcrescimo);
         informacoes =
             <>
-                <InfosGeraisEmprestimo emprestimo={emprestimo} />
+                <InfoCompletaEmprestimo emprestimo={emprestimo} />
 
                 <h3 className="h4 text-center">Deseja renovar o empréstimo para o dia ({dataRenovacao})?</h3>
                 <button onClick={onClickRenovarEmprestimo} className="btn align-self-end text-white botao">SIM</button>

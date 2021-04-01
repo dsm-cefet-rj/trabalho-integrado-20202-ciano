@@ -2,7 +2,7 @@ import React from 'react';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
 import CapaLivro from '../img/capa-livro-exemplo.svg';
-import InfosGeraisEmprestimo from '../emprestimo/InfosGeraisEmprestimo';
+import InfosGeraisEmprestimo from '../emprestimo/InfoCompletaEmprestimo';
 
 var usuario = { nome: 'Rodrio da Silva Barreto', matricula: '19654684ADM', email: 'exemplo@email.com', telefone: '(21) 93939-9933' };
 var livro = { titulo: 'Calculo Vol.1', autor: 'James Stewart', codLocalizacao: 'S15P5-6', isbn: 'C978-85-221-1461-0', qtdDisponivel: 9, qtdTotal: 15, imagem: CapaLivro };

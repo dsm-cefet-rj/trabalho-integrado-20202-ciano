@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { formatData } from '../../utils';
-import CabecalhoVoltar from '../utils/CabecalhoVoltar';
-import Rodape from '../utils/Rodape';
-import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from './EmprestimosSlice';
-import InfosGeraisEmprestimo from './InfosGeraisEmprestimo';
+import { formatData } from '../../../utils';
+import CabecalhoVoltar from '../../utils/CabecalhoVoltar';
+import Rodape from '../../utils/Rodape';
+import { fetchEmprestimos, selectEmprestimoById, updateEmprestimoServer } from '../EmprestimosSlice';
+import InfoCompletaEmprestimo from '../InfoCompletaEmprestimo';
 
 const EncerrarEmprestimoConfirmacao = () => {
 
@@ -47,7 +47,7 @@ const EncerrarEmprestimoConfirmacao = () => {
    if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo) {
        informacoes =
            <>
-               <InfosGeraisEmprestimo emprestimo={emprestimo} />
+               <InfoCompletaEmprestimo emprestimo={emprestimo} />
 
 
                <button onClick={onClickEncerrarEmprestimo} id="encerrar-emprestimo" className="btn align-self-end text-white botao-red">Encerrar Empréstimo</button>

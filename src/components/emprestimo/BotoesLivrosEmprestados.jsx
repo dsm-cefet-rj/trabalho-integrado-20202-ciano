@@ -4,7 +4,7 @@ import CapaLivro from '../img/capa-livro-exemplo.svg';
 
 const BotaoLivroEmprestado = (props) => {
     return (
-        <Link to={`/emprestimo/renovar/${props.emprestimo.id}`} className="d-flex flex-column w-100 p-2 m-sm-3 my-3">
+        <Link to={props.rota + props.emprestimo.id + '/confirmacao'} className="d-flex flex-column w-100 p-2 m-sm-3 my-3">
             <img src={CapaLivro} alt="Livro fechado" className="size-book-10" /><br />
             <h4 className="text-center">{props.emprestimo.livro.titulo}</h4>
         </Link>
@@ -12,13 +12,13 @@ const BotaoLivroEmprestado = (props) => {
 }
 
 const BotoesLivrosEmprestados = (props) => {
-    if (props != null && props.emprestimos.length > 0) {
+    if (props.emprestimos != null && props.emprestimos.length > 0) {
 
         return (
             <div className="d-flex flex-column flex-sm-row justify-content-center livros overflow-auto">
                 {
                     props.emprestimos.map((emprestimo) =>
-                        <BotaoLivroEmprestado key={emprestimo.id} emprestimo={emprestimo} />)
+                        <BotaoLivroEmprestado key={emprestimo.id} emprestimo={emprestimo} rota={props.rota} />)
                 }
             </div>
         );
