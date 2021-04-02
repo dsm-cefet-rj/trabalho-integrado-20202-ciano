@@ -5,11 +5,11 @@ setLocale(ptForm);
 
 const emprestimoSchema = object().shape({
 
-    matricula: string().required(),
+    matricula: string().min(10).required(),
     nome: string().required(),
     email: string().email().required(),
 
-    isbn: string().required(),
+    isbn: string().min(17).required(),
     titulo: string().required(),
     autor: string().required(),
 });

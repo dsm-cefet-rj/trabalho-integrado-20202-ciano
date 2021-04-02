@@ -116,8 +116,8 @@ const FormLivros = () => {
                     - String
                     - Não pode ser Nulo;
                 */}
-                    <input onChange={onChange} value={formLivro.cod_localizacao} className="input_login w-100 mb-5 box_perfil" type="text" name="cod_localizacao" placeholder="Cód. localização" ref={register} />
-                    &nbsp;<p>{errors.cod_localizacao?.message}</p>
+                    <input onChange={onChange} value={formLivro.cod_localizacao} id="codLocalizacao" className="input_login w-100 mb-5 box_perfil" type="text" name="cod_localizacao" placeholder="Cód. localização" ref={register} />
+                    &nbsp;<p>{errors.codLocalizacao?.message}</p>
 
                     <input className="mt-2 align-self-center btn" id={(actionType === "addLivro")?'cadastrar':'atualizar'} type="submit" value={(actionType === "addLivro")?'Cadastrar':'Atualizar'} />
                 </form>

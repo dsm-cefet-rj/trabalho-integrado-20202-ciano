@@ -8,8 +8,8 @@ const livroSchema = object().shape({
     titulo: string().required(),
     edicao: string().required(),
     autor: string().required(),
-    isbn: string().required(),
-    quantidade: number().min(1).required(),
+    isbn: string().min(17).required(),
+    quantidade: number().positive().integer().required(),
     codLocalizacao: string().required(),
 });
 

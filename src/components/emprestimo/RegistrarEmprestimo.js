@@ -136,7 +136,7 @@ const RegistrarEmprestimo = () => {
                                 {/* 
                                     Matricula:
                                     - String
-                                    - Máximo de Caracteres -> 20
+                                    - Máximo de Caracteres -> 10
                                     - Não pode ser Nulo
                                 */}
                                 <input onChange={onChange} type="text" className="input_login form-control m-0" name="matricula" id="matricula" placeholder="Matrícula" ref={register} />

@@ -5,7 +5,7 @@ setLocale(ptForm);
 
 const consultarMatriculaSchema = object().shape({
 
-    matricula: string().max(20).required(),
+    matricula: string().min(10).required(),
 });
 
 export default consultarMatriculaSchema;
