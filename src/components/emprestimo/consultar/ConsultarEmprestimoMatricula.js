@@ -5,7 +5,7 @@ import ConsultarMatricula from '../ConsultarMatricula';
 
 const ConsultarEmprestimoMatricula = () => {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid" >
             <CabecalhoVoltar titulo='Consultar Empréstimo' link='/emprestimo'/>
             
             <ConsultarMatricula rota='/emprestimo/consultar/'/>

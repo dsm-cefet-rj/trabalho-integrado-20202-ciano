@@ -13,7 +13,6 @@ const ConsultarMatricula = (props) => {
 
     const usuarios = useSelector(selectAllUsuarios);
     const status = useSelector(state => state.usuarios.status);
-    // const error = useSelector(state => state.usuarios.error);
 
     const [matriculaOnLoad] = useState(matriculaSchema.cast({}));
 
@@ -28,10 +27,10 @@ const ConsultarMatricula = (props) => {
     const onSubmit = (form) => {
         let usuario = usuarios.filter(usuario => usuario.matricula === form.matricula)[0];
 
-        if(typeof usuario !== 'undefined'){
+        if (typeof usuario !== 'undefined') {
             history.push(props.rota + usuario.id);
         }
-        else{
+        else {
             window.alert("Matrícula não existe!");
         }
     }
@@ -41,16 +40,14 @@ const ConsultarMatricula = (props) => {
     });
 
     return (
-        <div className="mt-2">
-            <section className="row justify-content-center corpo_login my-5">
-                <form onSubmit={handleSubmit(onSubmit)} className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25">
-                    <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula</h3>
-                    <input className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" defaultValue={matriculaOnLoad.matricula} ref={register} />
+        <section className="row justify-content-center corpo_login my-5 flex-grow-1">
+            <form onSubmit={handleSubmit(onSubmit)} className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25">
+                <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula</h3>
+                <input className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" defaultValue={matriculaOnLoad.matricula} ref={register} />
                     &nbsp;<span>{errors.matricula?.message}</span>
-                    <input className="btn btn-block align-self-center" id="pesq" type="submit" value="Pesquisar" />
-                </form>
-            </section>
-        </div>
+                <input className="btn btn-block align-self-center" id="pesq" type="submit" value="Pesquisar" />
+            </form>
+        </section>
     );
 }
 export default ConsultarMatricula;
