@@ -5,7 +5,7 @@ import ConsultarMatricula from '../ConsultarMatricula';
 
 const EncerrarEmprestimo = () => {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo="Encerrar Empréstimo" link='/emprestimo' />
 
             <ConsultarMatricula rota='/emprestimo/encerrar/' />

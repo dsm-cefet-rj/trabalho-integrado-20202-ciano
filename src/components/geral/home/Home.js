@@ -7,8 +7,10 @@ const Home = () => {
     return (
         <div className="container-fluid d-flex flex-column" >
             <CabecalhoHome />
+
             <Conteudo />
-            < Rodape />
+
+            <Rodape />
         </div>
     );
 }

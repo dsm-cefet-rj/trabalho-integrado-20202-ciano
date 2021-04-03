@@ -40,13 +40,15 @@ const ConsultarMatricula = (props) => {
     });
 
     return (
-        <section className="row justify-content-center corpo_login my-5 flex-grow-1">
-            <form onSubmit={handleSubmit(onSubmit)} className="formulario_email col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 h-100 w-25">
-                <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula</h3>
-                <input className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" defaultValue={matriculaOnLoad.matricula} ref={register} />
-                    &nbsp;<span>{errors.matricula?.message}</span>
-                <input className="btn btn-block align-self-center" id="pesq" type="submit" value="Pesquisar" />
-            </form>
+        <section className="row justify-content-center align-items-start flex-grow-1">
+            <div className="conteudo col-12 col-sm-10 col-md-7 col-lg-7 col-xl-5 py-4 px-5 my-5">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <h3 className="row justify-content-center text-center titulo_email h-25 mb-0 mt-3">Ensira a Matrícula</h3>
+                    <input className="input_login w-100" type="text" name="matricula" placeholder="Matrícula" defaultValue={matriculaOnLoad.matricula} ref={register} />
+                    <br /><span>{errors.matricula?.message}</span>
+                    <input className="btn btn-block align-self-center" id="pesq" type="submit" value="Pesquisar" />
+                </form>
+            </div>
         </section>
     );
 }

@@ -5,7 +5,7 @@ import ConsultarMatricula from '../ConsultarMatricula';
 
 const RenovarEmprestimo = () => {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo='Renovar Empréstimo' link='/emprestimo' />
 
             <ConsultarMatricula rota='/emprestimo/renovar/' />

@@ -10,7 +10,7 @@ const ManterRelatorio = () => {
     ]
 
     return (
-        <div className="container-fluid ">
+        <div className="container-fluid d-flex flex-column">
             <CabecalhoVoltar titulo="Relatórios" link="/menu/bibliotecario" />
 
             <Manter botoes={botoes} />
