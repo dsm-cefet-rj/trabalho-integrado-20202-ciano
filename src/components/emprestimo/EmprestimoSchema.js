@@ -1,17 +1,15 @@
-import { object, setLocale, string } from 'yup';
+import { number, object, setLocale, string } from 'yup';
 import { ptForm } from 'yup-locale-pt';
+import {testIsbn} from '../livro/LivroSchema';
 
 setLocale(ptForm);
 
 const emprestimoSchema = object().shape({
-
     matricula: string().min(10).required(),
-    nome: string().required(),
-    email: string().email().required(),
+    idUsuario: number().notRequired(),
 
-    isbn: string().min(17).required(),
-    titulo: string().required(),
-    autor: string().required(),
+    isbn: string().trim().min(10).max(13).test(testIsbn).required(),
+    idLivro: number().notRequired()
 });
 
 export default emprestimoSchema;

@@ -27,7 +27,7 @@
     {
       "id": 3,
       "isbn": 9788576081739,
-      "titulo": "Use a Cabeça!: Java",
+      "titulo": "Use a Cabeça! Java",
       "edicao": "2ª",
       "autores": [
         "Kathy Sierra",
@@ -112,7 +112,7 @@
       "livroId": 3,
       "usuarioId": 1,
       "data_emprestimo": "25/03/2021",
-      "data_devolucao": "09/04/2021",
+      "data_devolucao": "24/04/2021",
       "data_devolvido": null,
       "data_excluido": null
     },
@@ -122,6 +122,15 @@
       "usuarioId": 1,
       "data_emprestimo": "25/03/2021",
       "data_devolucao": "09/04/2021",
+      "data_devolvido": "03/04/2021",
+      "data_excluido": null
+    },
+    {
+      "id": 5,
+      "livroId": 2,
+      "usuarioId": 3,
+      "data_emprestimo": "03/04/2021",
+      "data_devolucao": "18/04/2021",
       "data_devolvido": null,
       "data_excluido": null
     }

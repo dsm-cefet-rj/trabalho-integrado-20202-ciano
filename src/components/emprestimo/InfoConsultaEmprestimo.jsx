@@ -18,12 +18,12 @@ const InfoConsultaEmprestimo = (props) => {
     const emprestimos = useSelector(selectAllEmprestimos);
 
     useEffect(() => {
-        if (emprestimosStatus === 'not_loaded') {
+        if (emprestimosStatus === 'not_loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
             dispatch(fetchEmprestimos());
         } else if (emprestimosStatus === 'failed') {
             setTimeout(() => dispatch(fetchEmprestimos()), 5000);
         }
-        if (usuariosStatus === 'not_loaded') {
+        if (usuariosStatus === 'not_loaded' || usuariosStatus === 'saved' || usuariosStatus === 'deleted') {
             dispatch(fetchUsuarios());
         } else if (usuariosStatus === 'failed') {
             setTimeout(() => dispatch(fetchUsuarios()), 5000);
@@ -31,7 +31,7 @@ const InfoConsultaEmprestimo = (props) => {
     }, [emprestimosStatus, usuariosStatus, dispatch]);
 
     let TabelaUsuario = '';
-    if ((usuariosStatus === 'loaded' || usuariosStatus === 'saved' || usuariosStatus === 'deleted') && usuario) {
+    if ((usuariosStatus === 'loaded') && usuario) {
         TabelaUsuario =
             <table className="table table-bordered bg-white">
                 <tr>
@@ -64,7 +64,7 @@ const InfoConsultaEmprestimo = (props) => {
 
 
     let LivrosEmprestados = '';
-    if (emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') {
+    if (emprestimosStatus === 'loaded' ) {
 
         let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null)
             && (emprestimo.data_excluido === null) && (emprestimo.usuarioId === id));
