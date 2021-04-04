@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import CapaLivro from '../../../src/components/img/capa-livro-exemplo.svg';
 import { fetchLivro, selectAllLivro, softDeleteLivroServer } from './LivroSlice';
 
@@ -35,25 +35,23 @@ function ListandoLivros(props) {
     let TabelaLivro = '';
     if ((status === 'loaded' || status === 'saved' || status === 'deleted') && listaLivros[0]) {
         TabelaLivro = livroFiltrado.map((livro, index) =>
-            <tr key={index}>
-                <td className="text-center">
-                    <a href={`/livro/informacoes/consulta/${livro.id}`}>
-                        <img src={CapaLivro} className=" ml-1 ajuste3" alt="imagem" />
-                    </a>
+            <tr key={index} className="py-3">
+                <td className="justify-content-center align-middle">
+                    <Link to={`/livro/informacoes/${livro.id}`}>
+                        <img src={CapaLivro} className="ajuste3" alt="imagem" />
+                    </Link>
                 </td>
-                <td className="d-flex flex-column justify-content-center align-items-center ">
-                    <a href={`/livro/informacoes/consulta/${livro.id}`}><div className="font-weight-bold mt-3 mb-1  h4">{livro.titulo}</div></a>
-                    <a href={`/livro/informacoes/consulta/${livro.id}`}> <div className="font-weight-bold  h4">{livro.autores}</div></a>
+                <td className="align-middle">
+                    <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 text-center">{livro.titulo}</p></Link>
+                    <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 mt-3 text-center">{livro.autores}</p></Link>
                 </td>
-                <td >
-                    <div>
-                        <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
-                            className="btn mt-2 w-100 mr-5 mb-1 btn-primary">Atualizar</button>
-                    </div>
-                    <div>
-                        <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
-                            className="btn mr-5 w-100 btn-danger">Deletar</button>
-                    </div>
+                <td className="pr-4 align-middle">
+
+                    <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
+                        className="btn w-100 mb-1 btn-primary">Atualizar</button>
+                    <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
+                        className="btn w-100 mt-1 btn-danger">Deletar</button>
+
                 </td>
             </tr>)
 
@@ -68,11 +66,13 @@ function ListandoLivros(props) {
     }
 
     return (
-        <table className="table table-striped my-1">
-            <tbody>
-                {TabelaLivro}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table className="table table-striped table-hover m-0">
+                <tbody>
+                    {TabelaLivro}
+                </tbody>
+            </table>
+        </div>
     );
 
 }

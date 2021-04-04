@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ConsultarEmprestimo from '../components/emprestimo/consultar/ConsultarEmprestimo';
+import ConsultarEmprestimoCompleto from '../components/emprestimo/consultar/ConsultarEmprestimoCompleto';
+import ConsultarEmprestimoMatricula from '../components/emprestimo/consultar/ConsultarEmprestimoMatricula';
 import EncerrarEmprestimo from '../components/emprestimo/encerrar/EncerrarEmprestimo';
 import EncerrarEmprestimoConfirmacao from '../components/emprestimo/encerrar/EncerrarEmprestimoConfirmacao';
+import EncerrarEmprestimoConsulta from '../components/emprestimo/encerrar/EncerrarEmprestimoConsulta';
 import ManterEmprestimo from '../components/emprestimo/ManterEmprestimo';
 import RegistrarEmprestimo from '../components/emprestimo/RegistrarEmprestimo';
 import RenovarEmprestimo from '../components/emprestimo/renovar/RenovarEmprestimo';
@@ -17,14 +20,10 @@ import AtualizarLivro from '../components/livro/AtualizarLivro';
 import CadastrarLivro from '../components/livro/CadastrarLivro';
 import ConsultarLivro from '../components/livro/ConsultarLivro';
 import InformacoesDetalhadasConsulta from '../components/livro/InformacoesDetalhadasConsulta';
-import ListandoLivros from '../components/livro/ListandoLivros';
 import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
 import ManterRelatorio from '../components/relatorio/ManterRelatorio';
 import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
-import EncerrarEmprestimoConsulta from '../components/emprestimo/encerrar/EncerrarEmprestimoConsulta';
-import ConsultarEmprestimoCompleto from '../components/emprestimo/consultar/ConsultarEmprestimoCompleto';
-import ConsultarEmprestimoMatricula from '../components/emprestimo/consultar/ConsultarEmprestimoMatricula';
 
 function Rotas() {
 	return (
@@ -45,11 +44,11 @@ function Rotas() {
 				<Route path="/emprestimo/encerrar" component={EncerrarEmprestimo} exact />
 				<Route path="/emprestimo/encerrar/:id" component={EncerrarEmprestimoConsulta} exact />
 				<Route path="/emprestimo/encerrar/:id/confirmacao" component={EncerrarEmprestimoConfirmacao} />
-				
+
 				<Route path="/emprestimo/consultar" component={ConsultarEmprestimoMatricula} exact />
 				<Route path="/emprestimo/consultar/:id" component={ConsultarEmprestimo} exact />
 				<Route path="/emprestimo/consultar/:id/confirmacao" component={ConsultarEmprestimoCompleto} />
-				
+
 				<Route path="/emprestimo/renovar" component={RenovarEmprestimo} exact />
 				<Route path="/emprestimo/renovar/:id" component={RenovarEmprestimoConsulta} exact />
 				<Route path="/emprestimo/renovar/:id/confirmacao" component={RenovarEmprestimoConfirmacao} />
@@ -63,9 +62,8 @@ function Rotas() {
 				{/* ---------------- Livro ---------------- */}
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
 				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
-				<Route path="/livro/consultar" component={ConsultarLivro} />
-				<Route path="/livro/consultar/listagem/:id" component={ListandoLivros} exact />
-				<Route path="/livro/informacoes/consulta/:id" component={InformacoesDetalhadasConsulta} />
+				<Route path="/livro" component={ConsultarLivro} exact />
+				<Route path="/livro/informacoes/:id" component={InformacoesDetalhadasConsulta} />
 			</Switch>
 		</Router>
 	);

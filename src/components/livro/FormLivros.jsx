@@ -55,7 +55,7 @@ const FormLivros = () => {
         } else {
             dispatch(updateLivroServer(formLivro))
         }
-        history.push("/livro/consultar");
+        history.push("/livro");
     }
 
     const { register, handleSubmit, errors } = useForm({
