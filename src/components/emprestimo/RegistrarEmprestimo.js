@@ -45,7 +45,7 @@ const RegistrarEmprestimo = () => {
         let titulo = document.getElementById("titulo");
         let autor = document.getElementById("autor");
         if (typeof livros !== 'undefined') {
-            let livro = livros.filter(livro => { return livro.isbn === Number(formLivro.isbn) })[0];
+            let livro = livros.filter(livro => { return livro.isbn === formLivro.isbn })[0];
 
             if (livro) {
                 emprestimo.idLivro = livro.id;
@@ -92,11 +92,12 @@ const RegistrarEmprestimo = () => {
 
             dispatch(addEmprestimoServer({
                 id: "",
-                livroId: emprestimo.idLivro, 
-                usuarioId: emprestimo.idUsuario, 
+                livroId: emprestimo.idLivro,
+                usuarioId: emprestimo.idUsuario,
                 data_emprestimo: hoje,
-                data_devolucao: diaDevolucao, 
-                data_devolvido: null, 
+                data_devolucao: diaDevolucao,
+                qtd_renovacoes: 0,
+                data_devolvido: null,
                 data_excluido: null
             }));
             history.push("/emprestimo");
@@ -111,7 +112,7 @@ const RegistrarEmprestimo = () => {
             <CabecalhoVoltar titulo="Registrar Empréstimo" link='/emprestimo' />
 
             <section className="row justify-content-center align-items-start flex-grow-1">
-                <div className="row conteudo justify-content-center col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-0">
+                <div className="row conteudo justify-content-center col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 my-2 my-sm-4 p-0">
 
                     <div className="row mx-4 border border-secondary rounded justify-content-center w-100 mt-5 p-2">
                         <label className="h4">Usuário</label>

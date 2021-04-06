@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchUsuarios, selectUsuarioById } from '../geral/usuario/UsuariosSlice';
+import StatusBox from '../utils/StatusBox';
 import BotoesLivrosEmprestados from './BotoesLivrosEmprestados';
 import { fetchEmprestimos, selectAllEmprestimos } from './EmprestimosSlice';
 
@@ -52,19 +53,18 @@ const InfoConsultaEmprestimo = (props) => {
                 </tr>
             </table>
 
-    } else if (usuariosStatus === 'loading') {
-        TabelaUsuario = <div className="alert alert-info w-100" >Carregando usuario...</div>
+    } else if (emprestimosStatus === 'loading') {
+        TabelaUsuario = <StatusBox status="Carregando usuario..." />
 
-    } else if (usuariosStatus === 'failed') {
-        TabelaUsuario = <div className="alert alert-warning w-100">Erro: {usuariosError}</div>
+    } else if (emprestimosStatus === 'failed') {
+        TabelaUsuario = <StatusBox status={"Erro: " + usuariosError} estilo='warning' />
 
     } else {
-        TabelaUsuario = <div className="alert alert-warning w-100">Usuário não encontrado.</div>
+        TabelaUsuario = <StatusBox status="Usuário não encontrado." estilo='warning' />
     }
 
-
     let LivrosEmprestados = '';
-    if (emprestimosStatus === 'loaded' ) {
+    if (emprestimosStatus === 'loaded') {
 
         let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null)
             && (emprestimo.data_excluido === null) && (emprestimo.usuarioId === id));
@@ -72,15 +72,16 @@ const InfoConsultaEmprestimo = (props) => {
         LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} rota={props.rota} />
 
     } else if (emprestimosStatus === 'loading') {
-        LivrosEmprestados = <div className="alert alert-info w-100">Carregando emprestimos...</div>
+        LivrosEmprestados = <StatusBox status="Carregando emprestimos..." />
 
     } else if (emprestimosStatus === 'failed') {
-        LivrosEmprestados = <div className="alert alert-warning w-100">Erro: {emprestimosError}</div>
+        LivrosEmprestados = <StatusBox status={"Erro: " + emprestimosError} estilo='warning' />
+
     }
 
     return (
         <section className="row justify-content-center flex-grow-1">
-            <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 align-items-start conteudo">
+            <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 my-3 my-sm-4 align-items-start conteudo">
 
                 {TabelaUsuario}
 

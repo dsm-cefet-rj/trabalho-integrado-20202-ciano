@@ -31,7 +31,7 @@ const ConsultarMatricula = (props) => {
             history.push(props.rota + usuario.id);
         }
         else {
-            window.alert("Matrícula não existe!");
+            window.alert("Matrícula não existe no sistema!");
         }
     }
 

@@ -2,7 +2,7 @@
   "livros": [
     {
       "id": 1,
-      "isbn": 9788522106608,
+      "isbn": "9788522106608",
       "titulo": "Calculo Vol.1",
       "edicao": "3ª",
       "autores": [
@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "isbn": 9788540701694,
+      "isbn": "9788540701694",
       "titulo": "Álgebra Linear com Aplicações",
       "edicao": "10ª",
       "autores": [
@@ -26,7 +26,7 @@
     },
     {
       "id": 3,
-      "isbn": 9788576081739,
+      "isbn": "9788576081739",
       "titulo": "Use a Cabeça! Java",
       "edicao": "2ª",
       "autores": [
@@ -95,6 +95,7 @@
       "usuarioId": 2,
       "data_emprestimo": "10/03/2020",
       "data_devolucao": "18/02/2021",
+      "qtd_renovacoes": 0,
       "data_devolvido": null,
       "data_excluido": null
     },
@@ -104,6 +105,7 @@
       "usuarioId": 2,
       "data_emprestimo": "20/03/2020",
       "data_devolucao": "20/01/2021",
+      "qtd_renovacoes": 0,
       "data_devolvido": null,
       "data_excluido": null
     },
@@ -112,7 +114,8 @@
       "livroId": 3,
       "usuarioId": 1,
       "data_emprestimo": "25/03/2021",
-      "data_devolucao": "24/04/2021",
+      "data_devolucao": "07/08/2021",
+      "qtd_renovacoes": 0,
       "data_devolvido": null,
       "data_excluido": null
     },
@@ -122,7 +125,8 @@
       "usuarioId": 1,
       "data_emprestimo": "25/03/2021",
       "data_devolucao": "09/04/2021",
-      "data_devolvido": "03/04/2021",
+      "qtd_renovacoes": 0,
+      "data_devolvido": null,
       "data_excluido": null
     },
     {
@@ -131,7 +135,18 @@
       "usuarioId": 3,
       "data_emprestimo": "03/04/2021",
       "data_devolucao": "18/04/2021",
+      "qtd_renovacoes": 0,
       "data_devolvido": null,
+      "data_excluido": null
+    },
+    {
+      "id": 6,
+      "livroId": 2,
+      "usuarioId": 1,
+      "data_emprestimo": "06/04/2021",
+      "data_devolucao": "21/04/2021",
+      "qtd_renovacoes": 0,
+      "data_devolvido": "06/04/2021",
       "data_excluido": null
     }
   ]

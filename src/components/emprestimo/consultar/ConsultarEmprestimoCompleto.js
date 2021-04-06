@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import CabecalhoVoltar from '../../utils/CabecalhoVoltar';
 import Rodape from '../../utils/Rodape';
+import StatusBox from '../../utils/StatusBox';
 import { fetchEmprestimos, selectEmprestimoById } from '../EmprestimosSlice';
 import InfoCompletaEmprestimo from '../InfoCompletaEmprestimo';
 
@@ -26,45 +27,41 @@ const ConsultarEmprestimoCompleto = () => {
     function onClickVoltar(e) {
         e.preventDefault();
 
-        history.push('/emprestimo');
+        history.push('/emprestimo/consultar/' + emprestimo.usuarioId);
     }
 
     let informacoes;
-    if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo) {
+    if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo && emprestimo.data_devolvido === null && emprestimo.data_excluido === null) {
         informacoes =
-            <>
-                <InfoCompletaEmprestimo emprestimo={emprestimo} />
+            <div className="container-fluid ">
 
-                <button onClick={onClickVoltar} id="voltar" className="btn align-self-end text-white botao">Voltar</button>
-            </>
+                <CabecalhoVoltar titulo="Consultar Empréstimo" link={'/emprestimo/consultar/' + emprestimo.usuarioId} />
+
+                <section className="row justify-content-center align-items-start flex-grow-1">
+                    <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center my-3 my-sm-4 p-0">
+                        <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
+
+                            <InfoCompletaEmprestimo emprestimo={emprestimo} />
+
+                            <button onClick={onClickVoltar} id="voltar" className="btn align-self-end text-white botao">Voltar</button>
+
+                        </div>
+                    </div>
+                </section>
+
+                <Rodape />
+            </div>
+
     } else if (emprestimosStatus === 'loading') {
-        informacoes = <div className="alert alert-info w-100" >Carregando informações do Empréstimo...</div>
+        informacoes = <StatusBox status="Carregando informações do Empréstimo..." />
 
     } else if (emprestimosStatus === 'failed') {
-        informacoes = <div className="alert alert-warning w-100">Erro: {emprestimosError}</div>
+        informacoes = <StatusBox status={"Erro: " + emprestimosError} estilo='warning' />
 
     } else {
-        informacoes = <div className="alert alert-warning w-100">Empréstimo não encontrado.</div>
+        informacoes = <StatusBox status="Empréstimo não encontrado." estilo='warning' />
     }
 
-
-    return (
-        <div className="container-fluid ">
-
-            <CabecalhoVoltar titulo="Consultar Empréstimo" link='/emprestimo/consultar' />
-
-            <section className="row justify-content-center align-items-start flex-grow-1">
-                <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
-                    <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
-
-                        {informacoes}
-
-                    </div>
-                </div>
-            </section>
-
-            <Rodape />
-        </div>
-    );
+    return (informacoes);
 }
 export default ConsultarEmprestimoCompleto;
