@@ -9,14 +9,14 @@ const MenuInicialUsuario = () => {
     return (
         <div className="container-fluid">
             <TelaUsuario tituloUsuario="Bem vindo," />
-            
-            <InfsGeraisMenus 
-            img1={btnLivros} 
-            img2={btnRenovarEmprestimos} 
-            linkMenu1={"/"}
-            linkMenu2={"/emprestimo/consultar"}
+
+            <InfsGeraisMenus
+                img1={btnLivros}
+                img2={btnRenovarEmprestimos}
+                linkMenu1={"/livro"}
+                linkMenu2={"/emprestimo/renovar"}
             />
-            
+
             <Rodape />
         </div>
     );

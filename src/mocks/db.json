@@ -146,7 +146,7 @@
       "data_emprestimo": "06/04/2021",
       "data_devolucao": "21/04/2021",
       "qtd_renovacoes": 0,
-      "data_devolvido": "06/04/2021",
+      "data_devolvido": null,
       "data_excluido": null
     }
   ]

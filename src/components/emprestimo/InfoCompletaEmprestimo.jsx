@@ -72,7 +72,7 @@ const InfoCompletaEmprestimo = (props) => {
                 <TabelaFormatada titulo="Empréstimo" informacoes={[
                     { th: 'Data de Emprestimo:', td: emprestimo.data_emprestimo },
                     { th: 'Data de Devolução:', td: emprestimo.data_devolucao },
-                    { th: 'Quantidade de Renovação:', td: emprestimo.qtd_renovacoes },
+                    { th: 'Quantidade de Renovação(ões):', td: emprestimo.qtd_renovacoes },
                     { th: 'Data de Devolvido:', td: (emprestimo.data_devolvido ? emprestimo.data_devolvido : 'Não Devolvido' )}
                 ]} />
 
