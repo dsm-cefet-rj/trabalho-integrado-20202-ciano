@@ -35,22 +35,24 @@ const InfoConsultaEmprestimo = (props) => {
     if ((usuariosStatus === 'loaded') && usuario) {
         TabelaUsuario =
             <table className="table table-bordered bg-white">
-                <tr>
-                    <th scope="row">Nome:</th>
-                    <td>{usuario.nome}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Matrícula:</th>
-                    <td>{usuario.matricula}</td>
-                </tr>
-                <tr>
-                    <th scope="row">E-mail:</th>
-                    <td>{usuario.email}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Telefone:</th>
-                    <td>{usuario.telefone}</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row">Nome:</th>
+                        <td>{usuario.nome}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Matrícula:</th>
+                        <td>{usuario.matricula}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-mail:</th>
+                        <td>{usuario.email}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Telefone:</th>
+                        <td>{usuario.telefone}</td>
+                    </tr>
+                </tbody>
             </table>
 
     } else if (emprestimosStatus === 'loading') {
@@ -82,8 +84,10 @@ const InfoConsultaEmprestimo = (props) => {
     return (
         <section className="row justify-content-center flex-grow-1">
             <div className="row col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 p-5 my-3 my-sm-4 align-items-start conteudo">
-
-                {TabelaUsuario}
+                <div className="align-items-start mt-4 w-100">
+                    <h3 className="text-center">Usuário:</h3>
+                    {TabelaUsuario}
+                </div>
 
                 <div className="align-items-start mt-4 w-100">
                     <h3 className="text-center">Livros em posse:</h3>

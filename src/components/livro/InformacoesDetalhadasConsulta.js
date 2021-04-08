@@ -1,94 +1,69 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import CapaLivro from '../img/capa-livro-exemplo.svg';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import Rodape from '../utils/Rodape';
+import InfoCompletaLivro from './InfoCompletaLivro';
 import { fetchLivro, selectLivroById } from './LivroSlice';
-
+import StatusBox from '../utils/StatusBox';
 
 const InformacoesDetalhadasConsulta = () => {
-  let { id } = useParams();
-  id = parseInt(id)
+	let { id } = useParams();
+	id = parseInt(id);
+	const dispatch = useDispatch();
 
-  let atualizarLivros = useSelector(state => selectLivroById(state, id))
-  const status = useSelector(state => state.livros.status);
+	let livro = useSelector(state => selectLivroById(state, id));
+	const status = useSelector(state => state.livros.status);
+	const error = useSelector(state => state.livros.error);
 
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (status === 'not_loaded') {
-      dispatch(fetchLivro())
-    } else if (status === 'failed') {
-      setTimeout(() => dispatch(fetchLivro()), 5000);
-    }
-  }, [status, dispatch])
-
+	useEffect(() => {
+		if (status === 'not_loaded') {
+			dispatch(fetchLivro())
+		} else if (status === 'failed') {
+			setTimeout(() => dispatch(fetchLivro()), 5000);
+		}
+	}, [status, dispatch])
 
 
-  console.log(typeof (atualizarLivros) == "undefined")
-  if (typeof (atualizarLivros) == "undefined") {
 
-    atualizarLivros = {};
-  }
+	console.log(typeof (livro) == "undefined")
+	if (typeof (livro) == "undefined") {
 
-  return (
-    <div className="container-fluid ">
+		livro = {};
+	}
 
-      <CabecalhoVoltar titulo="Informações Detalhadas" link='/livro' />
+	let informacoes;
+	if ((status === 'loaded' || status === 'saved' || status === 'deleted') && livro && livro.data_excluido === null) {
 
-      <section className="row justify-content-center align-items-start flex-grow-1">
-        <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center p-0">
-          <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
+		informacoes =
+			<section className="row justify-content-center align-items-start flex-grow-1">
+				<div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center my-3 my-sm-4 p-0">
+					<div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
 
-            <img src={CapaLivro} alt="Livro fechado" className="ajuste3" />
+						<InfoCompletaLivro livro={livro} />
 
-            <div className="table-responsive ">
+					</div>
+				</div>
+			</section>
 
-              <table className="table table-striped mt-5">
+	} else if (status === 'loading') {
+		informacoes = <StatusBox status="Carregando informações do Livro..." />
 
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col" colspan="2" className="text-center">Livro</th>
-                  </tr>
-                </thead>
-                <tbody className="font-weight-bold w-100 text-left mt-5 ">
-                  <tr>
-                    <th scope="row" className="w-0">Título:</th>
-                    <td className="font-weight-bold w-100 text-left " >{atualizarLivros.titulo}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Edição:</th>
-                    <td className="font-weight-bold w-100 text-left">{atualizarLivros.edicao}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Autor:</th>
-                    <td className="font-weight-bold w-100 text-left">{atualizarLivros.autores}</td>
-                  </tr>
+	} else if (status === 'failed') {
+		informacoes = <StatusBox status={"Erro: " + error} estilo='warning' />
 
-                  <tr>
-                    <th scope="row">Cod. Localização:</th>
-                    <td className="font-weight-bold w-100 text-left">{atualizarLivros.cod_localizacao}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">ISBN:</th>
-                    <td className="font-weight-bold w-100 text-left">{atualizarLivros.isbn}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">QTD Total:</th>
-                    <td className="font-weight-bold w-100 text-left ">{atualizarLivros.qtd_total}</td>
-                  </tr>
-                </tbody>
-              </table>
+	} else {
+		informacoes = <StatusBox status="Livro não encontrado." estilo='warning' />
+	}
 
-            </div>
-          </div>
-        </div>
-      </section>
+	return (
+		<div className="container-fluid d-flex flex-column">
+			<CabecalhoVoltar titulo="Informações Detalhadas" link='/livro' />
 
-      <Rodape />
-    </div>
-  );
+			{informacoes}
+
+			<Rodape />
+		</div>
+	);
 }
 export default InformacoesDetalhadasConsulta;
