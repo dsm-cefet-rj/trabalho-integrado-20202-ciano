@@ -449,7 +449,10 @@ a:hover {
 .ajuste1 {
     border: 2px solid gray;
     border-radius: 5px;
-    height: 4.9rem;
+}
+
+.border-3 {
+    border-width:2px !important;
 }
 
 .size-book-10 {

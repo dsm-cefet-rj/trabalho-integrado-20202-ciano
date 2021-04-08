@@ -24,9 +24,6 @@ const InformacoesDetalhadasConsulta = () => {
 		}
 	}, [status, dispatch])
 
-
-
-	console.log(typeof (livro) == "undefined")
 	if (typeof (livro) == "undefined") {
 
 		livro = {};

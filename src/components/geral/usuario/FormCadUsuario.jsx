@@ -1,94 +1,102 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import usuarioSchema from './UsuarioSchema';
 import { addUsuarioServer } from './UsuariosSlice';
+import { formatData } from '../../../utils';
+
 const FormCadUsuario = () => {
-    let history =useHistory();
-    
+    const history = useHistory();
     const dispatch = useDispatch();
 
-    const [enderecoUsuarios, setEnderecoUsuarios] = useState({
-        logradouro: "",
-        complemento: "",
-        cidade: "",
-        bairro: "",
-        cep: "",
+    const [regUsuario] = useState(usuarioSchema.cast({}));
+
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(usuarioSchema),
     });
 
-    const [regUsuario, setRegUsuario] = useState({
-        id: "",
-        matricula: "",
-        senha: "",
-        categoria: "",
-        nome: "",
-        email: "",
-        data_nasc: "",
-        telefone: "",
-        endereco: {},
-        data_excluido: null
-    });
+    const onSubmit = (usuario) => {
+        console.log("oi");
+        usuario.data_nasc = formatData(usuario.data_nasc);
 
-    const onChangeUsuarios = (e) => {
-        setRegUsuario({ ...regUsuario, [e.target.name]: e.target.value })
-    };
+        console.log(usuario);
 
-    const onChangeUsuarios2 = (e) => {
-        setEnderecoUsuarios({ ...enderecoUsuarios, [e.target.name]: e.target.value })
-        setRegUsuario({ ...regUsuario, [e.target.name]: e.target.value })
-    };
-
-    const onSubmitUsuarios = (e) => {
-        e.preventDefault();
-        regUsuario.endereco = enderecoUsuarios
-        console.log(enderecoUsuarios)
-        for (let i = 0; i < 3; i++) {
-            if (document.getElementById(i.toString()).checked) {
-                regUsuario.categoria = document.getElementById(i.toString()).value;
-                break
-            }
-        }
-        dispatch(addUsuarioServer(regUsuario));
-        history.push('/menu/bibliotecario')
-
+        dispatch(addUsuarioServer(usuario));
+        history.push('/menu/bibliotecario');
     }
+
     return (
-        <div>
-            <section className="perfil_ajuste row justify-content-center corpo_login p-3">
-                <form onSubmit={onSubmitUsuarios} className="row flex-column perfil_formulario col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4 form w-25" action="#" method="POST">
-                    <input onChange={onChangeUsuarios} className=" box_perfil input_login w-100" type="text" name="nome" placeholder="Nome Completo" autofocus />
+        <section className="row justify-content-center flex-grow-1">
+            <form onSubmit={handleSubmit(onSubmit)} className="row flex-column perfil_formulario2 col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4 w-25 p-4 my-2 my-sm-4">
 
-                    <div className="ajuste1">
-                        <span className="font-weight-bold dark ml-0 mr-1 h5"> Categoria:</span>
-                        <input id="0" value="aluno" className=" mt-4 h-25" type="radio" name="categoria" />
-                        <span className="h6 text-dark ml-1 font-weight-bold">Aluno</span>
-                        <input id="1" value="professor" name="categoria" className="mr-1 mb-1 ml-1 h-25 " type="radio" />
-                        <span className="ml-1 text-dark font-weight-bold h6">Professor</span>
-                        <input id="2" value="bibliotecario" name="categoria" className="mx-1 my-0 h-25" type="radio" />
-                        <span className="ml-1 text-dark  font-weight-bold h6">bibliotecário</span>
+                <label className="h5 font-weight-bold mt-3" for="nome">Nome Completo:</label>
+                <input defaultValue={regUsuario.nome} className="input_login w-100" type="text" id="nome" name="nome" autofocus ref={register} />
+                <p>{errors.nome?.message}</p>
 
+                <div className="border border border-secondary border-3 rounded w-100 mt-3 p-3">
+                    <legend className="font-weight-bold h5">Categoria:</legend>
 
-                    </div>
+                    <input id="0" value="aluno" name="categoria" className="h-25 ml-3" type="radio" ref={register} />
+                    <label for="0" defaultValue={regUsuario.categoria} className="text-dark font-weight-bold h6 ">Aluno</label>
 
-                    <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="text" name="matricula" placeholder="Matricula" />
-                    <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="email" name="email" placeholder="E-mail" />
-                    <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="password" name="senha" placeholder="Senha" />
-                    <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="text" name="data_nasc" placeholder="Data Nascimento: xx/xx/xxxx" />
-                    <input onChange={onChangeUsuarios} className="input_login w-100 box_perfil" type="text" name="telefone" placeholder="Telefone: (xx)xxxxx-xxxx" />
+                    <input id="1" value="professor" name="categoria" className="h-25 ml-3" type="radio" ref={register} />
+                    <label for="1" defaultValue={regUsuario.categoria} className="text-dark font-weight-bold h6">Professor</label>
 
-                    <div className="borda_form mb-1">
-                        <legend className="ml-1 mb-0 mt-0 h5">Endereço:</legend>
-                        <input onChange={onChangeUsuarios2} className="input_login box_perfil w-100" type="text" name="logradouro" placeholder="Logradouro" />
-                        <input onChange={onChangeUsuarios2} className="input_login box_perfil w-100" type="text" name="complemento" placeholder="Complemento" />
-                        <input onChange={onChangeUsuarios2} className="input_login box_perfil w-100" type="text" name="cidade" placeholder="Cidade" />
-                        <input onChange={onChangeUsuarios2} className="input_login box_perfil w-100" type="text" name="bairro" placeholder="Bairro" />
-                        <input onChange={onChangeUsuarios2} className="input_login box_perfil w-100" type="text" name="cep" placeholder="CEP" />
-                    </div>
+                    <input id="2" value="bibliotecario" name="categoria" className="h-25 ml-3" type="radio" ref={register} />
+                    <label for="2" defaultValue={regUsuario.categoria} className="text-dark font-weight-bold h6">Bibliotecário </label>
+                </div>
+                <p>{errors.categoria?.message}</p>
 
-                    <input className=" mt-1 align-self-center btn text-white " id="atualizar" type="submit" value="Cadastrar" />
+                <label className="h5 font-weight-bold mt-3" for="matricula">Matrícula:</label>
+                <input defaultValue={regUsuario.matricula} className="input_login w-100" type="text" id="matricula" name="matricula" ref={register} />
+                <p>{errors.matricula?.message}</p>
 
-                </form>
-            </section>
-        </div>
+                <label className="h5 font-weight-bold mt-3" for="email">E-mail:</label>
+                <input defaultValue={regUsuario.email} className="input_login w-100" type="email" id="email" name="email" ref={register} />
+                <p>{errors.email?.message}</p>
+
+                <label className="h5 font-weight-bold mt-3" for="senha">Senha:</label>
+                <input defaultValue={regUsuario.senha} className="input_login w-100" type="password" id="senha" name="senha" ref={register} />
+                <p>{errors.senha?.message}</p>
+
+                <label className="h5 font-weight-bold mt-3" for="data_nasc">Data de Nascimento:</label>
+                <input defaultValue={regUsuario.data_nasc} className="input_login w-100" type="date" id="data_nasc" name="data_nasc" ref={register} />
+                <p>{errors.data_nasc?.message}</p>
+
+                <label className="h5 font-weight-bold mt-3" for="telefone">Telefone:</label>
+                <input defaultValue={regUsuario.telefone} className="input_login w-100" type="text" id="telefone" name="telefone" ref={register} />
+                <p>{errors.telefone?.message}</p>
+
+                <div className="borda_form mb-1 p-3 pb-5 mt-3">
+                    <legend className="h4 font-weight-bold">Endereço:</legend>
+
+                    <label className="h5 font-weight-bold mt-3" for="logradouro">Logradouro:</label>
+                    <input defaultValue={regUsuario.logradouro} className="input_login w-100" type="text" id="logradouro" name="logradouro" ref={register} />
+                    <p>{errors.logradouro?.message}</p>
+
+                    <label className="h5 font-weight-bold mt-3" for="complemento">Complemento:</label>
+                    <input defaultValue={regUsuario.complemento} className="input_login w-100" type="text" id="complemento" name="complemento" ref={register} />
+                    <p>{errors.complemento?.message}</p>
+
+                    <label className="h5 font-weight-bold mt-3" for="cidade">Cidade:</label>
+                    <input defaultValue={regUsuario.cidade} className="input_login w-100" type="text" id="cidade" name="cidade" ref={register} />
+                    <p>{errors.cidade?.message}</p>
+
+                    <label className="h5 font-weight-bold mt-3" for="bairro">Bairro:</label>
+                    <input defaultValue={regUsuario.bairro} className="input_login w-100" type="text" id="bairro" name="bairro" ref={register} />
+                    <p>{errors.bairro?.message}</p>
+
+                    <label className="h5 font-weight-bold mt-3" for="cep">CEP:</label>
+                    <input defaultValue={regUsuario.cep} className="input_login w-100" type="text" id="cep" name="cep" ref={register} />
+                    <p>{errors.cep?.message}</p>
+                </div>
+
+                <input className="mt-3 align-self-center btn text-white" id="enviar" type="submit" value="Cadastrar" />
+
+            </form>
+        </section>
     );
 }
 

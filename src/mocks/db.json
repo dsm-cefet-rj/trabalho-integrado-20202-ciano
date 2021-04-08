@@ -128,26 +128,6 @@
       "qtd_renovacoes": 0,
       "data_devolvido": null,
       "data_excluido": null
-    },
-    {
-      "id": 5,
-      "livroId": 2,
-      "usuarioId": 3,
-      "data_emprestimo": "03/04/2021",
-      "data_devolucao": "18/04/2021",
-      "qtd_renovacoes": 0,
-      "data_devolvido": null,
-      "data_excluido": null
-    },
-    {
-      "id": 6,
-      "livroId": 2,
-      "usuarioId": 1,
-      "data_emprestimo": "06/04/2021",
-      "data_devolucao": "21/04/2021",
-      "qtd_renovacoes": 0,
-      "data_devolvido": null,
-      "data_excluido": null
     }
   ]
 }

@@ -2,14 +2,13 @@ import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/too
 import { baseUrl } from '../../../baseUrl';
 import { httpDelete, httpGet, httpPost, httpPut } from '../../../utils';
 
-const usuariosAdapter = createEntityAdapter(
-
-);
+const usuariosAdapter = createEntityAdapter();
 
 const initialState = usuariosAdapter.getInitialState({
     status: 'not_loaded',
     error: null
 });
+
 export const fetchUsuarios = createAsyncThunk('usuarios/fetchUsuarios',
     async () => {
         return await httpGet(`${baseUrl}/usuarios`);
@@ -19,16 +18,14 @@ export const deleteUsuarioServer = createAsyncThunk('usuarios/deleteUsuarioServe
     await httpDelete(`${baseUrl}/usuarios/${idUsuario}`);
     return idUsuario;
 });
+
 export const addUsuarioServer = createAsyncThunk('usuarios/addUsuarioServer', async (usuario) => {
     return await httpPost(`${baseUrl}/usuarios`, usuario);
 });
+
 export const updateUsuarioServer = createAsyncThunk('usuarios/updateProjetoServer', async (usuario) => {
     return await httpPut(`${baseUrl}/usuarios/${usuario.id}`, usuario);
 });
-export const fetchUsuariosEmprestimos = createAsyncThunk('usuarios/fetchUsuarios',
-    async () => {
-        return await httpGet(`${baseUrl}/usuarios?_embed=emprestimos`);
-    });
 
 export const UsuariosSlice = createSlice({
     name: 'usuarios',
@@ -37,10 +34,6 @@ export const UsuariosSlice = createSlice({
         [fetchUsuarios.fulfilled]: (state, action) => { state.status = 'loaded'; usuariosAdapter.setAll(state, action.payload); },
         [fetchUsuarios.pending]: (state, action) => { state.status = 'loading' },
         [fetchUsuarios.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
-
-        [fetchUsuariosEmprestimos.fulfilled]: (state, action) => { state.status = 'loaded'; usuariosAdapter.setAll(state, action.payload); },
-        [fetchUsuariosEmprestimos.pending]: (state, action) => { state.status = 'loading'; },
-        [fetchUsuariosEmprestimos.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
 
         [deleteUsuarioServer.pending]: (state, action) => { state.status = 'loading' },
         [deleteUsuarioServer.fulfilled]: (state, action) => { state.status = 'deleted'; usuariosAdapter.removeOne(state, action.payload); },
@@ -57,5 +50,6 @@ export const {
     selectAll: selectAllUsuarios,
     selectById: selectUsuarioById,
     selectIds: selectUsuariosIds
-} = usuariosAdapter.getSelectors(state => state.usuarios)
+} = usuariosAdapter.getSelectors(state => state.usuarios);
+
 export default UsuariosSlice.reducer;
