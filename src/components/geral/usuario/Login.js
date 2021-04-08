@@ -4,8 +4,8 @@ import FormLogin from './FormLogin';
 const Login = () => {
     return (
         <div className="container-fluid">
-         <CabecalhoLogin />
-         <FormLogin />           
+            <CabecalhoLogin />
+            <FormLogin />
         </div>
     );
 }

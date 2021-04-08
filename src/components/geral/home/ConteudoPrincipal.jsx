@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ConteudoPrincipal = () => {
     return (
         <section className="row justify-content-center flex-grow-1">
-            <div className="row col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 p-5 conteudo">
+            <div className="row col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 p-5 my-3 my-md-4 conteudo">
                 <p className="font-weight-bold">
                     <span className="h3 font-weight-bold">Bem vindo ao nosso sistema!</span><br /><br />
             Aqui você vai poder aproveitar a praticidade de verificar o acervo da biblioteca, renovar o emprestimo do seu livro,

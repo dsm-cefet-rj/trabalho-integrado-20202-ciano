@@ -5,7 +5,8 @@ import FormLivro from './FormLivros';
 const AtualizarLivro = () => {
     return (
         <div className="container-fluid d-flex flex-column">
-            <CabecalhoVoltar titulo="Atualizar Livro" link='/menu/bibliotecario'/>
+            <CabecalhoVoltar titulo="Atualizar Livro" link='/livro'/>
+            
             <FormLivro btnNome="Atualização" idNome="atualizacao" />
         </div>
     );

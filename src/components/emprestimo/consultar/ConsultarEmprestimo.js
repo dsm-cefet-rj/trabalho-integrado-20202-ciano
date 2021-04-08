@@ -11,7 +11,7 @@ const ConsultarEmprestimo = () => {
             <InfoConsultaEmprestimo rota='/emprestimo/consultar/' />
 
             <Rodape />
-        </div >
+        </div>
     );
 }
 
