@@ -3,11 +3,20 @@ import { ptForm } from 'yup-locale-pt';
 
 setLocale(ptForm);
 
+/* 
+ISBN:
+    - String;
+    - Existe dois padrões de ISBN (ISBN-10 e ISBN-13);
+    - Possui digito verificador, com logica diferente dependendo da versão usada;
+    - Formato exemplo ISBN-10: 0-306-40615-2;
+    - Formato exemplo ISBN-13: 978-0-306-40615-7;
+    - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
+    - Não pode ser Nulo;
+*/
+
 const isbnValidation = (value) => {
     let isbn = value.toUpperCase();
     let soma = 0;
-
-    console.log(isbn);
 
     if (isbn.length === 10) {
         for (let i = 0; i < isbn.length; i++) {
@@ -57,13 +66,13 @@ export const testIsbn = {
 }
 
 const livroSchema = object().shape({
-
+    id: number(),
     titulo: string().required(),
     edicao: string().required(),
-    autor: string().required(),
+    autores: string().required(),
     isbn: string().trim().min(10).max(13).test(testIsbn).required(),
-    quantidade: number().positive().integer().required(),
-    codLocalizacao: string().required(),
+    qtd_total: number().typeError('O campo deve contar apenas número.').min(1).positive().integer().required(),
+    cod_localizacao: string().required(),
 });
 
 export default livroSchema;

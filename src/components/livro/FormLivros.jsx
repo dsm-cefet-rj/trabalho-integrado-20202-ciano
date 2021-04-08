@@ -1,11 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import livroSchema from './LivroSchema';
 import { addLivroServer, fetchLivro, selectLivroById, updateLivroServer } from './LivroSlice';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import livroSchema from './LivroSchema';
 
 const FormLivros = () => {
     let { id } = useParams();
@@ -24,8 +24,8 @@ const FormLivros = () => {
         }
     }, [status, dispatch])
 
-    const [formLivro, setFormLivro] = useState(
-        id ? livroFound ?? {} : {}
+    const [formLivro] = useState(
+        id ? livroFound ?? livroFound : livroSchema.cast({})
     )
 
     const [actionType,] = useState(
@@ -36,89 +36,58 @@ const FormLivros = () => {
             : 'addLivro'
     )
 
-    const onChange = (e) => {
-
-        setFormLivro({
-            ...formLivro,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        formLivro.isbn = parseInt(formLivro.isbn)
-        formLivro.qtd_total = parseInt(formLivro.qtd_total)
-
-        if (actionType === "addLivro") {
-            dispatch(addLivroServer(formLivro));
-
-        } else {
-            dispatch(updateLivroServer(formLivro))
-        }
-        history.push("/livro");
-    }
-
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(livroSchema),
     });
 
+    const onSubmit = (livro) => {
+        livro.autores = ((livro.autores).split(',')).map(autor => autor.trim());
+        livro.data_excluido = null;
+
+        if (actionType === 'addLivro') {
+            dispatch(addLivroServer(livro));
+        } else {
+            livro.id = livroFound.id;
+            dispatch(updateLivroServer(livro))
+        }
+        history.push('/livro');
+    }
+
     return (
-        <section className="row perfil_ajuste justify-content-center corpo_login my-4" >
+        <section className="row justify-content-center flex-grow-1">
 
-            <form onSubmit={handleSubmit(onSubmit)} className="row flex-column perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 form w-25">
-                <div className="my-2 text-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="row flex-column perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-5 my-2 my-sm-4 ">
 
-                </div>
-                {/* 
-                    Título do Livro:                              
-                    - String;
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.titulo} className="box_perfil input_login mt-5 w-100 mb-5 " type="text" id="titulo" name="titulo" placeholder="Título" ref={register} />
-                    &nbsp;<p>{errors.titulo?.message}</p>
-                {/* 
-                    Gênero:
-                    - String;
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.edicao} id="edicao" className="box_perfil mb-5  input_login w-100" type="text" name="edicao" placeholder="Edição" ref={register} />
-                    &nbsp;<p>{errors.edicao?.message}</p>
-                {/* 
-                    Autor do Livro:
-                    - String;
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.autores} id="autor" className="box_perfil input_login w-100 mb-5 " type="text" name="autores" placeholder="Autor" ref={register} />
-                    &nbsp;<p>{errors.autor?.message}</p>
-                {/* 
-                    ISBN:
-                    - String;
-                    - Existe dois padrões de ISBN (ISBN-10 e ISBN-13);
-                    - Possui digito verificador, com logica diferente dependendo da versão usada;
-                    - Formato exemplo ISBN-10: 0-306-40615-2;
-                    - Formato exemplo ISBN-13: 978-0-306-40615-7;
-                    - Possui 10 ou 13 digitos (desconsiderando a inclusão de traços ou espaços);
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.isbn} id="isbn" className="input_login mb-5  box_perfil w-100" type="number" name="isbn" placeholder="ISBN" ref={register} />
-                    &nbsp;<p>{errors.isbn?.message}</p>
-                {/* 
-                    Quantidade de Livros:
-                    - Inteiro
-                    - Minimo -> 1
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.qtd_total} id="quantidade" className="input_login w-100 mb-5 box_perfil" type="number" name="qtd_total" placeholder="Quantidade" ref={register} />
-                    &nbsp;<p>{errors.quantidade?.message}</p>
-                {/* 
-                    Codigo de Localização:
-                    - String
-                    - Não pode ser Nulo;
-                */}
-                <input onChange={onChange} value={formLivro.cod_localizacao} id="codLocalizacao" className="input_login w-100 mb-5 box_perfil" type="text" name="cod_localizacao" placeholder="Cód. localização" ref={register} />
-                    &nbsp;<p>{errors.codLocalizacao?.message}</p>
+                <label className="h5 font-weight-bold" for="titulo">Título:</label>
+                <input defaultValue={formLivro.titulo} id="titulo" name="titulo" className="input_login w-100" type="text" ref={register} />
+                <p>{errors.titulo?.message}</p>
 
-                <input className="my-2 align-self-center btn" id={(actionType === "addLivro") ? 'cadastrar' : 'atualizar'} type="submit" value={(actionType === "addLivro") ? 'Cadastrar' : 'Atualizar'} />
+
+                <label className="h5 font-weight-bold" for="edicao">Edição:</label>
+                <input defaultValue={formLivro.edicao} id="edicao" name="edicao" className="input_login w-100" type="text" ref={register} />
+                <p>{errors.edicao?.message}</p>
+
+
+                <label className="h5 font-weight-bold" title="Separe os autores por vírgulas. Ex: Maria Silva, Carlos Brandão" for="autores">Autores:</label>
+                <input defaultValue={formLivro.autores} id="autores" name="autores" className="input_login w-100" type="text" ref={register} />
+                <p>{errors.autores?.message}</p>
+
+
+                <abbr title="International Standard Book Number"><label className="h5 font-weight-bold" title="Digite apenas os dígitos que compõe o ISBN, sem incluir espaços ou traços." for="isbn">ISBN:</label>
+                    <input defaultValue={formLivro.isbn} id="isbn" name="isbn" className="input_login w-100" type="number" ref={register} /></abbr>
+                <p>{errors.isbn?.message}</p>
+
+
+                <label className="h5 font-weight-bold" for="qtd_total">Quantidade de Livros:</label>
+                <input defaultValue={formLivro.qtd_total} id="qtd_total" name="qtd_total" className="input_login w-100 box_perfil" type="number" ref={register} />
+                <p>{errors.qtd_total?.message}</p>
+
+
+                <label className="h5 font-weight-bold" for="cod_localizacao">Código de Localização:</label>
+                <input defaultValue={formLivro.cod_localizacao} id="cod_localizacao" name="cod_localizacao" className="input_login w-100 box_perfil" type="text" ref={register} />
+                <p>{errors.cod_localizacao?.message}</p>
+
+                <input className="btn align-self-center" id='enviar' type="submit" value={(actionType === "addLivro") ? 'Cadastrar' : 'Atualizar'} />
             </form>
         </section>
     );

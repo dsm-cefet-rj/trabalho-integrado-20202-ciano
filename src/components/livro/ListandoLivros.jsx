@@ -34,26 +34,40 @@ function ListandoLivros(props) {
 
     let TabelaLivro = '';
     if ((status === 'loaded' || status === 'saved' || status === 'deleted') && listaLivros[0]) {
-        TabelaLivro = livroFiltrado.map((livro, index) =>
-            <tr key={index} className="py-3">
-                <td className="justify-content-center align-middle">
-                    <Link to={`/livro/informacoes/${livro.id}`}>
-                        <img src={CapaLivro} className="ajuste3" alt="imagem" />
-                    </Link>
-                </td>
-                <td className="align-middle">
-                    <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 text-center">{livro.titulo}</p></Link>
-                    <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 mt-3 text-center">{livro.autores}</p></Link>
-                </td>
-                <td className="pr-4 align-middle">
+        TabelaLivro =
+            <div class="table-responsive">
+                <table className="table table-striped table-hover m-0">
+                    <tbody>
+                        {livroFiltrado.map((livro, index) => {
+                            let aux = 0;
 
-                    <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
-                        className="btn w-100 mb-1 btn-primary">Atualizar</button>
-                    <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
-                        className="btn w-100 mt-1 btn-danger">Deletar</button>
+                            return <tr key={index} className="py-3">
+                                <td className="justify-content-center align-middle">
+                                    <Link to={`/livro/informacoes/${livro.id}`}>
+                                        <img src={CapaLivro} className="ajuste3" alt="imagem" />
+                                    </Link>
+                                </td>
+                                <td className="align-middle">
+                                    <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 text-center">{livro.titulo}</p></Link>
+                                    <Link to={`/livro/informacoes/${livro.id}`}>
+                                        <p className="font-weight-bold h4 mt-3 text-center">
+                                            { livro.autores.map(autor => aux++ === 0 ? autor : ", " + autor) }
+                                        </p>
+                                    </Link>
+                                </td>
+                                <td className="pr-4 align-middle">
 
-                </td>
-            </tr>)
+                                    <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
+                                        className="btn w-100 mb-1 btn-primary">Atualizar</button>
+                                    <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
+                                        className="btn w-100 mt-1 btn-danger">Deletar</button>
+
+                                </td>
+                            </tr>
+                        })}
+                    </tbody>
+                </table>
+            </div>
 
     } else if (status === 'loading') {
         TabelaLivro = <div className="alert alert-info w-100" >Carregando livros...</div>
@@ -65,15 +79,7 @@ function ListandoLivros(props) {
         TabelaLivro = <div className="alert alert-warning w-100">Não existe livros cadastrados.</div>
     }
 
-    return (
-        <div class="table-responsive">
-            <table className="table table-striped table-hover m-0">
-                <tbody>
-                    {TabelaLivro}
-                </tbody>
-            </table>
-        </div>
-    );
+    return (TabelaLivro);
 
 }
 export default ListandoLivros;

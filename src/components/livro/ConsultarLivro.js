@@ -19,16 +19,16 @@ const ConsultarLivro = () => {
             
             <CabecalhoVoltar titulo="Consultar Livro" link='/menu/bibliotecario' />
 
-            <section className="row justify-content-center align-content-start flex-grow-1">
-                <form className="d-flex flex-column my-4 perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4">
+            <section className="row my-3 my-sm-4 justify-content-center align-content-start flex-grow-1">
+                <form className="d-flex py-3 flex-column perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4">
                     <input onChange={onChangePesquisar} className="input_login w-100 h-100 box_perfil" type="text" name="tituloConsultar" placeholder="Consultar Título" />
 
-                    <div className="row justify-content-center mt-1 mb-2">
-                        <Link to={`/livro/cadastrar`}> <input id="cadastro" className="btn btn-primary h-100 h2 text-center w-100 " type="submit" value="+ Cadastrar novo livro" /></Link>
+                    <div className="row justify-content-center">
+                        <Link to={`/livro/cadastrar`}> <input id="cadastro" className="btn btn-primary h-100 h2 text-center w-100 " type="submit" value="+ Cadastrar Novo Livro" /></Link>
                     </div>
                 </form>
 
-                <div className="d-flex flex-column p-2 conteudo col-12 col-sm-9">
+                <div className="d-flex flex-column p-2 mt-3 mt-sm-4 conteudo col-12 col-sm-9">
                     <ListandoLivros titulo={consultar.tituloConsultar} />
                 </div>
             </section>
