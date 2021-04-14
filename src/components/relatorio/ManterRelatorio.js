@@ -5,8 +5,8 @@ import Rodape from '../utils/Rodape';
 
 const ManterRelatorio = () => {
     let botoes = [
-        { link: '/relatorio/livros/emprestados', texto: 'Relatório de Empréstimos' },
-        { link: '/relatorio/livros/devolucoes', texto: 'Relatório de Devoluções' }
+        { link: '/relatorio/emprestimos', texto: 'Relatório de Empréstimos' },
+        { link: '/relatorio/devolucoes', texto: 'Relatório de Devoluções' }
     ]
 
     return (

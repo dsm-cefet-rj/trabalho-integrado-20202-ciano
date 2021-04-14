@@ -20,9 +20,9 @@ import AtualizarLivro from '../components/livro/AtualizarLivro';
 import CadastrarLivro from '../components/livro/CadastrarLivro';
 import ConsultarLivro from '../components/livro/ConsultarLivro';
 import InformacoesDetalhadasConsulta from '../components/livro/InformacoesDetalhadasConsulta';
-import InformacoesDetalhadasNaoDevolvido from '../components/relatorio/InformacoesDetalhadasNaoDevolvido';
+import InformacoesDetalhadasEmprestimo from '../components/relatorio/InformacoesDetalhadasEmprestimo';
 import ManterRelatorio from '../components/relatorio/ManterRelatorio';
-import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesLivros';
+import RelatorioDevolucoesLivros from '../components/relatorio/RelatorioDevolucoesEmprestimo';
 import RelatorioLivrosEmprestado from '../components/relatorio/RelatorioLivrosEmprestado';
 
 function Rotas() {
@@ -55,14 +55,14 @@ function Rotas() {
 
 				{/* ---------------- Relatório ---------------- */}
 				<Route path="/relatorio" component={ManterRelatorio} exact />
-				<Route path="/relatorio/livros/devolucoes" component={RelatorioDevolucoesLivros} exact />
-				<Route path="/relatorio/livros/devolucoes/informacoes" component={InformacoesDetalhadasNaoDevolvido} />
-				<Route path="/relatorio/livros/emprestados" component={RelatorioLivrosEmprestado} />
+				<Route path="/relatorio/devolucoes" component={RelatorioDevolucoesLivros} exact />
+				<Route path="/relatorio/emprestimos" component={RelatorioLivrosEmprestado} />
+				<Route path="/relatorio/emprestimo/:id" component={InformacoesDetalhadasEmprestimo} />
 
 				{/* ---------------- Livro ---------------- */}
+				<Route path="/livro" component={ConsultarLivro} exact />
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
 				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
-				<Route path="/livro" component={ConsultarLivro} exact />
 				<Route path="/livro/informacoes/:id" component={InformacoesDetalhadasConsulta} />
 			</Switch>
 		</Router>
