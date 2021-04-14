@@ -10,7 +10,7 @@ function ListandoLivros(props) {
     const status = useSelector(state => state.livros.status);
     const error = useSelector(state => state.livros.error);
     const listaLivros = (useSelector(selectAllLivro)).filter(livro => livro.data_excluido === null);
-    let livroFiltrado = listaLivros.filter(livro => props.titulo.toLowerCase() === livro.titulo.toLowerCase());
+    let livroFiltrado = listaLivros.filter(livro => livro.titulo.toLowerCase().indexOf(props.titulo.toLowerCase()) !== -1);
 
     if (typeof livroFiltrado[0] === 'undefined') {
         livroFiltrado = listaLivros;
@@ -35,7 +35,7 @@ function ListandoLivros(props) {
     let TabelaLivro = '';
     if ((status === 'loaded' || status === 'saved' || status === 'deleted') && listaLivros[0]) {
         TabelaLivro =
-            <div class="table-responsive">
+            <div className="table-responsive">
                 <table className="table table-striped table-hover m-0">
                     <tbody>
                         {livroFiltrado.map((livro, index) => {
