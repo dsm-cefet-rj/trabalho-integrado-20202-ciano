@@ -3,32 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatData } from '../../utils';
 import { fetchEmprestimos, selectAllEmprestimos } from '../emprestimo/EmprestimosSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import ComparaData from '../utils/ComparaData';
 import Rodape from '../utils/Rodape';
 import StatusBox from '../utils/StatusBox';
 import TabelaRelatorio from './TabelaRelatorio';
-import ComparaData from '../utils/ComparaData';
 
 const RelatorioDevolucoesEmprestimo = () => {
     const dispatch = useDispatch();
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
-    const emprestimos = (useSelector(selectAllEmprestimos)).filter((emprestimo) => emprestimo.data_devolvido === null && emprestimo.data_excluido === null);
+    const emprestimos = (useSelector(selectAllEmprestimos)).filter((emprestimo) => emprestimo.data_excluido === null);
 
 
     const [filtro, setFiltro] = useState({
         titulo: "",
         data_inicio: "",
         data_fim: "",
-        devolvido: true
+        devolvido: false
     })
 
     const onChangeFiltro = (e) => {
-        if (e.target.name === 'devolvido') 
+        if (e.target.name === 'devolvido') {
+            let resp = e.target.value === "true";
             setFiltro({
-                ...filtro, [e.target.name]: Boolean(e.target.value)
+                ...filtro, [e.target.name]: resp
             })
-        
+        }
         else
             setFiltro({
                 ...filtro, [e.target.name]: e.target.value
@@ -42,9 +43,8 @@ const RelatorioDevolucoesEmprestimo = () => {
 
     let informacoes;
     if ((emprestimosStatus === 'loaded') && emprestimos) {
-        console.log(filtro);
         let emprestimosFiltrados = emprestimos.filter((emprestimo) => {
-            return filtro.devolvido ? emprestimo.data_devolvido !== null: emprestimo.data_devolvido === null;
+            return filtro.devolvido ? emprestimo.data_devolvido !== null : emprestimo.data_devolvido === null;
         });
 
         // Filtra o título.
@@ -70,10 +70,10 @@ const RelatorioDevolucoesEmprestimo = () => {
                         <h2 className="h3 mb-0 w-100 text-center font-weight-bold">Filtro:</h2>
 
                         <div className="mx-auto d-block justify-content-center align-content-center mt-4 p-1">
-                            <input className="align-self-center" onChange={onChangeFiltro} type="radio" value={true} name="devolvido" id="devolvido" checked />
-                            <label className="align-self-center" htmlFor="devolvido">Devolvidos</label>
-                            <input className="align-self-center ml-2" onChange={onChangeFiltro} type="radio" value={false} name="devolvido" id="n_devolvido" />
+                            <input className="align-self-center" onClick={onChangeFiltro} type="radio" value="false" name="devolvido" id="n_devolvido" defaultChecked />
                             <label className="align-self-center" htmlFor="n_devolvido">Não Devolvidos</label>
+                            <input className="align-self-center ml-2" onClick={onChangeFiltro} type="radio" value="true" name="devolvido" id="devolvido" />
+                            <label className="align-self-center" htmlFor="devolvido">Devolvidos</label>
                         </div>
 
                         <input onChange={onChangeFiltro} className="mt-3 input_login col-10" type="text" name="titulo" placeholder="Título do Livro" />
