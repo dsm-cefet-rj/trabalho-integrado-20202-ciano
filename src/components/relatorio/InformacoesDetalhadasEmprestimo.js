@@ -31,7 +31,7 @@ const InformacoesDetalhadasEmprestimo = () => {
     }
 
     let informacoes;
-    if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo && emprestimo.data_devolvido === null && emprestimo.data_excluido === null) {
+    if ((emprestimosStatus === 'loaded' || emprestimosStatus === 'saved' || emprestimosStatus === 'deleted') && emprestimo && emprestimo.data_excluido === null) {
         informacoes =
             <div className="container-fluid ">
 
