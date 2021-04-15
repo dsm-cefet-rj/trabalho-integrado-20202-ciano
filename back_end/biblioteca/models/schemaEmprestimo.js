@@ -8,12 +8,12 @@ const emprestimoSchema = new Schema({
         required: false
     },
 
-    livroId:{
+    livroId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Livro'
     },
 
-    usuarioId:{
+    usuarioId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
     },
@@ -30,19 +30,19 @@ const emprestimoSchema = new Schema({
 
     qtd_renovacoes: {
         type: Number,
-        required: true
+        default: 0
     },
 
     data_devolvido: {
         type: String,
-        default: "null"
+        default: null
     },
 
     data_excluido: {
         type: String,
-        default: "null"
+        default: null
     }
-    
+
 })
 emprestimoSchema.plugin(normalize);
 var emprestimos = mongoose.model('emprestimos', emprestimoSchema)

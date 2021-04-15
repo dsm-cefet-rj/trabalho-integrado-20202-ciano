@@ -52,12 +52,12 @@ const usuarioSchema = new Schema({
         require: true
     },
     cep: {
-        type: Number,
+        type: String,
         require: true
     },
     data_excluido: {
         type: String,
-        default: "null"
+        default: null
     },
 });
 
