@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.cf0c743d.chunk.css",
-    "main.js": "/static/js/main.dc045d56.chunk.js",
-    "main.js.map": "/static/js/main.dc045d56.chunk.js.map",
+    "main.js": "/static/js/main.7b27a440.chunk.js",
+    "main.js.map": "/static/js/main.7b27a440.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.2595dd82.js",
     "runtime-main.js.map": "/static/js/runtime-main.2595dd82.js.map",
-    "static/js/2.b430fc71.chunk.js": "/static/js/2.b430fc71.chunk.js",
-    "static/js/2.b430fc71.chunk.js.map": "/static/js/2.b430fc71.chunk.js.map",
+    "static/js/2.e5a45ebc.chunk.js": "/static/js/2.e5a45ebc.chunk.js",
+    "static/js/2.e5a45ebc.chunk.js.map": "/static/js/2.e5a45ebc.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.cf0c743d.chunk.css.map": "/static/css/main.cf0c743d.chunk.css.map",
-    "static/js/2.b430fc71.chunk.js.LICENSE.txt": "/static/js/2.b430fc71.chunk.js.LICENSE.txt",
+    "static/js/2.e5a45ebc.chunk.js.LICENSE.txt": "/static/js/2.e5a45ebc.chunk.js.LICENSE.txt",
     "static/media/btn_CadastrarUsuario.86530d06.jpg": "/static/media/btn_CadastrarUsuario.86530d06.jpg",
     "static/media/btn_Livros.228dc931.jpg": "/static/media/btn_Livros.228dc931.jpg",
     "static/media/btn_ManterEmprestimos.37c01c14.jpg": "/static/media/btn_ManterEmprestimos.37c01c14.jpg",
@@ -24,8 +24,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.2595dd82.js",
-    "static/js/2.b430fc71.chunk.js",
+    "static/js/2.e5a45ebc.chunk.js",
     "static/css/main.cf0c743d.chunk.css",
-    "static/js/main.dc045d56.chunk.js"
+    "static/js/main.7b27a440.chunk.js"
   ]
 }

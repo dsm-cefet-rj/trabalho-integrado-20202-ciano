@@ -24,7 +24,9 @@ const FormCadUsuario = () => {
         usuario.data_excluido = null;
 
         dispatch(addUsuarioServer(usuario));
-        history.push('/menu/bibliotecario');
+        history.push('/');
+
+       // history.push('/menu/bibliotecario');
     }
     
     return (
