@@ -23,8 +23,8 @@ export const addUsuarioServer = createAsyncThunk('usuarios/addUsuarioServer', as
     return await httpPost(`${baseUrl}/usuarios`, usuario);
 });
 
-export const updateUsuarioServer = createAsyncThunk('usuarios/updateProjetoServer', async (usuario) => {
-    return await httpPut(`${baseUrl}/usuarios/${usuario.id}`, usuario);
+export const updateUsuarioServer = createAsyncThunk('usuarios/updateProjetoServer', async (idUsuario, usuario) => {
+    return await httpPut(`${baseUrl}/usuarios/${idUsuario}`, usuario);
 });
 
 export const UsuariosSlice = createSlice({

@@ -17,7 +17,7 @@ function ListandoLivros(props) {
     }
 
     useEffect(() => {
-        if (status === 'not_loaded') {
+        if (status === 'not_loaded' || status === 'saved' || status === 'deleted') {
             dispatch(fetchLivro());
         } else if (status === 'failed') {
             setTimeout(() => dispatch(fetchLivro()), 5000);
@@ -25,7 +25,7 @@ function ListandoLivros(props) {
     }, [status, dispatch]);
 
     const handleClickDeletar = (livro) => {
-        dispatch(softDeleteLivroServer(livro))
+        dispatch(softDeleteLivroServer(livro.id))
     }
 
     const handleClickAtualizar = (livro) => {
@@ -33,7 +33,7 @@ function ListandoLivros(props) {
     }
 
     let TabelaLivro = '';
-    if ((status === 'loaded' || status === 'saved' || status === 'deleted') && listaLivros[0]) {
+    if (status === 'loaded' && livroFiltrado[0]) {
         TabelaLivro =
             <div className="table-responsive">
                 <table className="table table-striped table-hover m-0">
@@ -51,7 +51,7 @@ function ListandoLivros(props) {
                                     <Link to={`/livro/informacoes/${livro.id}`}><p className="font-weight-bold h4 text-center">{livro.titulo}</p></Link>
                                     <Link to={`/livro/informacoes/${livro.id}`}>
                                         <p className="font-weight-bold h4 mt-3 text-center">
-                                            { livro.autores.map(autor => aux++ === 0 ? autor : ", " + autor) }
+                                            {livro.autores.map(autor => aux++ === 0 ? autor : ", " + autor)}
                                         </p>
                                     </Link>
                                 </td>

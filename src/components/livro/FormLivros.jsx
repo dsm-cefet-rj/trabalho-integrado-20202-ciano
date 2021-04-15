@@ -42,13 +42,14 @@ const FormLivros = () => {
 
     const onSubmit = (livro) => {
         livro.autores = ((livro.autores).split(',')).map(autor => autor.trim());
-        livro.data_excluido = null;
 
         if (actionType === 'addLivro') {
             dispatch(addLivroServer(livro));
         } else {
-            livro.id = livroFound.id;
-            dispatch(updateLivroServer(livro))
+            let payload = {};
+            payload.id = livroFound.id; 
+            payload.livro = livro;
+            dispatch(updateLivroServer(payload))
         }
         history.push('/livro');
     }

@@ -10,8 +10,6 @@ import { fetchLivro, selectAllLivro } from '../livro/LivroSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
 import emprestimoSchema from './EmprestimoSchema';
 
-
-
 const RegistrarEmprestimo = () => {
     let history = useHistory();
     const dispatch = useDispatch();
@@ -91,14 +89,10 @@ const RegistrarEmprestimo = () => {
             let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
 
             dispatch(addEmprestimoServer({
-                id: "",
                 livroId: emprestimo.idLivro,
                 usuarioId: emprestimo.idUsuario,
                 data_emprestimo: hoje,
-                data_devolucao: diaDevolucao,
-                qtd_renovacoes: 0,
-                data_devolvido: null,
-                data_excluido: null
+                data_devolucao: diaDevolucao
             }));
             history.push("/emprestimo");
         }

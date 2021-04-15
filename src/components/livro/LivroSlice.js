@@ -13,34 +13,28 @@ const initialState = livroAdapter.getInitialState({
 });
 
 export const fetchLivro = createAsyncThunk('livros/fetchLivro', async () => {
-        return await httpGet(`${baseUrl}/livros`);
-    });
+    return await httpGet(`${baseUrl}/livros`);
+});
 
 export const deleteLivroServer = createAsyncThunk('livro/deleteLivroServer', async (idLivro) => {
     await httpDelete(`${baseUrl}/livros/${idLivro}`);
     return idLivro;
 });
 
-export const softDeleteLivroServer = createAsyncThunk('livro/updateLivroServer', async (livro) => {
+export const softDeleteLivroServer = createAsyncThunk('livro/updateLivroServer', async (idLivro) => {
+
     const livroExcluido = {
-        id: livro.id,
-        isbn: livro.isbn,
-        titulo: livro.titulo,
-        edicao: livro.edicao,
-        autores: livro.autores,
-        cod_localizacao: livro.cod_localizacao,
-        qtd_total: livro.qtd_total,
         data_excluido: formatData(new Date())
     }
-    return await httpPut(`${baseUrl}/livros/${livroExcluido.id}`, livroExcluido);
+    return await httpPut(`${baseUrl}/livros/${idLivro}`, livroExcluido);
 })
 
 export const addLivroServer = createAsyncThunk('livro/addLivroServer', async (livro) => {
     return await httpPost(`${baseUrl}/livros`, livro);
 });
 
-export const updateLivroServer = createAsyncThunk('livro/updateLivroServer', async (livro) => {
-    return await httpPut(`${baseUrl}/livros/${livro.id}`, livro);
+export const updateLivroServer = createAsyncThunk('livro/updateLivroServer', async (payload) => {
+    return await httpPut(`${baseUrl}/livros/${payload.id}`, payload.livro);
 });
 
 export const LivroSlice = createSlice({
@@ -50,16 +44,16 @@ export const LivroSlice = createSlice({
         [fetchLivro.fulfilled]: (state, action) => { state.status = 'loaded'; livroAdapter.setAll(state, action.payload); },
         [fetchLivro.pending]: (state, action) => { state.status = 'loading' },
         [fetchLivro.rejected]: (state, action) => { state.status = 'failed'; state.error = action.error.message },
-        
+
         [deleteLivroServer.pending]: (state, action) => { state.status = 'loading' },
         [deleteLivroServer.fulfilled]: (state, action) => { state.status = 'deleted'; livroAdapter.removeOne(state, action.payload); },
 
         [softDeleteLivroServer.pending]: (state, action) => { state.status = 'loading' },
         [softDeleteLivroServer.fulfilled]: (state, action) => { state.status = 'deleted'; livroAdapter.upsertOne(state, action.payload); },
-        
+
         [addLivroServer.pending]: (state, action) => { state.status = 'loading' },
         [addLivroServer.fulfilled]: (state, action) => { state.status = 'saved'; livroAdapter.addOne(state, action.payload); },
-        
+
         [updateLivroServer.pending]: (state, action) => { state.status = 'loading' },
         [updateLivroServer.fulfilled]: (state, action) => { state.status = 'saved'; livroAdapter.upsertOne(state, action.payload); },
     },

@@ -31,7 +31,6 @@ const EncerrarEmprestimoConfirmacao = () => {
         let hoje = new Date();
 
         let updateEmprestimo = {
-            "id": emprestimo.id,
             "livroId": emprestimo.livroId,
             "usuarioId": emprestimo.usuarioId,
             "data_emprestimo": emprestimo.data_emprestimo,
@@ -41,7 +40,7 @@ const EncerrarEmprestimoConfirmacao = () => {
             "data_excluido": emprestimo.data_excluido
         }
 
-        dispatch(updateEmprestimoServer(updateEmprestimo));
+        dispatch(updateEmprestimoServer(emprestimo.id, updateEmprestimo));
         history.push('/emprestimo/encerrar/' + emprestimo.usuarioId);
     }
 

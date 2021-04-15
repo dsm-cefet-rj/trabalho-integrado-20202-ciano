@@ -31,17 +31,11 @@ const RenovarEmprestimoConfirmacao = () => {
         e.preventDefault();
 
         let updateEmprestimo = {
-            "id": emprestimo.id,
-            "livroId": emprestimo.livroId,
-            "usuarioId": emprestimo.usuarioId,
-            "data_emprestimo": emprestimo.data_emprestimo,
             "data_devolucao": adiarData(emprestimo.data_devolucao, diasDeAcrescimo),
             "qtd_renovacoes": emprestimo.qtd_renovacoes + 1,
-            "data_devolvido": emprestimo.data_devolvido,
-            "data_excluido": emprestimo.data_excluido
         }
 
-        dispatch(updateEmprestimoServer(updateEmprestimo));
+        dispatch(updateEmprestimoServer(emprestimo.id, updateEmprestimo));
         history.push('/emprestimo/renovar/' + emprestimo.usuarioId);
     }
 
