@@ -9,7 +9,7 @@ import StatusBox from '../utils/StatusBox';
 
 const InformacoesDetalhadasConsulta = () => {
 	let { id } = useParams();
-	id = parseInt(id);
+	//id = parseInt(id);
 	const dispatch = useDispatch();
 
 	let livro = useSelector(state => selectLivroById(state, id));

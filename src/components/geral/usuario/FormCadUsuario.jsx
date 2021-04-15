@@ -18,6 +18,7 @@ const FormCadUsuario = () => {
     });
 
     const onSubmit = (usuario) => {
+        
         console.log("oi");
         usuario.data_nasc = formatData(usuario.data_nasc);
 

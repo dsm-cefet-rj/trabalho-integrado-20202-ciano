@@ -29,9 +29,11 @@ function Rotas() {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/" component={Home} exact />
+				{/*<Route path="/" component={Home} exact />*/}
+				<Route path="/home" component={Home} exact />
 				<Route path="/login" component={Login} />
-				<Route path="/menu/bibliotecario" component={MenuInicialBibliotecario} />
+				{/*<Route path="/menu/bibliotecario" component={MenuInicialBibliotecario} />*/}
+				<Route path="/" component={MenuInicialBibliotecario} exact />
 				<Route path="/menu/usuario" component={MenuInicialUsuario} />
 
 				{/* ---------------- Usuário ---------------- */}
@@ -58,11 +60,13 @@ function Rotas() {
 				<Route path="/relatorio/livros/devolucoes" component={RelatorioDevolucoesLivros} exact />
 				<Route path="/relatorio/livros/devolucoes/informacoes" component={InformacoesDetalhadasNaoDevolvido} />
 				<Route path="/relatorio/livros/emprestados" component={RelatorioLivrosEmprestado} />
+				
 
 				{/* ---------------- Livro ---------------- */}
 				<Route path="/livro/cadastrar" component={CadastrarLivro} />
 				<Route path="/livro/atualizar/:id" component={AtualizarLivro} />
-				<Route path="/livro" component={ConsultarLivro} exact />
+			    <Route path="/livro" component={ConsultarLivro} exact />
+				{/*<Route path="/" component={ConsultarLivro} exact />*/}
 				<Route path="/livro/informacoes/:id" component={InformacoesDetalhadasConsulta} />
 			</Switch>
 		</Router>

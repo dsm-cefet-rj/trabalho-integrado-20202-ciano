@@ -9,7 +9,7 @@ import { addLivroServer, fetchLivro, selectLivroById, updateLivroServer } from '
 
 const FormLivros = () => {
     let { id } = useParams();
-    id = parseInt(id)
+    // id = parseInt(id)
     const history = useHistory();
     const dispatch = useDispatch();
 

@@ -66,7 +66,7 @@ export const testIsbn = {
 }
 
 const livroSchema = object().shape({
-    id: number(),
+    id: string(),
     titulo: string().required(),
     edicao: string().required(),
     autores: string().required(),

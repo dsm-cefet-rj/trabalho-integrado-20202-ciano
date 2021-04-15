@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf0c743d.chunk.css",
+    "main.js": "/static/js/main.dc045d56.chunk.js",
+    "main.js.map": "/static/js/main.dc045d56.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2595dd82.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2595dd82.js.map",
+    "static/js/2.b430fc71.chunk.js": "/static/js/2.b430fc71.chunk.js",
+    "static/js/2.b430fc71.chunk.js.map": "/static/js/2.b430fc71.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.cf0c743d.chunk.css.map": "/static/css/main.cf0c743d.chunk.css.map",
+    "static/js/2.b430fc71.chunk.js.LICENSE.txt": "/static/js/2.b430fc71.chunk.js.LICENSE.txt",
+    "static/media/btn_CadastrarUsuario.86530d06.jpg": "/static/media/btn_CadastrarUsuario.86530d06.jpg",
+    "static/media/btn_Livros.228dc931.jpg": "/static/media/btn_Livros.228dc931.jpg",
+    "static/media/btn_ManterEmprestimos.37c01c14.jpg": "/static/media/btn_ManterEmprestimos.37c01c14.jpg",
+    "static/media/btn_Relatorios.2d7186c3.jpg": "/static/media/btn_Relatorios.2d7186c3.jpg",
+    "static/media/btn_RenovarEmprestimo.111bad08.jpg": "/static/media/btn_RenovarEmprestimo.111bad08.jpg",
+    "static/media/capa-livro-exemplo.8d98fc0d.svg": "/static/media/capa-livro-exemplo.8d98fc0d.svg",
+    "static/media/information-color.aaf5fd3f.svg": "/static/media/information-color.aaf5fd3f.svg",
+    "static/media/left-arrow-white.0665612d.svg": "/static/media/left-arrow-white.0665612d.svg",
+    "static/media/leitor.3820344d.svg": "/static/media/leitor.3820344d.svg",
+    "static/media/logo-University-Library.55c88343.svg": "/static/media/logo-University-Library.55c88343.svg",
+    "static/media/profile-user-white.a6785991.svg": "/static/media/profile-user-white.a6785991.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2595dd82.js",
+    "static/js/2.b430fc71.chunk.js",
+    "static/css/main.cf0c743d.chunk.css",
+    "static/js/main.dc045d56.chunk.js"
+  ]
+}
