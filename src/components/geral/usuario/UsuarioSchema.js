@@ -4,7 +4,6 @@ import { pt } from 'yup-locale-pt';
 setLocale(pt)
 
 const usuarioSchema = object().shape({
-    id: string().required(),
     matricula: string().max(20).uppercase().required(),
     senha: string().min(6).required(),
     categoria: string().typeError("É necessário escolher uma das categorias.").required(),
@@ -16,8 +15,7 @@ const usuarioSchema = object().shape({
     complemento: string().required(),
     cidade: string().required(),
     bairro: string().required(),
-    cep: string().required(),
-    data_excluido: date().nullable().default("25/02/13")
+    cep: string().required()
 });
 
 export default usuarioSchema;

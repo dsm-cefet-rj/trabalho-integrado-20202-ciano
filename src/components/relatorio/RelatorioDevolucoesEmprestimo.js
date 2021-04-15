@@ -3,29 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatData } from '../../utils';
 import { fetchEmprestimos, selectAllEmprestimos } from '../emprestimo/EmprestimosSlice';
 import CabecalhoVoltar from '../utils/CabecalhoVoltar';
+import ComparaData from '../utils/ComparaData';
 import Rodape from '../utils/Rodape';
 import StatusBox from '../utils/StatusBox';
 import TabelaRelatorio from './TabelaRelatorio';
-import ComparaData from '../utils/ComparaData';
 
-const RelatorioLivrosEmprestado = () => {
+const RelatorioDevolucoesEmprestimo = () => {
     const dispatch = useDispatch();
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
-    const emprestimos = (useSelector(selectAllEmprestimos)).filter((emprestimo) => emprestimo.data_devolvido === null && emprestimo.data_excluido === null);
+    const emprestimos = (useSelector(selectAllEmprestimos)).filter((emprestimo) => emprestimo.data_excluido === null);
 
 
     const [filtro, setFiltro] = useState({
         titulo: "",
         data_inicio: "",
-        data_fim: ""
+        data_fim: "",
+        devolvido: false
     })
 
     const onChangeFiltro = (e) => {
-        setFiltro({
-            ...filtro, [e.target.name]: e.target.value
-        })
+        if (e.target.name === 'devolvido') {
+            let resp = e.target.value === "true";
+            setFiltro({
+                ...filtro, [e.target.name]: resp
+            })
+        }
+        else
+            setFiltro({
+                ...filtro, [e.target.name]: e.target.value
+            })
     }
 
     useEffect(() => {
@@ -35,9 +43,12 @@ const RelatorioLivrosEmprestado = () => {
 
     let informacoes;
     if ((emprestimosStatus === 'loaded') && emprestimos) {
+        let emprestimosFiltrados = emprestimos.filter((emprestimo) => {
+            return filtro.devolvido ? emprestimo.data_devolvido !== null : emprestimo.data_devolvido === null;
+        });
 
         // Filtra o título.
-        let emprestimosFiltrados = emprestimos.filter((emprestimo) => {
+        emprestimosFiltrados = emprestimosFiltrados.filter((emprestimo) => {
             return filtro.titulo !== "" ? emprestimo.livro.titulo.toLowerCase().indexOf(filtro.titulo.toLowerCase()) !== -1 : true;
         });
 
@@ -55,10 +66,17 @@ const RelatorioLivrosEmprestado = () => {
             <section className="row py-sm-4 justify-content-center align-content-start flex-grow-1">
                 <div className="row m-0 p-0 justify-content-center conteudo col-12 col-sm-10 col-md-8">
 
-                    <form className="row justify-content-center col-12 col-sm-10 col-md-8 m-2 m-sm-4" id="filtro">
+                    <form className="row justify-content-center col-12 col-sm-10 col-md-8 m-3 m-sm-4" id="filtro">
                         <h2 className="h3 mb-0 w-100 text-center font-weight-bold">Filtro:</h2>
 
-                        <input onChange={onChangeFiltro} className="mt-4 input_login col-10" type="text" name="titulo" placeholder="Título do Livro" />
+                        <div className="mx-auto d-block justify-content-center align-content-center mt-4 p-1">
+                            <input className="align-self-center" onClick={onChangeFiltro} type="radio" value="false" name="devolvido" id="n_devolvido" defaultChecked />
+                            <label className="align-self-center" htmlFor="n_devolvido">Não Devolvidos</label>
+                            <input className="align-self-center ml-2" onClick={onChangeFiltro} type="radio" value="true" name="devolvido" id="devolvido" />
+                            <label className="align-self-center" htmlFor="devolvido">Devolvidos</label>
+                        </div>
+
+                        <input onChange={onChangeFiltro} className="mt-3 input_login col-10" type="text" name="titulo" placeholder="Título do Livro" />
 
                         <label className="h5 mt-3 font-weight-bold text-center w-100" htmlFor="titulo">Data inicial</label>
                         <input onChange={onChangeFiltro} className="input_login col-10" type="date" name="data_inicio" />
@@ -93,4 +111,4 @@ const RelatorioLivrosEmprestado = () => {
         </div >
     );
 }
-export default RelatorioLivrosEmprestado;
+export default RelatorioDevolucoesEmprestimo;

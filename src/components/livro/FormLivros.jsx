@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import livroSchema from './LivroSchema';
@@ -58,32 +58,32 @@ const FormLivros = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="row flex-column perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4 w-25 p-5 my-2 my-sm-4 ">
 
-                <label className="h5 font-weight-bold" for="titulo">Título:</label>
+                <label className="h5 font-weight-bold" htmlFor="titulo">Título:</label>
                 <input defaultValue={formLivro.titulo} id="titulo" name="titulo" className="input_login w-100" type="text" ref={register} />
                 <p>{errors.titulo?.message}</p>
 
 
-                <label className="h5 font-weight-bold" for="edicao">Edição:</label>
+                <label className="h5 font-weight-bold" htmlFor="edicao">Edição:</label>
                 <input defaultValue={formLivro.edicao} id="edicao" name="edicao" className="input_login w-100" type="text" ref={register} />
                 <p>{errors.edicao?.message}</p>
 
 
-                <label className="h5 font-weight-bold" title="Separe os autores por vírgulas. Ex: Maria Silva, Carlos Brandão" for="autores">Autores:</label>
+                <label className="h5 font-weight-bold" title="Separe os autores por vírgulas. Ex: Maria Silva, Carlos Brandão" htmlFor="autores">Autores:</label>
                 <input defaultValue={formLivro.autores} id="autores" name="autores" className="input_login w-100" type="text" ref={register} />
                 <p>{errors.autores?.message}</p>
 
 
-                <abbr title="International Standard Book Number"><label className="h5 font-weight-bold" title="Digite apenas os dígitos que compõe o ISBN, sem incluir espaços ou traços." for="isbn">ISBN:</label>
+                <abbr title="International Standard Book Number"><label className="h5 font-weight-bold" title="Digite apenas os dígitos que compõe o ISBN, sem incluir espaços ou traços." htmlFor="isbn">ISBN:</label>
                     <input defaultValue={formLivro.isbn} id="isbn" name="isbn" className="input_login w-100" type="number" ref={register} /></abbr>
                 <p>{errors.isbn?.message}</p>
 
 
-                <label className="h5 font-weight-bold" for="qtd_total">Quantidade de Livros:</label>
+                <label className="h5 font-weight-bold" htmlFor="qtd_total">Quantidade de Livros:</label>
                 <input defaultValue={formLivro.qtd_total} id="qtd_total" name="qtd_total" className="input_login w-100 box_perfil" type="number" ref={register} />
                 <p>{errors.qtd_total?.message}</p>
 
 
-                <label className="h5 font-weight-bold" for="cod_localizacao">Código de Localização:</label>
+                <label className="h5 font-weight-bold" htmlFor="cod_localizacao">Código de Localização:</label>
                 <input defaultValue={formLivro.cod_localizacao} id="cod_localizacao" name="cod_localizacao" className="input_login w-100 box_perfil" type="text" ref={register} />
                 <p>{errors.cod_localizacao?.message}</p>
 
