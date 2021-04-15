@@ -62,25 +62,25 @@ yarn-error.log*
 /back_end/biblioteca/jspm_packages/
 
 # Typescript v1 declaration files
-typings/
+/back_end/biblioteca/typings/
 
 # Optional npm cache directory
-.npm
+/back_end/biblioteca/.npm
 
 # Optional eslint cache
-.eslintcache
+/back_end/biblioteca/.eslintcache
 
 # Optional REPL history
-.node_repl_history
+/back_end/biblioteca/.node_repl_history
 
 # Output of 'npm pack'
-*.tgz
+/back_end/biblioteca/*.tgz
 
 # Yarn Integrity file
-.yarn-integrity
+/back_end/biblioteca/.yarn-integrity
 
 # dotenv environment variables file
-.env
+/back_end/biblioteca/.env
 
 # next.js build output
-.next
+/back_end/biblioteca/.next
