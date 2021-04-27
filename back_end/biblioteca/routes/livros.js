@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require("body-parser");
 const livros = require('../models/schemaLivro');
+const cors = require('./cors');
 
 /* GET users listing. */
 
 router.route('/')
-  .get((req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .get(cors.corsWithOptions, (req, res, next) => {
     livros.find({})
       .then((livrosBanco) => {
         console.log(livrosBanco)
@@ -16,7 +18,7 @@ router.route('/')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .post((req, res, next) => {
+  .post(cors.corsWithOptions, (req, res, next) => {
     livros.create(req.body)
       .then((livro) => {
         console.log('livro criado', livro);
@@ -30,7 +32,8 @@ router.route('/')
 
   })
 router.route('/:id')
-  .get((req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .get(cors.corsWithOptions, (req, res, next) => {
     livros.findById(req.params.id)
       .then((resp) => {
         res.statusCode = 200;
@@ -39,7 +42,7 @@ router.route('/:id')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .put((req, res, next) => {
+  .put(cors.corsWithOptions, (req, res, next) => {
     livros.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })

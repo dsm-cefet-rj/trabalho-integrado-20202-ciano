@@ -8,7 +8,6 @@ async function client(endpoint, { body, ...customConfig } = {}) {
       ...headers,
       ...customConfig.headers,
     },
-    credentials: 'include',
   }
 
   if (body) {
@@ -27,7 +26,7 @@ async function client(endpoint, { body, ...customConfig } = {}) {
     return Promise.reject(err.message ? err.message : data)
   }
 }
-  
+
 export const httpGet = async function (endpoint, customConfig = {}) {
   return client(endpoint, { ...customConfig, method: 'GET' })
 }
