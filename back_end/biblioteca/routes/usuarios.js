@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require("body-parser");
 const usuarios = require('../models/schemaUsuario');
+var authenticate = require('../authenticate');
 const cors = require('./cors');
 
 router.route('/')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     usuarios.find({})
       .then((usuariosBanco) => {
         console.log(usuariosBanco)
@@ -16,7 +17,7 @@ router.route('/')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .post(cors.corsWithOptions, (req, res, next) => {
+  .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     usuarios.create(req.body)
       .then((usuario) => {
         console.log('usuario criado', usuario);
@@ -29,7 +30,7 @@ router.route('/')
   })
 router.route('/:id')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     usuarios.findById(req.params.id)
       .then((resp) => {
         res.statusCode = 200;
@@ -39,7 +40,7 @@ router.route('/:id')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .put(cors.corsWithOptions, (req, res, next) => {
+  .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     usuarios.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })

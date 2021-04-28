@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require("body-parser");
 const emprestimos = require('../models/schemaEmprestimo');
+var authenticate = require('../authenticate');
 const cors = require('./cors');
 
 router.route('/')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     emprestimos.find({})
       .then((emprestimosBanco) => {
         console.log(emprestimosBanco)
@@ -16,7 +17,7 @@ router.route('/')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .post(cors.corsWithOptions, (req, res, next) => {
+  .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     emprestimos.create(req.body)
       .then((emprestimo) => {
         console.log('emprestimo criado', emprestimo);
@@ -29,7 +30,7 @@ router.route('/')
   })
 router.route('/:id')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     emprestimos.findById(req.params.id)
       .then((resp) => {
         res.statusCode = 200;
@@ -39,7 +40,7 @@ router.route('/:id')
       }, (err) => next(err))
       .catch((err) => next(err));
   })
-  .put(cors.corsWithOptions, (req, res, next) => {
+  .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     emprestimos.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })
