@@ -23,6 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # ======= Back-End ==========
+/back_end/biblioteca/public
+
 # Logs
 /back_end/biblioteca/logs
 /back_end/biblioteca/*.log
