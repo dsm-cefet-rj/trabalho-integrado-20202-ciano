@@ -7,8 +7,8 @@ const BotoesManter = (props) => {
             <div className="row justify-content-center col-sm-10 col-md-7 col-lg-6 col-xl-4 my-5 conteudo">
                 <div className="row ajustar_manter_emprestimo my-5 w-100">
 
-                    {props.botoes.map((botao) =>
-                        <Link to={botao.link} className="btn pt-3 mb-4 w-100 text-white">{botao.texto}</Link>
+                    {props.botoes.map((botao, index) =>
+                        <Link key={index} to={botao.link} className="btn pt-3 mb-4 w-100 text-white">{botao.texto}</Link>
                     )}
 
                 </div>

@@ -13,7 +13,6 @@ const EncerrarEmprestimoConfirmacao = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     let { id } = useParams();
-    id = parseInt(id);
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
@@ -31,17 +30,12 @@ const EncerrarEmprestimoConfirmacao = () => {
         let hoje = new Date();
 
         let updateEmprestimo = {
-            "livroId": emprestimo.livroId,
-            "usuarioId": emprestimo.usuarioId,
-            "data_emprestimo": emprestimo.data_emprestimo,
-            "data_devolucao": emprestimo.data_devolucao,
-            "qtd_renovacoes": emprestimo.qtd_renovacoes,
-            "data_devolvido": formatData(hoje),
-            "data_excluido": emprestimo.data_excluido
+            "id": emprestimo.id,
+            "data_devolvido": formatData(hoje)
         }
 
-        dispatch(updateEmprestimoServer(emprestimo.id, updateEmprestimo));
-        history.push('/emprestimo/encerrar/' + emprestimo.usuarioId);
+        dispatch(updateEmprestimoServer(updateEmprestimo));
+        history.push('/emprestimo/encerrar/' + emprestimo.usuario.id);
     }
 
     let informacoes;
@@ -49,7 +43,7 @@ const EncerrarEmprestimoConfirmacao = () => {
         informacoes =
             <div className="container-fluid ">
 
-                <CabecalhoVoltar titulo="Encerrar Empréstimo" link={'/emprestimo/encerrar/' + emprestimo.usuarioId} />
+                <CabecalhoVoltar titulo="Encerrar Empréstimo" link={'/emprestimo/encerrar/' + emprestimo.usuario.id} />
 
                 <section className="row justify-content-center align-items-start flex-grow-1">
                     <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center my-3 my-sm-4 p-0">

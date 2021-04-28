@@ -62,5 +62,5 @@ const usuarioSchema = new Schema({
 });
 
 usuarioSchema.plugin(normalize);
-var usuarios = mongoose.model('usuarios', usuarioSchema)
+var usuarios = mongoose.model('Usuario', usuarioSchema)
 module.exports = usuarios;

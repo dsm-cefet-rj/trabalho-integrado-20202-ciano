@@ -12,7 +12,6 @@ const RenovarEmprestimoConfirmacao = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     let { id } = useParams();
-    id = parseInt(id);
 
     let diasDeAcrescimo = 15;
     let limiteRenovacoes = 2;
@@ -26,17 +25,17 @@ const RenovarEmprestimoConfirmacao = () => {
             dispatch(fetchEmprestimos());
     }, [emprestimosStatus, dispatch]);
 
-
     function onClickRenovarEmprestimo(e) {
         e.preventDefault();
-
+        
         let updateEmprestimo = {
+            "id" :  emprestimo.id,
             "data_devolucao": adiarData(emprestimo.data_devolucao, diasDeAcrescimo),
             "qtd_renovacoes": emprestimo.qtd_renovacoes + 1,
         }
-
-        dispatch(updateEmprestimoServer(emprestimo.id, updateEmprestimo));
-        history.push('/emprestimo/renovar/' + emprestimo.usuarioId);
+        console.log(updateEmprestimo);
+        dispatch(updateEmprestimoServer(updateEmprestimo));
+        history.push('/emprestimo/renovar/' + emprestimo.usuario.id);
     }
 
     let informacoes;
@@ -46,13 +45,11 @@ const RenovarEmprestimoConfirmacao = () => {
         informacoes =
             <div className="container-fluid ">
 
-                <CabecalhoVoltar titulo="Renovar Empréstimo" link={'/emprestimo/renovar/' + emprestimo.usuarioId} />
+                <CabecalhoVoltar titulo="Renovar Empréstimo" link={'/emprestimo/renovar/' + emprestimo.usuario.id} />
 
                 <section className="row justify-content-center align-items-start flex-grow-1">
                     <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center my-3 my-sm-4 p-0">
                         <div className="row conteudo justify-content-center px-3 py-5 mx-0 w-100">
-
-
 
                             <InfoCompletaEmprestimo emprestimo={emprestimo} />
 

@@ -8,7 +8,7 @@ const cors = require('./cors');
 router.route('/')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    emprestimos.find({})
+    emprestimos.find({}).populate('livro').populate('usuario')
       .then((emprestimosBanco) => {
         console.log(emprestimosBanco)
         res.statusCode = 200;
@@ -31,7 +31,7 @@ router.route('/')
 router.route('/:id')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    emprestimos.findById(req.params.id)
+    emprestimos.findById(req.params.id).populate('livro').populate('usuario')
       .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -51,7 +51,6 @@ router.route('/:id')
         res.json(emprestimo);
       }, (err) => next(err))
       .catch((err) => next(err));
-
   })
 
 module.exports = router;

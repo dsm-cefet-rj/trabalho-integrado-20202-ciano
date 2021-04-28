@@ -42,5 +42,5 @@ const livroSchema = new Schema({
 
 })
 livroSchema.plugin(normalize);
-var livros = mongoose.model('livros', livroSchema)
+var livros = mongoose.model('Livro', livroSchema)
 module.exports = livros;
