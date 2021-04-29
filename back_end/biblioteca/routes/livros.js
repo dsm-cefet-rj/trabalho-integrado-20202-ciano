@@ -12,7 +12,7 @@ router.route('/')
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     livros.find({})
       .then((livrosBanco) => {
-        console.log(livrosBanco)
+        console.log(req.user)
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(livrosBanco);
