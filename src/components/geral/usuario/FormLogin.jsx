@@ -21,7 +21,7 @@ const CabecalhoLogin = () => {
       
     useEffect(() => {
         if (status === 'logged_in' ) {
-            history.push('/Home');
+            history.push('/menu/bibliotecario');
         }
     }, [status])
 

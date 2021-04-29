@@ -12,29 +12,29 @@ const initialState = livroAdapter.getInitialState({
     /* o array livro foi removido do state inicial, será criado pelo adapter */
 });
 
-export const fetchLivro = createAsyncThunk('livros/fetchLivro', async () => {
-    return await httpGet(`${baseUrl}/livros`);
+export const fetchLivro = createAsyncThunk('livros/fetchLivro', async (_, {getState} )=> {
+    return await httpGet(`${baseUrl}/livros`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const deleteLivroServer = createAsyncThunk('livro/deleteLivroServer', async (idLivro) => {
-    await httpDelete(`${baseUrl}/livros/${idLivro}`);
+export const deleteLivroServer = createAsyncThunk('livro/deleteLivroServer', async (idLivro, {getState}) => {
+    await httpDelete(`${baseUrl}/livros/${idLivro}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idLivro;
 });
 
-export const softDeleteLivroServer = createAsyncThunk('livro/updateLivroServer', async (idLivro) => {
+export const softDeleteLivroServer = createAsyncThunk('livro/updateLivroServer', async (idLivro, {getState}) => {
 
     const livroExcluido = {
         data_excluido: formatData(new Date())
     }
-    return await httpPut(`${baseUrl}/livros/${idLivro}`, livroExcluido);
+    return await httpPut(`${baseUrl}/livros/${idLivro}`, livroExcluido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 })
 
-export const addLivroServer = createAsyncThunk('livro/addLivroServer', async (livro) => {
-    return await httpPost(`${baseUrl}/livros`, livro);
+export const addLivroServer = createAsyncThunk('livro/addLivroServer', async (livro, {getState}) => {
+    return await httpPost(`${baseUrl}/livros`, livro, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const updateLivroServer = createAsyncThunk('livro/updateLivroServer', async (payload) => {
-    return await httpPut(`${baseUrl}/livros/${payload.id}`, payload.livro);
+export const updateLivroServer = createAsyncThunk('livro/updateLivroServer', async (payload, {getState})  => {
+    return await httpPut(`${baseUrl}/livros/${payload.id}`, payload.livro, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const LivroSlice = createSlice({
