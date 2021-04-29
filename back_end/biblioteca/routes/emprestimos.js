@@ -26,8 +26,8 @@ router.route('/')
         res.json(emprestimo);
       }, (err) => next(err))
       .catch((err) => next(err));
-
   })
+  
 router.route('/:id')
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
