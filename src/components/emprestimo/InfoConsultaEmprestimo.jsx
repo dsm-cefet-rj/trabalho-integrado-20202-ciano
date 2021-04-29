@@ -9,7 +9,7 @@ import { fetchEmprestimos, selectAllEmprestimos } from './EmprestimosSlice';
 
 const InfoConsultaEmprestimo = (props) => {
     let { id } = useParams();
-    id = parseInt(id);
+    
     const dispatch = useDispatch();
     const usuariosStatus = useSelector(state => state.usuarios.status);
     const usuariosError = useSelector(state => state.usuarios.error);
@@ -55,10 +55,10 @@ const InfoConsultaEmprestimo = (props) => {
                 </tbody>
             </table>
 
-    } else if (emprestimosStatus === 'loading') {
+    } else if (usuariosStatus === 'loading') {
         TabelaUsuario = <StatusBox status="Carregando usuario..." />
 
-    } else if (emprestimosStatus === 'failed') {
+    } else if (usuariosStatus === 'failed') {
         TabelaUsuario = <StatusBox status={"Erro: " + usuariosError} estilo='warning' />
 
     } else {
@@ -69,7 +69,7 @@ const InfoConsultaEmprestimo = (props) => {
     if (emprestimosStatus === 'loaded') {
 
         let emprestimosValidos = emprestimos.filter((emprestimo) => (emprestimo.data_devolvido === null)
-            && (emprestimo.data_excluido === null) && (emprestimo.usuarioId === id));
+            && (emprestimo.data_excluido === null) && (emprestimo.usuario.id === id));
 
         LivrosEmprestados = <BotoesLivrosEmprestados emprestimos={emprestimosValidos} rota={props.rota} />
 

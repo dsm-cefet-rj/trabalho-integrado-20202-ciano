@@ -38,7 +38,7 @@ db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     // If the connection was sucessful
-    console.log('DB connected com sucesso')
+    console.log('DB conectado com sucesso!')
 });
 
 module.exports = app;

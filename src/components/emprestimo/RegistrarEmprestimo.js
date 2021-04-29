@@ -89,8 +89,8 @@ const RegistrarEmprestimo = () => {
             let diaDevolucao = adiarData(hoje, diasDeAcrescimo);
 
             dispatch(addEmprestimoServer({
-                livroId: emprestimo.idLivro,
-                usuarioId: emprestimo.idUsuario,
+                livro: emprestimo.idLivro,
+                usuario: emprestimo.idUsuario,
                 data_emprestimo: hoje,
                 data_devolucao: diaDevolucao
             }));

@@ -8,12 +8,12 @@ const TabelaFormatada = (props) => {
     <table className="table table-striped my-5">
         <thead className="thead-dark">
             <tr>
-                <th scope="col" colspan="2" className="text-center">{props.titulo}</th>
+                <th scope="col" colSpan="2" className="text-center">{props.titulo}</th>
             </tr>
         </thead>
         <tbody>
-            {props.informacoes.map((informacao) =>
-                <tr>
+            {props.informacoes.map((informacao, index) =>
+                <tr key={index}>
                     <th scope="row">{informacao.th}</th>
                     <td>{informacao.td}</td>
                 </tr>

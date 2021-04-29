@@ -8,12 +8,12 @@ const emprestimoSchema = new Schema({
         required: false
     },
 
-    livroId: {
+    livro: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Livro'
     },
 
-    usuarioId: {
+    usuario: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
     },
@@ -45,5 +45,5 @@ const emprestimoSchema = new Schema({
 
 })
 emprestimoSchema.plugin(normalize);
-var emprestimos = mongoose.model('emprestimos', emprestimoSchema)
+var emprestimos = mongoose.model('Emprestimo', emprestimoSchema)
 module.exports = emprestimos;

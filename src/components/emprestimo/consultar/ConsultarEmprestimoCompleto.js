@@ -12,7 +12,6 @@ const ConsultarEmprestimoCompleto = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     let { id } = useParams();
-    id = parseInt(id);
 
     const emprestimosStatus = useSelector(state => state.emprestimos.status);
     const emprestimosError = useSelector(state => state.emprestimos.error);
@@ -27,7 +26,7 @@ const ConsultarEmprestimoCompleto = () => {
     function onClickVoltar(e) {
         e.preventDefault();
 
-        history.push('/emprestimo/consultar/' + emprestimo.usuarioId);
+        history.push('/emprestimo/consultar/' + emprestimo.usuario.id);
     }
 
     let informacoes;
@@ -35,7 +34,7 @@ const ConsultarEmprestimoCompleto = () => {
         informacoes =
             <div className="container-fluid ">
 
-                <CabecalhoVoltar titulo="Consultar Empréstimo" link={'/emprestimo/consultar/' + emprestimo.usuarioId} />
+                <CabecalhoVoltar titulo="Consultar Empréstimo" link={'/emprestimo/consultar/' + emprestimo.usuario.id} />
 
                 <section className="row justify-content-center align-items-start flex-grow-1">
                     <div className="row col-sm-8 col-md-7 col-lg-5 col-xl-4 justify-content-center my-3 my-sm-4 p-0">

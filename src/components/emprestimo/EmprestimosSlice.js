@@ -10,8 +10,8 @@ const initialState = emprestimosAdapter.getInitialState({
 });
 
 export const fetchEmprestimos = createAsyncThunk('emprestimos/fetchEmprestimos', async () => {
-    let emprestimos = await httpGet(`${baseUrl}/emprestimos?_expand=usuario&_expand=livro`);
-    return emprestimos.filter(emprestimo => emprestimo.data_excluido === null); //Retorna apenas os emprestimos que não foram excluidos
+    let emprestimos = await httpGet(`${baseUrl}/emprestimos`);
+    return emprestimos.filter(emprestimo => emprestimo.data_excluido === null); //Retorna apenas os emprestimos que não foram excluidos.
 });
 
 export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo) => {
@@ -19,26 +19,23 @@ export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmpres
     return idEmprestimo;
 });
 
-export const softDeleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo, emprestimo) => {
+export const softDeleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (emprestimo) => {
 
     let emprestimoExcluido = {
-        "livroId": emprestimo.livroId,
-        "usuarioId": emprestimo.usuarioId,
-        "data_emprestimo": emprestimo.data_emprestimo,
-        "data_devolucao": emprestimo.data_devolucao,
-        "data_devolvido": emprestimo.data_devolvido,
         "data_excluido": formatData(new Date())
     }
 
-    await httpPut(`${baseUrl}/emprestimos/${idEmprestimo}`, emprestimoExcluido);
+    await httpPut(`${baseUrl}/emprestimos/${emprestimo.id}`, emprestimoExcluido);
 });
 
 export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo) => {
     return await httpPost(`${baseUrl}/emprestimos`, emprestimo);
 });
 
-export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (idEmprestimo, emprestimo) => {
-    return await httpPut(`${baseUrl}/emprestimos/${idEmprestimo}`, emprestimo);
+export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo) => {
+    let id = emprestimo.id;
+    delete emprestimo.id;
+    return await httpPut(`${baseUrl}/emprestimos/${id}`, emprestimo);
 });
 
 export const EmprestimosSlice = createSlice({
