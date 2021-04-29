@@ -9,33 +9,33 @@ const initialState = emprestimosAdapter.getInitialState({
     error: null
 });
 
-export const fetchEmprestimos = createAsyncThunk('emprestimos/fetchEmprestimos', async () => {
-    let emprestimos = await httpGet(`${baseUrl}/emprestimos`);
+export const fetchEmprestimos = createAsyncThunk('emprestimos/fetchEmprestimos', async (_, {getState} ) => {
+    let emprestimos = await httpGet(`${baseUrl}/emprestimos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return emprestimos.filter(emprestimo => emprestimo.data_excluido === null); //Retorna apenas os emprestimos que não foram excluidos.
 });
 
-export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo) => {
-    await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`);
+export const deleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (idEmprestimo, {getState} ) => {
+    await httpDelete(`${baseUrl}/emprestimos/${idEmprestimo}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idEmprestimo;
 });
 
-export const softDeleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (emprestimo) => {
+export const softDeleteEmprestimoServer = createAsyncThunk('emprestimos/deleteEmprestimoServer', async (emprestimo, {getState} ) => {
 
     let emprestimoExcluido = {
         "data_excluido": formatData(new Date())
     }
 
-    await httpPut(`${baseUrl}/emprestimos/${emprestimo.id}`, emprestimoExcluido);
+    await httpPut(`${baseUrl}/emprestimos/${emprestimo.id}`, emprestimoExcluido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo) => {
-    return await httpPost(`${baseUrl}/emprestimos`, emprestimo);
+export const addEmprestimoServer = createAsyncThunk('emprestimos/addEmprestimoServer', async (emprestimo, {getState} ) => {
+    return await httpPost(`${baseUrl}/emprestimos`, emprestimo, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo) => {
+export const updateEmprestimoServer = createAsyncThunk('emprestimos/updateEmprestimoServer', async (emprestimo, {getState} ) => {
     let id = emprestimo.id;
     delete emprestimo.id;
-    return await httpPut(`${baseUrl}/emprestimos/${id}`, emprestimo);
+    return await httpPut(`${baseUrl}/emprestimos/${id}`, emprestimo, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const EmprestimosSlice = createSlice({
