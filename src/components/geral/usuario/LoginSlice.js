@@ -10,7 +10,6 @@ const initialState = loginAdapter.getInitialState({
     /* o array user foi removido do state inicial, será criado pelo adapter */
 });
 
-
 export const loginServer = createAsyncThunk('users/loginServer', async (login) => {
     return await httpPost(`${baseUrl}/users/login`,login);
 });
