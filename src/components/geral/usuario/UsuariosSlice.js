@@ -9,22 +9,21 @@ const initialState = usuariosAdapter.getInitialState({
     error: null
 });
 
-export const fetchUsuarios = createAsyncThunk('usuarios/fetchUsuarios',
-    async () => {
-        return await httpGet(`${baseUrl}/usuarios`);
+export const fetchUsuarios = createAsyncThunk('usuarios/fetchUsuarios', async (_, {getState}) => {
+        return await httpGet(`${baseUrl}/usuarios`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     });
 
-export const deleteUsuarioServer = createAsyncThunk('usuarios/deleteUsuarioServer', async (idUsuario) => {
-    await httpDelete(`${baseUrl}/usuarios/${idUsuario}`);
+export const deleteUsuarioServer = createAsyncThunk('usuarios/deleteUsuarioServer',  async (idUsuario, {getState}) => {
+    await httpDelete(`${baseUrl}/usuarios/${idUsuario}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idUsuario;
 });
 
-export const addUsuarioServer = createAsyncThunk('usuarios/addUsuarioServer', async (usuario) => {
-    return await httpPost(`${baseUrl}/usuarios`, usuario);
+export const addUsuarioServer = createAsyncThunk('usuarios/addUsuarioServer', async (usuario, {getState}) => {
+    return await httpPost(`${baseUrl}/usuarios`, usuario, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const updateUsuarioServer = createAsyncThunk('usuarios/updateProjetoServer', async (idUsuario, usuario) => {
-    return await httpPut(`${baseUrl}/usuarios/${idUsuario}`, usuario);
+export const updateUsuarioServer = createAsyncThunk('usuarios/updateProjetoServer', async (idUsuario, usuario ,{getState}) => {
+    return await httpPut(`${baseUrl}/usuarios/${idUsuario}`, usuario, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const UsuariosSlice = createSlice({
