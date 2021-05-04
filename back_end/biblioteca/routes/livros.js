@@ -8,8 +8,16 @@ const cors = require('./cors');
 /* GET users listing. */
 
 router.route('/')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Livro']
+      #swagger.description = 'texto do livro.'
+
+    #swagger.security = [{
+        "bearerAuth": []
+	}] 
+        */
     livros.find({})
       .then((livrosBanco) => {
         console.log(req.user)
@@ -20,6 +28,14 @@ router.route('/')
       .catch((err) => next(err));
   })
   .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Livro']
+      #swagger.description = 'texto do livro.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]  
+    */
     livros.create(req.body)
       .then((livro) => {
         console.log('livro criado', livro);
@@ -33,8 +49,16 @@ router.route('/')
 
   })
 router.route('/:id')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Livro']
+      #swagger.description = 'texto do livro.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     livros.findById(req.params.id)
       .then((resp) => {
         res.statusCode = 200;
@@ -44,6 +68,14 @@ router.route('/:id')
       .catch((err) => next(err));
   })
   .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Livro']
+      #swagger.description = 'texto do livro.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     livros.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })

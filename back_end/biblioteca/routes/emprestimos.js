@@ -6,8 +6,16 @@ var authenticate = require('../authenticate');
 const cors = require('./cors');
 
 router.route('/')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Emprestimo']
+      #swagger.description = 'texto do emprestimo.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     emprestimos.find({}).populate('livro').populate('usuario')
       .then((emprestimosBanco) => {
         console.log(emprestimosBanco)
@@ -18,6 +26,14 @@ router.route('/')
       .catch((err) => next(err));
   })
   .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Emprestimo']
+      #swagger.description = 'texto do emprestimo.'
+
+    #swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     emprestimos.create(req.body)
       .then((emprestimo) => {
         console.log('emprestimo criado', emprestimo);
@@ -29,8 +45,16 @@ router.route('/')
   })
   
 router.route('/:id')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Emprestimo']
+      #swagger.description = 'texto do emprestimo.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     emprestimos.findById(req.params.id).populate('livro').populate('usuario')
       .then((resp) => {
         res.statusCode = 200;
@@ -41,6 +65,14 @@ router.route('/:id')
       .catch((err) => next(err));
   })
   .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Emprestimo']
+      #swagger.description = 'texto do emprestimo.'
+
+	#swagger.security = [{
+        "bearerAuth": []
+	}]
+    */
     emprestimos.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })

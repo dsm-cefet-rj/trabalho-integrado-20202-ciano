@@ -24,6 +24,7 @@ yarn-error.log*
 
 # ======= Back-End ==========
 /back_end/biblioteca/public
+/back_end/biblioteca/doc/swagger-output.json
 
 # Logs
 /back_end/biblioteca/logs

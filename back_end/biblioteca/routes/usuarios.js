@@ -6,8 +6,12 @@ var authenticate = require('../authenticate');
 const cors = require('./cors');
 
 router.route('/')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Usuario']
+      #swagger.description = 'texto do usuário.'
+    */
     usuarios.find({})
       .then((usuariosBanco) => {
         console.log(usuariosBanco)
@@ -18,6 +22,10 @@ router.route('/')
       .catch((err) => next(err));
   })
   .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Usuario']
+      #swagger.description = 'texto do usuário.'
+    */
     usuarios.create(req.body)
       .then((usuario) => {
         console.log('usuario criado', usuario);
@@ -29,8 +37,12 @@ router.route('/')
 
   })
 router.route('/:id')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
   .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Usuario']
+      #swagger.description = 'texto do usuário.'
+    */
     usuarios.findById(req.params.id)
       .then((resp) => {
         res.statusCode = 200;
@@ -41,6 +53,14 @@ router.route('/:id')
       .catch((err) => next(err));
   })
   .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    /*  
+    #swagger.tags = ['Usuario']
+      #swagger.description = 'texto do usuário.'
+
+    #swagger.security = [{
+        "bearerAuth": []
+	  }]
+    */
     usuarios.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })
