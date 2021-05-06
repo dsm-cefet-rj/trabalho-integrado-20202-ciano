@@ -12,21 +12,17 @@ router.post('/signup', cors.corsWithOptions, (req, res, next) => {
 	/*  
 	#swagger.tags = ['User']
 		#swagger.description = 'Rota para a criação de um novo login do usuário.'
-		#swagger.parameters['username'] = { 
+
+	#swagger.parameters['obj'] = {
 			in: 'body',
-        	description: 'Matricula do usuário.',
-        	required: true
-		}
-		#swagger.parameters['password'] = { 
-			in: 'body',
-        	description: 'Senha do usuário.',
-        	required: true
-		}
+			description: "Dados do login do usuário enviado no corpo da requisição.\n\nO atributo admin é opcional, sendo seu valor default = false.",
+			schema: { $ref: "#/definitions/user" }
+	}
 	*/
+	console.log(req.body);
 	User.register(new User({ username: req.body.username }), req.body.password,
 		(err, user) => {
 			if (err) {
-				console.log(req.user)
 				// #swagger.responses[500]
 				res.statusCode = 500;
 				res.setHeader('Content-Type', 'application/json');
