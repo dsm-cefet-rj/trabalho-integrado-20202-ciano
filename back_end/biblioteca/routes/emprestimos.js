@@ -66,7 +66,7 @@ router.route('/:id')
 	.get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
 		/*  
 		#swagger.tags = ['Emprestimo']
-		  	#swagger.description = 'Retorna o empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.'
+				#swagger.description = 'Retorna o empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.'
 			#swagger.security = [{
 				"bearerAuth": []
 			}]
@@ -91,14 +91,17 @@ router.route('/:id')
 	.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
 		/*  
 		#swagger.tags = ['Emprestimo']
-		  	#swagger.description = 'Rota para atualizar informações do empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.'
+				#swagger.description = 'Rota para atualizar informações do empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.'
 			#swagger.security = [{
 				"bearerAuth": []
 			}]
+			#swagger.parameters['id'] = {
+				description: "Id do empréstimo que deseja atualizar.",
+			}
 			#swagger.parameters['obj'] = {
 				in: 'body',
 				description: "É possivel passar no body apenas os campos que serão atualizados, pois todos os campos são opcionais.",
-				schema:{
+				schema: {
 					qtd_renovacoes: 1,
 					data_emprestimo: "15/04/2021",
 					data_devolucao: "29/06/2021",
