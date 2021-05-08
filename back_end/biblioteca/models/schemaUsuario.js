@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const normalize = require('normalize-mongoose');
 
 const usuarioSchema = new Schema({
@@ -8,14 +8,6 @@ const usuarioSchema = new Schema({
         required: false
     },
     matricula: {
-        type: String,
-        required: true
-    },
-    senha: {
-        type: String,
-        required: true
-    },
-    categoria: {
         type: String,
         required: true
     },

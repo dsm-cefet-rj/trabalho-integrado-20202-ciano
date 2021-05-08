@@ -9,12 +9,12 @@ const emprestimoSchema = new Schema({
     },
 
     livro: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Livro'
     },
 
     usuario: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Usuario'
     },
 

@@ -8,14 +8,21 @@ const swaggerAutogen = require('swagger-autogen')(options);
 
 const doc = {
     info: {
-        title: "University Library API",
-        description: "API REST que "
+        title: "University Library API"
     },
     host: "localhost:3004",
     basePath: "/",
     schemes: ['http'],
     consumes: ['application/json'],
     produces: ['application/json'],
+    securityDefinitions: {
+        bearerAuth: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+            description: "Autenticação JWT, no campo value insira a palavra bearer antes do token. \nEx: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        },
+    },
     tags: [
         {
             "name": "User",
@@ -34,28 +41,10 @@ const doc = {
             "description": "Rotas de Emprestimo."
         }
     ],
-    components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: "http",
-                scheme: "bearer",
-                bearerFormat: "JWT",
-                description: "Autenticação e controle de acesso baseado em JWT."
-            }
-        }
-    },
     definitions: {
-        user: {
-            username: "1234567ABC",
-            password: "123456",
-            admin: false
-        },
-
         usuario: {
             id: "6078ac02c2c8e00c6cfdeb55",
             matricula: "1843234BCC",
-            senha: "123456",
-            categoria: "bibliotecario",
             nome: "Pablo Ricardo",
             data_nasc: "26/03/1999",
             email: "pablo@gmail.com",
@@ -69,6 +58,13 @@ const doc = {
         },
 
         usuarios: [{ $ref: '#/definitions/usuario' }],
+
+        user: {
+            $username: "1843234BCC",
+            $password: "123456",
+            $categoria: "bibliotecario",
+            $usuario: "6078ac02c2c8e00c6cfdeb55"
+        },
 
         livro: {
             id: "6078ac2cc2c8e00c6cfdeb56",
@@ -108,9 +104,15 @@ const doc = {
         emprestimos: [{ $ref: '#/definitions/emprestimoPopulado' }],
 
         respAuth: {
-            id: "608b1a5ca38be4147c7528ad",
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDhiMWE1Y2EzOGJlNDE0N2M3NTI4YWQiLCJpYXQiOjE2MjAzMjg5NjgsImV4cCI6MTYyMDMzMjU2OH0.-FfLiWBmi8U19gCBBACKLYKQiKQCyUHIVY4a3IWhcxQ"
-        }
+            id: "6096fd879a1bae1ca49e2428",
+            user: {
+              usuario: { $ref: '#/definitions/usuario' } ,
+              username: "1843234BCC",
+              categoria: "bibliotecario",
+              id: "6096fd879a1bae1ca49e2428"
+            },
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk2ZmQ4NzlhMWJhZTFjYTQ5ZTI0MjgiLCJpYXQiOjE2MjA1MTI1NDksImV4cCI6MTYyMDUxNjE0OX0.QElggzQNPVakO4rkTC_5JAWOmwYJxnxkTOMQmAtkdsU"
+          }
     }
 }
 

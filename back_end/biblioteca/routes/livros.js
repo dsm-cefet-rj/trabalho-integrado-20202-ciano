@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const bodyParser = require("body-parser");
 const livros = require('../models/schemaLivro');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
