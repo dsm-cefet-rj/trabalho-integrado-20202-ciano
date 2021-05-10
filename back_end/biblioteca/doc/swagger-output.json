@@ -1,0 +1,1055 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "University Library API",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "localhost:3004",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Rotas responsáveis pela autenticação do usuário."
+    },
+    {
+      "name": "Usuario",
+      "description": "Rotas responsáveis pelo perfil do usuário."
+    },
+    {
+      "name": "Livro",
+      "description": "Rotas de Livro."
+    },
+    {
+      "name": "Emprestimo",
+      "description": "Rotas de Emprestimo."
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Autenticação JWT, no campo value insira a palavra bearer antes do token. \nEx: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Rota para a criação de um novo login do usuário.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do login do usuário enviado no corpo da requisição.\n\n O atributo 'categoria' podem receber apenas um dos valores a seguir: 'aluno', 'professor' ou 'bibliotecario'.\n\n A categoria 'bibliotecario' concede acesso privilegiado a todas as rotas presentes na API.",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Rota de autenticação do usuário.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do login do usuário enviado no corpo da requisição.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "1234567ABC"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "É retornado o id do login do usuário que foi autenticado, todos os dados do usuário (\"user\") e o token de autenticação.",
+            "schema": {
+              "$ref": "#/definitions/respAuth"
+            }
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retornar todos os usuários. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retorna todos os usuários salvos no Banco de Dados.",
+            "schema": {
+              "$ref": "#/definitions/usuarios"
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Registrar um novo perfil do usuário. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "matricula": {
+                  "type": "string",
+                  "example": "1843234BCC"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "categoria": {
+                  "type": "string",
+                  "example": "bibliotecario"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Pablo Ricardo"
+                },
+                "data_nasc": {
+                  "type": "string",
+                  "example": "26/03/1999"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "pablo@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "21 97548-5545"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "20564-070"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Centro"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Rio"
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": "Apartamento 501"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua Presidente Vargas 232"
+                },
+                "data_excluido": {
+                  "type": "string",
+                  "example": "26/03/2021"
+                }
+              },
+              "required": [
+                "matricula",
+                "senha",
+                "categoria",
+                "nome",
+                "data_nasc",
+                "email",
+                "telefone",
+                "cep",
+                "bairro",
+                "cidade",
+                "complemento",
+                "logradouro"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Retorna o usuário que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do usuário que deseja retornar."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/usuario"
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Rota para atualizar informações do usuário que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do perfil usuário que deseja atualizar."
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "É possivel passar no body apenas os campos que serão atualizados, pois todos os campos são opcionais.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "matricula": {
+                  "type": "string",
+                  "example": "1843234BCC"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "categoria": {
+                  "type": "string",
+                  "example": "bibliotecario"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Pablo Ricardo"
+                },
+                "data_nasc": {
+                  "type": "string",
+                  "example": "26/03/1999"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "pablo@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "21 97548-5545"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "20564-070"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Centro"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Rio"
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": "Apartamento 501"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua Presidente Vargas 232"
+                },
+                "data_excluido": {
+                  "type": "string",
+                  "example": "26/03/2021"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/livros/": {
+      "get": {
+        "tags": [
+          "Livro"
+        ],
+        "description": "Retornar todos os livros. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retorna todos os livros salvos no Banco de Dados.",
+            "schema": {
+              "$ref": "#/definitions/livros"
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Livro"
+        ],
+        "description": "Registrar um novo livro. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isbn": {
+                  "type": "string",
+                  "example": "9788540701694"
+                },
+                "titulo": {
+                  "type": "string",
+                  "example": "Livro1"
+                },
+                "autores": {
+                  "type": "array",
+                  "example": [
+                    "Autor1",
+                    "Autor2"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "edicao": {
+                  "type": "string",
+                  "example": "3ª"
+                },
+                "cod_localizacao": {
+                  "type": "string",
+                  "example": "S15P7-7"
+                },
+                "qtd_total": {
+                  "type": "number",
+                  "example": 10
+                },
+                "data_excluido": {
+                  "type": "string",
+                  "example": "26/03/2021"
+                }
+              },
+              "required": [
+                "isbn",
+                "titulo",
+                "autores",
+                "edicao",
+                "cod_localizacao",
+                "qtd_total"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/livros/{id}": {
+      "get": {
+        "tags": [
+          "Livro"
+        ],
+        "description": "Retorna o livro que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do livro que deseja retornar."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/livro"
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Livro"
+        ],
+        "description": "Rota para atualizar informações do livro que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do livro que deseja atualizar."
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "É possivel passar no body apenas os campos que serão atualizados, pois todos os campos são opcionais.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isbn": {
+                  "type": "string",
+                  "example": "9788540701694"
+                },
+                "titulo": {
+                  "type": "string",
+                  "example": "Livro1"
+                },
+                "autores": {
+                  "type": "array",
+                  "example": [
+                    "Autor1",
+                    "Autor2"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "edicao": {
+                  "type": "string",
+                  "example": "3ª"
+                },
+                "cod_localizacao": {
+                  "type": "string",
+                  "example": "S15P7-7"
+                },
+                "qtd_total": {
+                  "type": "number",
+                  "example": 10
+                },
+                "data_excluido": {
+                  "type": "string",
+                  "example": "26/03/2021"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/emprestimos/": {
+      "get": {
+        "tags": [
+          "Emprestimo"
+        ],
+        "description": "Retorna todos os empréstimos salvos no Banco de Dados. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retorna todos os empréstimos salvos no Banco de Dados.",
+            "schema": {
+              "$ref": "#/definitions/emprestimos"
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Emprestimo"
+        ],
+        "description": "Registrar um novo empréstimo. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data_emprestimo": {
+                  "type": "string",
+                  "example": "15/04/2021"
+                },
+                "data_devolucao": {
+                  "type": "string",
+                  "example": "29/06/2021"
+                },
+                "livro": {
+                  "type": "string",
+                  "example": "6078c204fa3b833af441cdf8"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "6078ac02c2c8e00c6cfdeb55"
+                }
+              },
+              "required": [
+                "data_emprestimo",
+                "data_devolucao",
+                "livro",
+                "usuario"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/emprestimos/{id}": {
+      "get": {
+        "tags": [
+          "Emprestimo"
+        ],
+        "description": "Retorna o empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do empréstimo que deseja retornar."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o empréstimo e o usuário e livro relacionados a ele.",
+            "schema": {
+              "$ref": "#/definitions/emprestimoPopulado"
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Emprestimo"
+        ],
+        "description": "Rota para atualizar informações do empréstimo que foi especificado na rota. A rota exige estar previamente autenticado.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id do empréstimo que deseja atualizar."
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "É possivel passar no body apenas os campos que serão atualizados, pois todos os campos são opcionais.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "qtd_renovacoes": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_emprestimo": {
+                  "type": "string",
+                  "example": "15/04/2021"
+                },
+                "data_devolucao": {
+                  "type": "string",
+                  "example": "29/06/2021"
+                },
+                "data_devolvido": {
+                  "type": "string",
+                  "example": "26/03/2021"
+                },
+                "data_excluido": {
+                  "type": "string",
+                  "example": "30/04/2021"
+                },
+                "livro": {
+                  "type": "string",
+                  "example": "6078c204fa3b833af441cdf8"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "6078ac02c2c8e00c6cfdeb55"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "usuario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6078ac02c2c8e00c6cfdeb55"
+        },
+        "matricula": {
+          "type": "string",
+          "example": "1843234BCC"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Pablo Ricardo"
+        },
+        "data_nasc": {
+          "type": "string",
+          "example": "26/03/1999"
+        },
+        "email": {
+          "type": "string",
+          "example": "pablo@gmail.com"
+        },
+        "telefone": {
+          "type": "string",
+          "example": "21 97548-5545"
+        },
+        "cep": {
+          "type": "string",
+          "example": "20564-070"
+        },
+        "bairro": {
+          "type": "string",
+          "example": "Centro"
+        },
+        "cidade": {
+          "type": "string",
+          "example": "Rio"
+        },
+        "complemento": {
+          "type": "string",
+          "example": "Apartamento 501"
+        },
+        "logradouro": {
+          "type": "string",
+          "example": "Rua Presidente Vargas 232"
+        },
+        "data_excluido": {
+          "type": "string",
+          "example": "26/03/2021"
+        }
+      }
+    },
+    "usuarios": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/usuario"
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "1843234BCC"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        },
+        "categoria": {
+          "type": "string",
+          "example": "bibliotecario"
+        },
+        "usuario": {
+          "type": "string",
+          "example": "6078ac02c2c8e00c6cfdeb55"
+        }
+      },
+      "required": [
+        "username",
+        "password",
+        "categoria",
+        "usuario"
+      ]
+    },
+    "livro": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6078ac2cc2c8e00c6cfdeb56"
+        },
+        "isbn": {
+          "type": "string",
+          "example": "9788540701694"
+        },
+        "titulo": {
+          "type": "string",
+          "example": "Livro1"
+        },
+        "autores": {
+          "type": "array",
+          "example": [
+            "Autor1",
+            "Autor2"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "edicao": {
+          "type": "string",
+          "example": "3ª"
+        },
+        "cod_localizacao": {
+          "type": "string",
+          "example": "S15P7-7"
+        },
+        "qtd_total": {
+          "type": "number",
+          "example": 10
+        },
+        "data_excluido": {
+          "type": "string",
+          "example": "26/03/2021"
+        }
+      }
+    },
+    "livros": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/livro"
+      }
+    },
+    "emprestimo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6078c204fa3b833af441cdf8"
+        },
+        "qtd_renovacoes": {
+          "type": "number",
+          "example": 0
+        },
+        "data_emprestimo": {
+          "type": "string",
+          "example": "15/04/2021"
+        },
+        "data_devolucao": {
+          "type": "string",
+          "example": "29/06/2021"
+        },
+        "data_devolvido": {
+          "type": "string",
+          "example": "26/03/2021"
+        },
+        "data_excluido": {
+          "type": "string",
+          "example": "30/04/2021"
+        },
+        "livro": {
+          "type": "string",
+          "example": "6078c204fa3b833af441cdf8"
+        },
+        "usuario": {
+          "type": "string",
+          "example": "6078ac02c2c8e00c6cfdeb55"
+        }
+      },
+      "required": [
+        "data_emprestimo",
+        "data_devolucao",
+        "livro",
+        "usuario"
+      ]
+    },
+    "emprestimoPopulado": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6078c204fa3b833af441cdf8"
+        },
+        "qtd_renovacoes": {
+          "type": "number",
+          "example": 2
+        },
+        "data_emprestimo": {
+          "type": "string",
+          "example": "15/04/2021"
+        },
+        "data_devolucao": {
+          "type": "string",
+          "example": "29/06/2021"
+        },
+        "data_devolvido": {
+          "type": "string",
+          "example": "26/03/2021"
+        },
+        "data_excluido": {
+          "type": "string",
+          "example": "30/04/2021"
+        },
+        "livro": {
+          "$ref": "#/definitions/livro"
+        },
+        "usuario": {
+          "$ref": "#/definitions/usuario"
+        }
+      }
+    },
+    "emprestimos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/emprestimoPopulado"
+      }
+    },
+    "respAuth": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "6096fd879a1bae1ca49e2428"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "usuario": {
+              "$ref": "#/definitions/usuario"
+            },
+            "username": {
+              "type": "string",
+              "example": "1843234BCC"
+            },
+            "categoria": {
+              "type": "string",
+              "example": "bibliotecario"
+            },
+            "id": {
+              "type": "string",
+              "example": "6096fd879a1bae1ca49e2428"
+            }
+          }
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk2ZmQ4NzlhMWJhZTFjYTQ5ZTI0MjgiLCJpYXQiOjE2MjA1MTI1NDksImV4cCI6MTYyMDUxNjE0OX0.QElggzQNPVakO4rkTC_5JAWOmwYJxnxkTOMQmAtkdsU"
+        }
+      }
+    }
+  }
+}
