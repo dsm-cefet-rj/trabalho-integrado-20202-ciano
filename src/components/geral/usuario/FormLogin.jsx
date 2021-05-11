@@ -17,13 +17,12 @@ const CabecalhoLogin = () => {
     });
 
     function onSubmit(login) {
-        console.log(login);
         dispatch(loginServer(login));
     }
 
     useEffect(() => {
         if (status === 'logged_in') {
-            history.push('/menu/bibliotecario');
+            history.push('/menu');
         }
     }, [status, history]);
 

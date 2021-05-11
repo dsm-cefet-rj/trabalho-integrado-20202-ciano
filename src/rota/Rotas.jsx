@@ -15,9 +15,7 @@ import RenovarEmprestimoConsulta from '../components/emprestimo/renovar/RenovarE
 import Home from '../components/geral/home/Home';
 import CadastrarUsuario from '../components/geral/usuario/CadastrarUsuario';
 import Login from '../components/geral/usuario/Login';
-import MenuInicialBibliotecario from '../components/geral/usuario/MenuInicialBibliotecario';
 import MenuInicial from '../components/geral/usuario/MenuInicial';
-import MenuInicialUsuario from '../components/geral/usuario/MenuInicialUsuario';
 import AtualizarLivro from '../components/livro/AtualizarLivro';
 import CadastrarLivro from '../components/livro/CadastrarLivro';
 import ConsultarLivro from '../components/livro/ConsultarLivro';
@@ -31,8 +29,6 @@ function Rotas() {
 	const login = useSelector(state => state.logins);
 
 	function PrivateRoute({ children, ...rest }) {
-		console.log(children);
-		console.log(rest);
 		return (
 			<Route {...rest} render={({ location }) => {
 				if (login.status === 'logged_in') {
@@ -67,11 +63,6 @@ function Rotas() {
 			<Switch>
 				<Route path="/" component={Home} exact />
 				<Route path="/login" component={Login} />
-				<PrivateRoute path="/menu/bibliotecario" authorize={['bibliotecario']} >
-					<MenuInicialBibliotecario />
-				</PrivateRoute>
-
-				<Route path="/menu/usuario" component={MenuInicialUsuario} />
 
 				<PrivateRoute path="/menu" >
 					<MenuInicial />

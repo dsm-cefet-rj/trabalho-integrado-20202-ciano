@@ -14,7 +14,7 @@ const ManterEmprestimo = () => {
     return (
         <div className="container-fluid d-flex flex-column">
 
-            <CabecalhoVoltar titulo="Manter Empréstimo" link="/menu/bibliotecario" />
+            <CabecalhoVoltar titulo="Manter Empréstimo" link="/menu" />
 
             <Manter botoes={botoes} />
 

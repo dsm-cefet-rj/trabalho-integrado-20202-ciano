@@ -6,7 +6,7 @@ const CadastrarUsuario = () => {
 
     return (
         <div className="container-fluid d-flex flex-column">
-            <CabecalhoVoltar titulo="Cadastrar Usuário" link="/menu/bibliotecario" />
+            <CabecalhoVoltar titulo="Cadastrar Usuário" link="/menu" />
             
             <FormCadastrarUsuario />
         </div>

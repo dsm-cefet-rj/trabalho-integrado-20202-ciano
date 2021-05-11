@@ -17,7 +17,7 @@ const ConsultarLivro = () => {
     return (
         <div className="container-fluid d-flex flex-column">
             
-            <CabecalhoVoltar titulo="Consultar Livro" link='/menu/bibliotecario' />
+            <CabecalhoVoltar titulo="Consultar Livro" link='/menu' />
 
             <section className="row my-3 my-sm-4 justify-content-center align-content-start flex-grow-1">
                 <form className="d-flex py-3 flex-column perfil_formulario2 col-12 col-sm-9 col-md-7 col-lg-6 col-xl-4">
