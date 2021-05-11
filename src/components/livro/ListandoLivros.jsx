@@ -32,6 +32,19 @@ function ListandoLivros(props) {
         history.push(`/livro/atualizar/${livro.id}`)
     }
 
+    function botoesAlteracao(livro, isBibliotecario) {
+        let botoes = '';
+        if (isBibliotecario) {
+            botoes = <>
+                <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
+                    className="btn w-100 mb-1 btn-primary">Atualizar</button>
+                <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
+                    className="btn w-100 mt-1 btn-danger">Deletar</button>
+            </>
+        }
+        return botoes;
+    }
+
     let TabelaLivro = '';
     if (status === 'loaded' && livroFiltrado[0]) {
         TabelaLivro =
@@ -57,10 +70,7 @@ function ListandoLivros(props) {
                                 </td>
                                 <td className="pr-4 align-middle">
 
-                                    <button onClick={(e) => { e.preventDefault(); handleClickAtualizar(livro) }}
-                                        className="btn w-100 mb-1 btn-primary">Atualizar</button>
-                                    <button onClick={(e) => { e.preventDefault(); handleClickDeletar(livro) }}
-                                        className="btn w-100 mt-1 btn-danger">Deletar</button>
+                                    {botoesAlteracao(livro, props.bliotecario)}
 
                                 </td>
                             </tr>
