@@ -30,7 +30,7 @@ describe('Cadastrando livros', () => {
         cy.wait(200); 
         cy.get('#qtd_total').type('18');
         cy.wait(200); 
-        cy.get('#"cod_localizacao').type('S35P2-20');
+        cy.get('#cod_localizacao').type('S35P2-20');
         cy.wait(200);        
         cy.get('#enviar').click();
 
