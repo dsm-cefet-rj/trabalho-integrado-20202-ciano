@@ -3,13 +3,14 @@ var router = express.Router();
 const usuarios = require('../models/schemaUsuario');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
+const users = require('../models/schemaUsers');
 
 router.route('/')
 	.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); /* #swagger.ignore = true */ })
 	.get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
 		/*  
 		#swagger.tags = ['Usuario']
-		  	#swagger.description = 'Retornar todos os usuários. A rota exige estar previamente autenticado.'
+				#swagger.description = 'Retornar todos os usuários. A rota exige estar previamente autenticado.'
 			#swagger.security = [{
 				"bearerAuth": []
 			}] 
@@ -28,10 +29,10 @@ router.route('/')
 			}, (err) => next(err))
 			.catch((err) => next(err));
 	})
-	.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+	.post(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
 		/*  
 		#swagger.tags = ['Usuario']
-		  	#swagger.description = 'Registrar um novo perfil do usuário. A rota exige estar previamente autenticado.'
+				#swagger.description = 'Registrar um novo perfil do usuário. A rota exige estar previamente autenticado.'
 			
 			#swagger.security = [{
 				"bearerAuth": []
@@ -59,14 +60,25 @@ router.route('/')
 			#swagger.responses[401]
 			#swagger.responses[500]
 		*/
-		usuarios.create(req.body)
-			.then((usuario) => {
-				console.log('usuario criado', usuario);
-				res.statusCode = 200;
-				res.setHeader('Content-Type', 'application/json');
-				res.json(usuario);
-			}, (err) => next(err))
-			.catch((err) => next(err));
+
+		const usuarioData = req.body;
+		const usuario = await usuarios.create(usuarioData)
+		const user = new users({
+			username: usuarioData.matricula,
+			categoria: usuarioData.categoria,
+			usuario: usuario._id,
+		})
+		await users.register(user, usuarioData.senha);
+		return res.json(usuario)
+
+		// usuarios.create(req.body)
+		// 	.then((usuario) => {
+		// 		console.log('usuario criado', usuario);
+		// 		res.statusCode = 200;
+		// 		res.setHeader('Content-Type', 'application/json');
+		// 		res.json(usuario);
+		// 	}, (err) => next(err))
+		// 	.catch((err) => next(err));
 
 	})
 router.route('/:id')
@@ -74,7 +86,7 @@ router.route('/:id')
 	.get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
 		/*  
 		#swagger.tags = ['Usuario']
-		  	#swagger.description = 'Retorna o usuário que foi especificado na rota. A rota exige estar previamente autenticado.'
+				#swagger.description = 'Retorna o usuário que foi especificado na rota. A rota exige estar previamente autenticado.'
 			#swagger.security = [{
 				"bearerAuth": []
 			}]

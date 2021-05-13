@@ -31,7 +31,7 @@ const MenuInicialBibliotecario = () => {
 
     return (
         <div className="container-fluid d-flex flex-column">
-            <TelaUsuario tituloUsuario={"Bem vindo, " + (typeof UserAuth.usuario !== 'undefined' ? UserAuth.usuario.nome : '')} />
+            <TelaUsuario tituloUsuario={"Bem vindo, " + (UserAuth.usuario !== null ? UserAuth.usuario.nome : '')} />
 
             {botoes}
 
