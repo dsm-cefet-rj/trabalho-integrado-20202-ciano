@@ -4,9 +4,9 @@ describe('Cadastrando livros', () => {
         cy.visit('http://localhost:3000/login');      
        
         //entrar na tela de login
-        cy.get('#username').type('diogo');                
+        cy.get('#username').type('1843234BCC');                
         cy.wait(200);                                 
-        cy.get('#password').type('2055582BIB');
+        cy.get('#password').type('123456');
         cy.wait(200); 
         cy.get('#entrar').click();
         cy.wait(500);                              
