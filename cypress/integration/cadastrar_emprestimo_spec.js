@@ -1,5 +1,5 @@
-describe('Cadastrando livros', () => {
-    it('cadastrar usuarios no banco', () => { 
+describe('Cadastrando emprestimos', () => {
+    it('cadastrar emprestimos no banco', () => { 
         //ir para rota de login        
         cy.visit('http://localhost:3000/login');      
        
