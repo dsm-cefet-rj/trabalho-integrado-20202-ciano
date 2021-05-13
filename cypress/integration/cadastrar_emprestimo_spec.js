@@ -22,15 +22,12 @@ describe('Cadastrando emprestimos', () => {
         //cadastrar emprestimo
         cy.get('#matricula').type('1055882ADM');
         cy.wait(200);
-        cy.get('#consultar-matricula').click();
-        cy.wait(600);
         cy.get('#isbn').type('9788529402024');
         cy.wait(200); 
+        cy.get('#consultar-matricula').click();
+        cy.wait(600);
         cy.get('#consultar-isbn').click();
         cy.wait(600);         
         cy.get('#confirmar').click();
-
-
     })
-
 })

@@ -10,7 +10,6 @@ import BotoesMenuIncial from './BotoesMenuIncial';
 import TelaUsuario from './TelaUsuario';
 
 const MenuInicialBibliotecario = () => {
-    // const UserAuthStatus = useSelector(state => state.logins.state);
     const UserAuth = useSelector(state => state.logins.currentUserAuth);
 
     let botoes;
