@@ -18,7 +18,8 @@ describe('Cadastrando livros', () => {
         //cadastrar usuario
         cy.get('#nome').type('marcelo');           
         cy.wait(200);                             
-        cy.get('#categoria').contains('aluno');
+        cy.get('#categoria').select('Aluno');
+        //cy.get('[value="aluno"]');
         cy.wait(200); 
         cy.get('#matricula').type('1055882ADM');
         cy.wait(200); 
@@ -26,7 +27,7 @@ describe('Cadastrando livros', () => {
         cy.wait(200); 
         cy.get('#senha').type('77340099');
         cy.wait(200); 
-        cy.get('#data_nasc').type('25/10/1999');
+        cy.get('#data_nasc').type('1999-10-25');
         cy.wait(200);  
         cy.get('#telefone').type('(21)99999-9999');
         cy.wait(200);  

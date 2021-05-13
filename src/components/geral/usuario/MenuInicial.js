@@ -16,10 +16,10 @@ const MenuInicialBibliotecario = () => {
     let botoes;
     if (UserAuth.categoria === 'bibliotecario') {
         botoes = <BotoesMenuIncial botoes={[
-            { link: "/emprestimo", img: btnManterEmprestimos },
-            { link: "/livro", img: btnLivros },
-            { link: "/relatorio", img: btnRelatorios },
-            { link: "/usuario/cadastrar", img: btnCadastrarUsuario },
+            { link: "/emprestimo", img: btnManterEmprestimos, id:"btnManterEmprestimos" },
+            { link: "/livro", img: btnLivros, id:"btnLivros" },
+            { link: "/relatorio", img: btnRelatorios, id:"btnRelatorios" },
+            { link: "/usuario/cadastrar", img: btnCadastrarUsuario, id:"btnCadastrarUsuario" },
         ]} />;
     }
     else {

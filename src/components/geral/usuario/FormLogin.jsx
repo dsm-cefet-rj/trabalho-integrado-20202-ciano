@@ -37,7 +37,7 @@ const CabecalhoLogin = () => {
                     
                     {informacaoLogin}
 
-                    <input className="input_login col " type="text" name="username" id="" ref={register} placeholder="Matrícula" />
+                    <input className="input_login col " type="text" name="username" id="username" ref={register} placeholder="Matrícula" />
                     <p>{errors.username?.message}</p>
 
                     <input type="password" className="input_login col " name="password" id="password" ref={register} placeholder="***********" />
