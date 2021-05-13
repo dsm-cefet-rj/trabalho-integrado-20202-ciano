@@ -5,10 +5,10 @@ import Rodape from '../utils/Rodape';
 
 const ManterEmprestimo = () => {
     let botoes = [
-        { link: '/emprestimo/registrar', texto: 'Registrar Empréstimo' },
-        { link: '/emprestimo/consultar', texto: 'Consultar Empréstimo' },
-        { link: '/emprestimo/renovar', texto: 'Renovar Empréstimo' },
-        { link: '/emprestimo/encerrar', texto: 'Encerrar Empréstimo' }
+        { link: '/emprestimo/registrar', texto: 'Registrar Empréstimo', id:"Registrar" },
+        { link: '/emprestimo/consultar', texto: 'Consultar Empréstimo', id:"Consultar" },
+        { link: '/emprestimo/renovar', texto: 'Renovar Empréstimo', id:"Renovar" },
+        { link: '/emprestimo/encerrar', texto: 'Encerrar Empréstimo', id:"Encerrar" }
     ]
 
     return (

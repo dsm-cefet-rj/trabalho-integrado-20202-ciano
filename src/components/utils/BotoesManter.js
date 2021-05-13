@@ -8,7 +8,7 @@ const BotoesManter = (props) => {
                 <div className="row ajustar_manter_emprestimo my-5 w-100">
 
                     {props.botoes.map((botao, index) =>
-                        <Link key={index} to={botao.link} className="btn pt-3 mb-4 w-100 text-white">{botao.texto}</Link>
+                        <Link key={index} to={botao.link} id={botao.id} className="btn pt-3 mb-4 w-100 text-white">{botao.texto}</Link>
                     )}
 
                 </div>
