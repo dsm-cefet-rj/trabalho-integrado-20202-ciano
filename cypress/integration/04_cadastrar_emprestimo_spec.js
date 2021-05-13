@@ -1,5 +1,5 @@
-describe('Cadastrando emprestimos', () => {
-    it('cadastrar emprestimos no banco', () => { 
+describe('Cadastrando emprestimo', () => {
+    it('cadastrar emprestimo no banco', () => { 
         //ir para rota de login        
         cy.visit('http://localhost:3000/login');      
        
@@ -29,5 +29,8 @@ describe('Cadastrando emprestimos', () => {
         cy.get('#consultar-isbn').click();
         cy.wait(600);         
         cy.get('#confirmar').click();
+
+        cy.wait(400); 
+        cy.url().should('eq', 'http://localhost:3000/emprestimo');
     })
 })

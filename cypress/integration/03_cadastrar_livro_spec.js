@@ -1,5 +1,5 @@
-describe('Cadastrando livros', () => {
-    it('cadastrar livros no banco', () => { 
+describe('Cadastrando livro', () => {
+    it('cadastrar livro no banco', () => { 
         //ir para rota de login        
         cy.visit('http://localhost:3000/login');      
        
@@ -34,6 +34,8 @@ describe('Cadastrando livros', () => {
         cy.wait(200);        
         cy.get('#enviar').click();
 
+        cy.wait(400); 
+        cy.url().should('eq', 'http://localhost:3000/livro');
     })
 
 })
