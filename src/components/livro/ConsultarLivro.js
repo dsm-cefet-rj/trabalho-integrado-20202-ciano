@@ -41,7 +41,7 @@ const ConsultarLivro = () => {
                 </form>
 
                 <div className="d-flex flex-column p-2 mt-3 mt-sm-4 conteudo col-12 col-sm-9">
-                    <ListandoLivros titulo={consultar.tituloConsultar} />
+                    <ListandoLivros titulo={consultar.tituloConsultar} bliotecario={UserAuth.categoria === 'bibliotecario'}/>
                 </div>
             </section>
 
