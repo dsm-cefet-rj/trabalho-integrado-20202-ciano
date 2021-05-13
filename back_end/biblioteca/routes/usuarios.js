@@ -29,14 +29,10 @@ router.route('/')
 			}, (err) => next(err))
 			.catch((err) => next(err));
 	})
-	.post(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+	.post(cors.corsWithOptions, async (req, res, next) => {
 		/*  
 		#swagger.tags = ['Usuario']
-				#swagger.description = 'Registrar um novo perfil do usuário. A rota exige estar previamente autenticado.'
-			
-			#swagger.security = [{
-				"bearerAuth": []
-			}]
+				#swagger.description = "Registrar um novo usuário, com perfil e login. A rota não está exigindo autenticação para facilitar no desenvolvimento, entretando o ideal é a rota ser bloqueada para pessoas não autorizadas."
 
 			#swagger.parameters['obj'] = {
 				in: 'body',

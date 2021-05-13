@@ -106,13 +106,18 @@ const doc = {
         respAuth: {
             id: "6096fd879a1bae1ca49e2428",
             user: {
-              usuario: { $ref: '#/definitions/usuario' } ,
-              username: "1843234BCC",
-              categoria: "bibliotecario",
-              id: "6096fd879a1bae1ca49e2428"
+                usuario: { $ref: '#/definitions/usuario' },
+                username: "1843234BCC",
+                categoria: "bibliotecario",
+                id: "6096fd879a1bae1ca49e2428"
             },
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk2ZmQ4NzlhMWJhZTFjYTQ5ZTI0MjgiLCJpYXQiOjE2MjA1MTI1NDksImV4cCI6MTYyMDUxNjE0OX0.QElggzQNPVakO4rkTC_5JAWOmwYJxnxkTOMQmAtkdsU"
-          }
+        },
+
+        login: {
+            $username: "1843234BCC",
+            $password: "123456"
+        }
     }
 }
 

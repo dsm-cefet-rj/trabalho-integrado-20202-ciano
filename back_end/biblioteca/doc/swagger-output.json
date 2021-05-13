@@ -43,35 +43,6 @@
     "application/json"
   ],
   "paths": {
-    "/users/signup": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Rota para a criação de um novo login do usuário.",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Dados do login do usuário enviado no corpo da requisição.\n\n O atributo 'categoria' podem receber apenas um dos valores a seguir: 'aluno', 'professor' ou 'bibliotecario'.\n\n A categoria 'bibliotecario' concede acesso privilegiado a todas as rotas presentes na API.",
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
-      }
-    },
     "/users/login": {
       "post": {
         "tags": [
@@ -87,21 +58,7 @@
             "in": "body",
             "description": "Dados do login do usuário enviado no corpo da requisição.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string",
-                  "example": "1234567ABC"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "123456"
-                }
-              },
-              "required": [
-                "username",
-                "password"
-              ]
+              "$ref": "#/definitions/login"
             }
           }
         ],
@@ -114,9 +71,6 @@
           },
           "400": {
             "description": "Solicitação Inválida"
-          },
-          "401": {
-            "description": "Não autorizado"
           }
         }
       }
@@ -152,10 +106,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "Registrar um novo perfil do usuário. A rota exige estar previamente autenticado.",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Registrar um novo usuário, com perfil e login. A rota não está exigindo autenticação para facilitar no desenvolvimento, entretando o ideal é a rota ser bloqueada para pessoas não autorizadas.",
         "parameters": [
           {
             "name": "obj",
@@ -243,12 +194,7 @@
           "500": {
             "description": "Erro Interno do Servidor"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/usuarios/{id}": {
@@ -1050,6 +996,23 @@
           "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk2ZmQ4NzlhMWJhZTFjYTQ5ZTI0MjgiLCJpYXQiOjE2MjA1MTI1NDksImV4cCI6MTYyMDUxNjE0OX0.QElggzQNPVakO4rkTC_5JAWOmwYJxnxkTOMQmAtkdsU"
         }
       }
+    },
+    "login": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "1843234BCC"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     }
   }
 }
