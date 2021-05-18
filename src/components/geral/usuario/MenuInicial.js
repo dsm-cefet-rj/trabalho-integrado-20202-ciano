@@ -1,24 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import btnCadastrarUsuario from '../../img/botoes/btn_CadastrarUsuario.jpg';
-import btnLivros from '../../img/botoes/btn_Livros.jpg';
-import btnManterEmprestimos from '../../img/botoes/btn_ManterEmprestimos.jpg';
-import btnRelatorios from '../../img/botoes/btn_Relatorios.jpg';
-import btnRenovarEmprestimos from '../../img/botoes/btn_RenovarEmprestimo.jpg';
+import btnCadastrarUsuario from '../../img/botoes/btn_CadastrarUsuario.webp';
+import btnLivros from '../../img/botoes/btn_Livros.webp';
+import btnManterEmprestimos from '../../img/botoes/btn_ManterEmprestimos.webp';
+import btnRelatorios from '../../img/botoes/btn_Relatorios.webp';
+import btnRenovarEmprestimos from '../../img/botoes/btn_RenovarEmprestimo.webp';
 import Rodape from '../../utils/Rodape';
 import BotoesMenuIncial from './BotoesMenuIncial';
 import TelaUsuario from './TelaUsuario';
 
-const MenuInicialBibliotecario = () => {
+const MenuInicial = () => {
     const UserAuth = useSelector(state => state.logins.currentUserAuth);
 
     let botoes;
     if (UserAuth.categoria === 'bibliotecario') {
         botoes = <BotoesMenuIncial botoes={[
-            { link: "/emprestimo", img: btnManterEmprestimos, id:"btnManterEmprestimos" },
-            { link: "/livro", img: btnLivros, id:"btnLivros" },
-            { link: "/relatorio", img: btnRelatorios, id:"btnRelatorios" },
-            { link: "/usuario/cadastrar", img: btnCadastrarUsuario, id:"btnCadastrarUsuario" },
+            { link: "/emprestimo", img: btnManterEmprestimos, id: "btnManterEmprestimos" },
+            { link: "/livro", img: btnLivros, id: "btnLivros" },
+            { link: "/relatorio", img: btnRelatorios, id: "btnRelatorios" },
+            { link: "/usuario/cadastrar", img: btnCadastrarUsuario, id: "btnCadastrarUsuario" },
         ]} />;
     }
     else {
@@ -38,4 +38,4 @@ const MenuInicialBibliotecario = () => {
         </div>
     );
 }
-export default MenuInicialBibliotecario;
+export default MenuInicial;
